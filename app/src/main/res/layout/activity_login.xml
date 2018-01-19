@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+     android:background="#ffffff">
+
+    <io.github.froger.instamaterial.ui.view.RevealLoginView
+        android:id="@+id/vloginRevealBackground"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
+
+
+
+    <ImageView
+        android:id="@+id/logo_img"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@drawable/logo_i"
+        android:layout_marginTop="50dp"
+        android:layout_centerHorizontal="true"/>
+
+
+    <Button
+        android:id="@+id/btnfb"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginBottom="2dp"
+        android:background="#3b5998"
+        android:elevation="4dp"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical"
+        android:text="Login with Facebook"
+        android:textColor="#ffffff"
+        android:textSize="14sp"
+        android:textAllCaps="false"
+        android:textStyle="bold"
+        />
+
+
+</RelativeLayout>

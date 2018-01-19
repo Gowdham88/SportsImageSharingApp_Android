@@ -1,0 +1,144 @@
+{
+  "project_info": {
+    "project_number": "364263394041",
+    "firebase_url": "https://myapp-eb284.firebaseio.com",
+    "project_id": "myapp-eb284",
+    "storage_bucket": "myapp-eb284.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:364263394041:android:22b373fb1674ac6f",
+        "android_client_info": {
+          "package_name": "com.qinapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "364263394041-hsavsorjshgn5iv5rtaeungl6mtep1lq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.qinapp",
+            "certificate_hash": "7e53707d6eec976a7611f484211267c44a250ab0"
+          }
+        },
+        {
+          "client_id": "364263394041-9upaonvd1j626buau9p1hcovc9dvooo8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBJ0TdLJM7Y8Z-BhqrTEqxlfWR3HvcFLL4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "364263394041-hudfo089g7grdmijflp08e7t6tnp99qq.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.Hello.Woofy-Automated-Social-Media-Scheduler-prod"
+              }
+            },
+            {
+              "client_id": "364263394041-9upaonvd1j626buau9p1hcovc9dvooo8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:364263394041:android:79aa058c3cafeb02",
+        "android_client_info": {
+          "package_name": "nld.com.nld"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "364263394041-rdvu3ieqik0kaegj3mvuilrdggff6dph.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "nld.com.nld",
+            "certificate_hash": "7e53707d6eec976a7611f484211267c44a250ab0"
+          }
+        },
+        {
+          "client_id": "364263394041-9upaonvd1j626buau9p1hcovc9dvooo8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBJ0TdLJM7Y8Z-BhqrTEqxlfWR3HvcFLL4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "364263394041-hudfo089g7grdmijflp08e7t6tnp99qq.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.Hello.Woofy-Automated-Social-Media-Scheduler-prod"
+              }
+            },
+            {
+              "client_id": "364263394041-9upaonvd1j626buau9p1hcovc9dvooo8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:364263394041:android:0c10006aa847cc09",
+        "android_client_info": {
+          "package_name": "io.github.froger.instamaterial"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "364263394041-9upaonvd1j626buau9p1hcovc9dvooo8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBJ0TdLJM7Y8Z-BhqrTEqxlfWR3HvcFLL4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
