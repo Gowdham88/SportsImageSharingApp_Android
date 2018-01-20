@@ -28,10 +28,25 @@
         <item name="android:textColor">?attr/colorPrimary</item>
         <item name="android:textSize">14sp</item>
     </style>
+
     <style name="FontAvenirBook">
         <item name="fontPath">fonts/Avenir-Book.ttf</item>
     </style>
+
+    <style name="FontAvenirBlack">
+        <item name="fontPath">fonts/Avenir-Black.ttf</item>
+    </style>
+
     <style name="FontAvenirheavy">
         <item name="fontPath">fonts/Avenir-Heavy.ttf</item>
     </style>
+
+    <style name="FontAvenirLight">
+        <item name="fontPath">fonts/Avenir-Light.ttf</item>
+    </style>
+
+    <style name="FontAvenirMedium">
+        <item name="fontPath">fonts/Avenir-Medium.ttf</item>
+    </style>
+
 </resources>

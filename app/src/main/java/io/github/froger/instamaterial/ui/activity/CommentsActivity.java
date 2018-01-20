@@ -51,6 +51,7 @@ import io.github.froger.instamaterial.ui.view.SendCommentButton;
  */
 public class CommentsActivity extends BaseDrawerActivity implements SendCommentButton.OnSendClickListener {
     public static final String ARG_DRAWING_START_LOCATION = "arg_drawing_start_location";
+    public static final String POST_ID = "post_id";
 
     @BindView(R.id.contentRoot)
     LinearLayout contentRoot;
@@ -67,16 +68,20 @@ public class CommentsActivity extends BaseDrawerActivity implements SendCommentB
     private CommentsAdapter commentsAdapter;
     private int drawingStartLocation;
     String comment;
+    String postId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comments);
+
+        drawingStartLocation = getIntent().getIntExtra(ARG_DRAWING_START_LOCATION, 0);
+        postId = getIntent().getStringExtra(POST_ID);
+
         setupComments();
         loadPost();
         setupSendCommentButton();
 
-        drawingStartLocation = getIntent().getIntExtra(ARG_DRAWING_START_LOCATION, 0);
         if (savedInstanceState == null) {
             contentRoot.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
                 @Override
@@ -211,7 +216,7 @@ public class CommentsActivity extends BaseDrawerActivity implements SendCommentB
         Map<String, Boolean> comData = new HashMap<>();
         comData.put(uid, false);
 
-        Comment comment1 = new Comment(uid,profileImageURL,userName,comment);
+        Comment comment1 = new Comment(uid,profileImageURL,userName,comment,postId);
 
         db.collection("Comment").add(comment1).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
             @Override
@@ -241,7 +246,7 @@ public class CommentsActivity extends BaseDrawerActivity implements SendCommentB
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-        Query first = db.collection("Comment");
+        Query first = db.collection("Comment").whereEqualTo("postid",postId);
 
         first.get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
