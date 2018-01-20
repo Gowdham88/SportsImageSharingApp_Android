@@ -5,9 +5,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
@@ -34,6 +36,8 @@ import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import io.github.froger.instamaterial.R;
 import io.github.froger.instamaterial.ui.Models.Post;
 import io.github.froger.instamaterial.ui.adapter.FeedAdapter;
@@ -49,7 +53,7 @@ import static android.content.ContentValues.TAG;
 /**
  * Created by Miroslaw Stanek on 14.01.15.
  */
-public class UserProfileActivity extends BaseDrawerActivity implements RevealBackgroundView.OnStateChangeListener,FeedAdapter.OnFeedItemClickListener {
+public class UserProfileActivity extends AppCompatActivity implements RevealBackgroundView.OnStateChangeListener,FeedAdapter.OnFeedItemClickListener {
     public static final String ARG_REVEAL_START_LOCATION = "reveal_start_location";
     public static final String USER_ID = "user_id";
     public static final String USER_IMAGE = "user_image";
@@ -80,6 +84,15 @@ public class UserProfileActivity extends BaseDrawerActivity implements RevealBac
     TextView vUserName;
     @BindView(R.id.username_simple)
     TextView vUserNameSub;
+    @BindView(R.id.toolbar_title)
+    TextView toolbarTitle;
+    @BindView(R.id.logout_image)
+    TextView logout;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+    @BindView(R.id.back_image)
+    ImageView backarrow;
+
 
     private int avatarSize;
     private String profilePhoto;
@@ -110,7 +123,8 @@ public class UserProfileActivity extends BaseDrawerActivity implements RevealBac
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
-
+        ButterKnife.bind(this);
+        setSupportActionBar(toolbar);
         this.avatarSize = getResources().getDimensionPixelSize(R.dimen.user_profile_avatar_size);
 
 
@@ -282,6 +296,21 @@ public class UserProfileActivity extends BaseDrawerActivity implements RevealBac
     @Override
     public void onProfileClick(View v, int position) {
 
+    }
+
+    @OnClick(R.id.back_image)
+    public void setBackarrow() {
+
+        finish();
+    }
+
+    @OnClick(R.id.logout_image)
+    public void logout() {
+
+        Intent intent = new Intent(getApplicationContext(), SignupActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.putExtra("EXIT", true);
+        startActivity(intent);
     }
 
 
