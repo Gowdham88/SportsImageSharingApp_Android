@@ -264,8 +264,8 @@ public class CommentsActivity extends BaseDrawerActivity implements SendCommentB
                             Comment comment1 = document.toObject(Comment.class);
                             commeList.add(comment1);
                             commeListId.add(document.getId());
-                            Log.e("adbbd",document.getId());
-                            Log.e("adbbd", String.valueOf(document.getData()));
+//                            Log.e("adbbd",document.getId());
+//                            Log.e("adbbd", String.valueOf(document.getData()));
 
                         }
                         setupComments();
