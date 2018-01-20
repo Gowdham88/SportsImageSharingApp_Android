@@ -19,13 +19,20 @@ import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.CursorLoader;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.OvershootInterpolator;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
+
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -48,6 +55,7 @@ import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.github.froger.instamaterial.R;
 import io.github.froger.instamaterial.Utils;
@@ -65,7 +73,7 @@ import static com.facebook.FacebookSdk.getApplicationContext;
 import static io.github.froger.instamaterial.ui.adapter.FeedAdapter.ACTION_LIKE_BUTTON_CLICKED;
 
 
-public class MainActivity extends BaseDrawerActivity implements FeedAdapter.OnFeedItemClickListener,
+public class MainActivity extends AppCompatActivity implements FeedAdapter.OnFeedItemClickListener,
         FeedContextMenu.OnFeedContextMenuItemClickListener,EasyPermissions.PermissionCallbacks {
     public static final String ACTION_SHOW_LOADING_ITEM = "action_show_loading_item";
     public static final String ACTION_SHOW_DEFAULT_ITEM = "action_show_default_item";
@@ -79,6 +87,15 @@ public class MainActivity extends BaseDrawerActivity implements FeedAdapter.OnFe
     FloatingActionButton fabCreate;
     @BindView(R.id.content)
     CoordinatorLayout clContent;
+    @BindView(R.id.toolbar_title)
+    TextView toolbarTitle;
+    @BindView(R.id.profile_image)
+    ImageView profile;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+    @BindView(R.id.back_image)
+    ImageView backarrow;
+
 
     final private int RC_PICK_IMAGE = 1;
     private static final int PERMISSIONS_REQUEST_CAMERA = 1888;
@@ -100,6 +117,8 @@ public class MainActivity extends BaseDrawerActivity implements FeedAdapter.OnFe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
+        setSupportActionBar(toolbar);
 
         loadPost(ACTION_SHOW_DEFAULT_ITEM);
 
@@ -109,11 +128,7 @@ public class MainActivity extends BaseDrawerActivity implements FeedAdapter.OnFe
             feedAdapter.updateItems(false);
         }
 
-
-    }
-
-    private void setupFeed() {
-        final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this) {
+        final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext()) {
             @Override
             protected int getExtraLayoutSpace(RecyclerView.State state) {
                 return 300;
@@ -121,16 +136,6 @@ public class MainActivity extends BaseDrawerActivity implements FeedAdapter.OnFe
         };
         rvFeed.setLayoutManager(linearLayoutManager);
 
-        feedAdapter = new FeedAdapter(this,postList);
-        feedAdapter.setOnFeedItemClickListener(this);
-        rvFeed.setAdapter(feedAdapter);
-        rvFeed.setOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                FeedContextMenuManager.getInstance().onScrolled(recyclerView, dx, dy);
-            }
-        });
-        rvFeed.setItemAnimator(new FeedItemAnimator());
         rvFeed.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
@@ -146,25 +151,43 @@ public class MainActivity extends BaseDrawerActivity implements FeedAdapter.OnFe
 
 
 
-                    if (!isLoading && totalItemCount <= (firstVisibleItemPosition + visibleItemCount)) {
+                if (!isLoading && totalItemCount <= (firstVisibleItemPosition + visibleItemCount)) {
 
-                        if (lastVisible != null) {
+                    if (lastVisible != null) {
 
-                            Log.e("totalItemCount", String.valueOf(totalItemCount));
-                            Log.e("visibleThreshold", String.valueOf(firstVisibleItemPosition + visibleItemCount));
+                        Log.e("totalItemCount", String.valueOf(totalItemCount));
+                        Log.e("visibleThreshold", String.valueOf(firstVisibleItemPosition + visibleItemCount));
 
-                            loadMorePost();
+                        loadMorePost();
 
-                        }
-
-                        isLoading = true;
                     }
+
+                    isLoading = true;
+                }
 
 
 
 
             }
         });
+
+
+    }
+
+    private void setupFeed() {
+
+
+        feedAdapter = new FeedAdapter(this,postList);
+        feedAdapter.setOnFeedItemClickListener(this);
+        rvFeed.setAdapter(feedAdapter);
+        rvFeed.setOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                FeedContextMenuManager.getInstance().onScrolled(recyclerView, dx, dy);
+            }
+        });
+        rvFeed.setItemAnimator(new FeedItemAnimator());
+
     }
 
     @Override
@@ -180,13 +203,13 @@ public class MainActivity extends BaseDrawerActivity implements FeedAdapter.OnFe
     }
 
     private void showFeedLoadingItemDelayed() {
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                rvFeed.smoothScrollToPosition(0);
-                feedAdapter.showLoadingView();
-            }
-        }, 500);
+//        new Handler().postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                rvFeed.smoothScrollToPosition(0);
+//                feedAdapter.showLoadingView();
+//            }
+//        }, 500);
     }
 
     @Override
@@ -203,22 +226,27 @@ public class MainActivity extends BaseDrawerActivity implements FeedAdapter.OnFe
         fabCreate.setTranslationY(2 * getResources().getDimensionPixelOffset(R.dimen.btn_fab_size));
 
         int actionbarSize = Utils.dpToPx(56);
-        getToolbar().setTranslationY(-actionbarSize);
-        getIvLogo().setTranslationY(-actionbarSize);
-        getInboxMenuItem().getActionView().setTranslationY(-actionbarSize);
+        toolbar.setTranslationY(-actionbarSize);
+        toolbarTitle.setTranslationY(-actionbarSize);
+        profile.setTranslationY(-actionbarSize);
+        backarrow.setTranslationX(-actionbarSize);
 
-        getToolbar().animate()
+        toolbar.animate()
                 .translationY(0)
                 .setDuration(ANIM_DURATION_TOOLBAR)
                 .setStartDelay(300);
-        getIvLogo().animate()
+        toolbarTitle.animate()
                 .translationY(0)
                 .setDuration(ANIM_DURATION_TOOLBAR)
                 .setStartDelay(400);
-        getInboxMenuItem().getActionView().animate()
+        backarrow.animate()
+                .translationX(0)
+                .setDuration(ANIM_DURATION_TOOLBAR)
+                .setStartDelay(500);
+        profile.animate()
                 .translationY(0)
                 .setDuration(ANIM_DURATION_TOOLBAR)
-                .setStartDelay(500)
+                .setStartDelay(600)
                 .setListener(new AnimatorListenerAdapter() {
                     @Override
                     public void onAnimationEnd(Animator animation) {
@@ -244,6 +272,7 @@ public class MainActivity extends BaseDrawerActivity implements FeedAdapter.OnFe
         int[] startingLocation = new int[2];
         v.getLocationOnScreen(startingLocation);
         intent.putExtra(CommentsActivity.ARG_DRAWING_START_LOCATION, startingLocation[1]);
+        intent.putExtra(CommentsActivity.POST_ID, postListId.get(position));
         startActivity(intent);
         overridePendingTransition(0, 0);
     }
@@ -254,13 +283,19 @@ public class MainActivity extends BaseDrawerActivity implements FeedAdapter.OnFe
     }
 
     @Override
-    public void onProfileClick(View v) {
+    public void onProfileClick(View v, int position) {
+
+        String name    = postList.get(position).getuserName();
+        String profile = postList.get(position).getProfileImageURL();
+
         int[] startingLocation = new int[2];
         v.getLocationOnScreen(startingLocation);
         startingLocation[0] += v.getWidth() / 2;
-        UserProfileActivity.startUserProfileFromLocation(startingLocation, this);
+        UserProfileActivity.startUserProfileFromLocation(startingLocation, this,postList.get(position).getUid(),name,profile);
         overridePendingTransition(0, 0);
     }
+
+
 
     @Override
     public void onReportClick(int feedItem) {
@@ -290,6 +325,26 @@ public class MainActivity extends BaseDrawerActivity implements FeedAdapter.OnFe
         } else {
             EasyPermissions.requestPermissions(this, "Permissions required", PERMISSIONS_REQUEST_GALLERY, CAMERA);
         }
+    }
+
+    @OnClick(R.id.back_image)
+    public void setBackarrow() {
+
+        finish();
+    }
+
+    @OnClick(R.id.profile_image)
+    public void profileArrow(View v) {
+
+        String name = PreferencesHelper.getPreference(this,PreferencesHelper.PREFERENCE_EMAIL);
+        String profile = PreferencesHelper.getPreference(this,PreferencesHelper.PREFERENCE_PROFILE_PIC);
+
+        int[] startingLocation = new int[2];
+        v.getLocationOnScreen(startingLocation);
+        startingLocation[0] += v.getWidth() / 2;
+        String uid = PreferencesHelper.getPreference(this,PreferencesHelper.PREFERENCE_FIREBASE_UUID);
+        UserProfileActivity.startUserProfileFromLocation(startingLocation, this,uid,name,profile);
+        overridePendingTransition(0, 0);
     }
 
     private boolean hasPermissions() {
@@ -472,8 +527,8 @@ public class MainActivity extends BaseDrawerActivity implements FeedAdapter.OnFe
                             Post post = document.toObject(Post.class);
                             postList.add(post);
                             postListId.add(document.getId());
-                            Log.e("dbbd",document.getId());
-                            Log.e("dbbd", String.valueOf(document.getData()));
+//                            Log.e("dbbd",document.getId());
+//                            Log.e("dbbd", String.valueOf(document.getData()));
 
                         }
 

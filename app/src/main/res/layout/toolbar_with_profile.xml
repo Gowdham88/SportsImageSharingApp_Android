@@ -1,0 +1,47 @@
+<android.support.v7.widget.Toolbar
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:background="?attr/colorPrimary"
+    app:elevation="@dimen/default_elevation"
+    app:layout_scrollFlags="scroll|enterAlways"
+    app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            style="@style/FontAvenirMedium"
+            android:id="@+id/toolbar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/app_name"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:textColor="#ffffff"
+            android:textSize="16dp"/>
+
+        <TextView
+            style="@style/FontAvenirMedium"
+            android:id="@+id/logout_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:text="Logout"
+            android:gravity="center"
+            android:textColor="#ffffff"
+            android:textSize="16dp"/>
+
+
+    </RelativeLayout>
+
+
+
+</android.support.v7.widget.Toolbar>
+

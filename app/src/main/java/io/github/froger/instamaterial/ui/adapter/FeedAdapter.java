@@ -36,6 +36,7 @@ import butterknife.ButterKnife;
 import io.github.froger.instamaterial.R;
 import io.github.froger.instamaterial.ui.Models.Post;
 import io.github.froger.instamaterial.ui.activity.MainActivity;
+import io.github.froger.instamaterial.ui.activity.UserProfileActivity;
 import io.github.froger.instamaterial.ui.utils.PreferencesHelper;
 import io.github.froger.instamaterial.ui.view.LoadingFeedItemView;
 
@@ -102,8 +103,15 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             public void onClick(View v) {
                 int adapterPosition = cellFeedViewHolder.getAdapterPosition();
                 if (context instanceof MainActivity) {
+
                     ((MainActivity) context).getDocument(adapterPosition,ACTION_LIKE_IMAGE_CLICKED);
+
+                } else if  (context instanceof UserProfileActivity) {
+
+                    ((UserProfileActivity) context).getDocument(adapterPosition, ACTION_LIKE_IMAGE_CLICKED);
+
                 }
+
 
             }
         });
@@ -113,7 +121,14 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
                 int adapterPosition = cellFeedViewHolder.getAdapterPosition();
                 if (context instanceof MainActivity) {
+
                     ((MainActivity) context).getDocument(adapterPosition,ACTION_LIKE_BUTTON_CLICKED);
+
+                } else if  (context instanceof UserProfileActivity) {
+
+                    ((UserProfileActivity) context).getDocument(adapterPosition, ACTION_LIKE_IMAGE_CLICKED);
+
+
                 }
 
             }
@@ -121,7 +136,16 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         cellFeedViewHolder.ivUserProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onFeedItemClickListener.onProfileClick(view);
+                int adapterPosition = cellFeedViewHolder.getAdapterPosition();
+                onFeedItemClickListener.onProfileClick(view,adapterPosition);
+            }
+        });
+
+        cellFeedViewHolder.vUsername.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int adapterPosition = cellFeedViewHolder.getAdapterPosition();
+                onFeedItemClickListener.onProfileClick(view,adapterPosition);
             }
         });
     }
@@ -219,7 +243,6 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             if(!this.postItem.getProfileImageURL().equals("") && this.postItem.getProfileImageURL() != null) {
 
                 Picasso.with(context).load(this.postItem.getProfileImageURL())
-                        .placeholder(R.drawable.ic_heart_outline_white)
                         .into(ivUserProfile);
             }
 
@@ -236,7 +259,6 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             if(!this.postItem.getPostimage().equals("failed")) {
 
                 Picasso.with(context).load(this.postItem.getPostimage())
-                        .placeholder(R.drawable.ic_heart_outline_white).fit()
                         .into(ivFeedCenter);
             }
 
@@ -312,6 +334,6 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         void onMoreClick(View v, int position);
 
-        void onProfileClick(View v);
+        void onProfileClick(View v,int position);
     }
 }

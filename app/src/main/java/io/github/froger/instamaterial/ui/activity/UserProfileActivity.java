@@ -3,6 +3,7 @@ package io.github.froger.instamaterial.ui.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -16,7 +17,11 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
@@ -24,7 +29,9 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import io.github.froger.instamaterial.R;
@@ -37,11 +44,16 @@ import io.github.froger.instamaterial.ui.utils.PreferencesHelper;
 import io.github.froger.instamaterial.ui.view.FeedContextMenuManager;
 import io.github.froger.instamaterial.ui.view.RevealBackgroundView;
 
+import static android.content.ContentValues.TAG;
+
 /**
  * Created by Miroslaw Stanek on 14.01.15.
  */
 public class UserProfileActivity extends BaseDrawerActivity implements RevealBackgroundView.OnStateChangeListener,FeedAdapter.OnFeedItemClickListener {
     public static final String ARG_REVEAL_START_LOCATION = "reveal_start_location";
+    public static final String USER_ID = "user_id";
+    public static final String USER_IMAGE = "user_image";
+    public static final String USER_NAME = "user_name";
 
     private static final int USER_OPTIONS_ANIMATION_DELAY = 300;
     private static final Interpolator INTERPOLATOR = new DecelerateInterpolator();
@@ -71,6 +83,9 @@ public class UserProfileActivity extends BaseDrawerActivity implements RevealBac
 
     private int avatarSize;
     private String profilePhoto;
+    String userId;
+    String userName;
+    String userProfile;
 //    private UserProfileAdapter userPhotosAdapter;
 
     private FeedAdapter feedAdapter;
@@ -82,9 +97,12 @@ public class UserProfileActivity extends BaseDrawerActivity implements RevealBac
     private int visibleThreshold = 1;
     private boolean isLoading=false;
 
-    public static void startUserProfileFromLocation(int[] startingLocation, Activity startingActivity) {
+    public static void startUserProfileFromLocation(int[] startingLocation, Activity startingActivity,String Userid,String name,String image) {
         Intent intent = new Intent(startingActivity, UserProfileActivity.class);
         intent.putExtra(ARG_REVEAL_START_LOCATION, startingLocation);
+        intent.putExtra(USER_ID,Userid);
+        intent.putExtra(USER_NAME,name);
+        intent.putExtra(USER_IMAGE,image);
         startingActivity.startActivity(intent);
     }
 
@@ -94,9 +112,15 @@ public class UserProfileActivity extends BaseDrawerActivity implements RevealBac
         setContentView(R.layout.activity_user_profile);
 
         this.avatarSize = getResources().getDimensionPixelSize(R.dimen.user_profile_avatar_size);
-        this.profilePhoto = PreferencesHelper.getPreference(getApplicationContext(),PreferencesHelper.PREFERENCE_PROFILE_PIC);
-        vUserName.setText(PreferencesHelper.getPreference(getApplicationContext(),PreferencesHelper.PREFERENCE_EMAIL));
-        vUserNameSub.setText("@"+PreferencesHelper.getPreference(getApplicationContext(),PreferencesHelper.PREFERENCE_EMAIL));
+
+
+        userId = getIntent().getStringExtra(USER_ID);
+        userName = getIntent().getStringExtra(USER_NAME);
+        userProfile = getIntent().getStringExtra(USER_IMAGE);
+
+        this.profilePhoto = userProfile;
+        vUserName.setText(userName);
+        vUserNameSub.setText("@"+userName);
 
         Picasso.with(this)
                 .load(profilePhoto)
@@ -240,6 +264,14 @@ public class UserProfileActivity extends BaseDrawerActivity implements RevealBac
     @Override
     public void onCommentsClick(View v, int position) {
 
+        final Intent intent = new Intent(this, CommentsActivity.class);
+        int[] startingLocation = new int[2];
+        v.getLocationOnScreen(startingLocation);
+        intent.putExtra(CommentsActivity.ARG_DRAWING_START_LOCATION, startingLocation[1]);
+        intent.putExtra(CommentsActivity.POST_ID, postListId.get(position));
+        startActivity(intent);
+        overridePendingTransition(0, 0);
+
     }
 
     @Override
@@ -248,20 +280,21 @@ public class UserProfileActivity extends BaseDrawerActivity implements RevealBac
     }
 
     @Override
-    public void onProfileClick(View v) {
+    public void onProfileClick(View v, int position) {
 
     }
+
+
 
     public void loadPost() {
 
         postList.clear();
         postListId.clear();
 
-        String uid = PreferencesHelper.getPreference(this,PreferencesHelper.PREFERENCE_FIREBASE_UUID);
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-        Query first = db.collection("Post").whereEqualTo("uid", uid)
+        Query first = db.collection("Post").whereEqualTo("uid", userId)
 
                 .limit(5);
 
@@ -303,9 +336,9 @@ public class UserProfileActivity extends BaseDrawerActivity implements RevealBac
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-        String uid = PreferencesHelper.getPreference(this,PreferencesHelper.PREFERENCE_FIREBASE_UUID);
 
-        Query first = db.collection("Post").whereEqualTo("uid", uid)
+
+        Query first = db.collection("Post").whereEqualTo("uid", userId)
                 .startAfter(lastVisible)
                 .limit(5);
 
@@ -340,6 +373,150 @@ public class UserProfileActivity extends BaseDrawerActivity implements RevealBac
                     }
 
                 });
+
+    }
+
+    public void updateLikeCount(int position,int likecount,Boolean likeData) {
+
+        String uid = PreferencesHelper.getPreference(this,PreferencesHelper.PREFERENCE_FIREBASE_UUID);
+
+        try {
+
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+            DocumentReference washingtonRef = db.collection("Post").document(this.postListId.get(position));
+
+            washingtonRef
+                    .update("likecount", likecount,"userlikes."+uid, likeData)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Log.d(TAG, "DocumentSnapshot successfully updated!");
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Log.w(TAG, "Error updating document", e);
+                        }
+                    });
+
+        } catch (NullPointerException e) {
+
+            e.printStackTrace();
+        }
+
+    }
+
+    public void getDocument(final int position, final String type) {
+
+        try {
+
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+            DocumentReference docRef = db.collection("Post").document(this.postListId.get(position));
+            docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if (task.isSuccessful()) {
+                        DocumentSnapshot document = task.getResult();
+                        if (document != null) {
+
+                            Post post = document.toObject(Post.class);
+                            checkUserLikes(position,post,type);
+
+
+                        } else {
+                            Log.d("Doc", "No such document");
+                        }
+                    } else {
+                        Log.d("Doc", "get failed with ", task.getException());
+                    }
+                }
+            });
+
+        }catch (NullPointerException e) {
+
+            e.printStackTrace();
+        }
+
+    }
+
+
+    public void checkUserLikes(int position,Post post,String type){
+
+        int likecount = post.getLikecount();
+        if (post.getUserlikes().size() > 0) {
+
+            if (post.getUserlikes().get(PreferencesHelper.getPreference(this,PreferencesHelper.PREFERENCE_FIREBASE_UUID)) != null){
+
+                Boolean isLiked = post.getUserlikes().get(PreferencesHelper.getPreference(this,PreferencesHelper.PREFERENCE_FIREBASE_UUID));
+
+                if (isLiked) {
+
+                    postList.get(position).setLikecount(likecount-1);
+
+                } else {
+
+                    postList.get(position).setLikecount(likecount+1);
+                }
+
+                Map<String, Boolean> likeData = new HashMap<>();
+                for (Map.Entry<String, Boolean> entry : post.getUserlikes().entrySet())
+                {
+                    if (entry.getKey().equals(PreferencesHelper.getPreference(this,PreferencesHelper.PREFERENCE_FIREBASE_UUID))){
+
+                        likeData.put(PreferencesHelper.getPreference(this,PreferencesHelper.PREFERENCE_FIREBASE_UUID), !isLiked);
+
+                    } else {
+
+                        likeData.put(entry.getKey(),entry.getValue());
+                    }
+                }
+
+                for (Map.Entry<String, Boolean> entry : likeData.entrySet())
+                {
+
+                    Log.e("d"+entry.getKey(), String.valueOf(entry.getValue()));
+
+                }
+
+
+                postList.get(position).setUserlikes(likeData);
+                feedAdapter.notifyItemChanged(position, type);
+                updateLikeCount(position, postList.get(position).getLikecount(),!isLiked);
+
+            } else {
+
+                Map<String, Boolean> newlikeData = new HashMap<>();
+                for (Map.Entry<String, Boolean> entry : post.getUserlikes().entrySet())
+                {
+
+                    newlikeData.put(entry.getKey(),entry.getValue());
+
+                }
+
+                newlikeData.put(PreferencesHelper.getPreference(this,PreferencesHelper.PREFERENCE_FIREBASE_UUID), true);
+
+                for (Map.Entry<String, Boolean> entry : newlikeData.entrySet())
+                {
+
+                    Log.e("dsjdhsjdhj"+entry.getKey(), String.valueOf(entry.getValue()));
+
+                }
+
+                postList.get(position).setLikecount(likecount+1);
+                postList.get(position).setUserlikes(newlikeData);
+                feedAdapter.notifyItemChanged(position, type);
+                updateLikeCount(position,postList.get(position).getLikecount(),true);
+
+            }
+
+
+
+
+        }
+
 
     }
 }

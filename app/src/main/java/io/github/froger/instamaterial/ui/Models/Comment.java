@@ -9,23 +9,33 @@ public class Comment {
     private String profileImageURL;
     private String userName;
     private String uid;
+    private String postid;
     private String comment;
 
     public Comment() {
 
     }
 
-    public Comment(String uid, String profileImageURL, String userName,String comment) {
+    public Comment(String uid, String profileImageURL, String userName,String comment,String postid) {
 
         this.profileImageURL = profileImageURL;
         this.userName        = userName;
         this.uid             = uid;
         this.comment         = comment;
+        this.postid          = postid;
 
     }
 
     public void setProfileImageURL(String profileImageURL) {
         this.profileImageURL = profileImageURL;
+    }
+
+    public String getPostid() {
+        return postid;
+    }
+
+    public void setPostid(String postid) {
+        this.postid = postid;
     }
 
     public void setUserName(String userName) {
