@@ -19,6 +19,6 @@
     <color name="business_viewcolor">#b4d8d8d8</color>
 
     <color name="text_like_counter">#2b5a83</color>
-
+    <color name="darker_grey">#2A2A2A</color>
     <color name="bg_comments">#ffffff</color>
 </resources>
