@@ -98,9 +98,6 @@ public class LoginActivity extends BaseDrawerActivity implements RevealLoginView
         // [END initialize_auth]
 
 
-
-
-
     }
 
     @OnClick(R.id.btnfb)
