@@ -3,6 +3,8 @@ package io.github.froger.instamaterial.ui.adapter;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.content.Context;
+import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +13,8 @@ import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -18,6 +22,7 @@ import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.BindView;
+import de.hdodenhof.circleimageview.CircleImageView;
 import io.github.froger.instamaterial.R;
 import io.github.froger.instamaterial.ui.Models.Comment;
 import io.github.froger.instamaterial.ui.Models.Post;
@@ -36,6 +41,7 @@ public class CommentsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private boolean animationsLocked = false;
     private boolean delayEnterAnimation = true;
     List<Comment> commeList = new ArrayList<>();
+    Comment commentlis;
 
     public CommentsAdapter(Context context, List<Comment> commeList) {
         this.context = context;
@@ -52,9 +58,12 @@ public class CommentsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
     public static class CommentViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.ivUserAvatar)
-        ImageView ivUserAvatar;
+        CircleImageView ivUserAvatar;
         @BindView(R.id.tvComment)
         TextView tvComment;
+        @BindView(R.id.tvName)
+        TextView tvname;
+
 
         public CommentViewHolder(View view) {
             super(view);
@@ -68,6 +77,9 @@ public class CommentsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         CommentViewHolder holder = (CommentViewHolder) viewHolder;
         String str=commeList.get(position).getComment();
         holder.tvComment.setText(str);
+        String namestr=commeList.get(position).getuserName();
+        holder.tvname.setText(namestr);
+
 //        switch (position % 3) {
 //            case 0:
 //                holder.tvComment.setText("Lorem ipsum dolor sit amet, consectetur adipisicing elit.");
@@ -79,13 +91,18 @@ public class CommentsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 //                holder.tvComment.setText("Cupcake ipsum dolor sit. Amet gingerbread cupcake. Gummies ice cream dessert icing marzipan apple pie dessert sugar plum.");
 //                break;
 //        }
+        if(!this.commeList.get(position).getProfileImageURL().equals("") && this.commeList.get(position).getProfileImageURL()!= null) {
 
-        Picasso.with(context)
-                .load(R.drawable.logo_ic)
-                .centerCrop()
-                .resize(avatarSize, avatarSize)
-                .transform(new RoundedTransformation())
-                .into(holder.ivUserAvatar);
+            Picasso.with(context).load(this.commeList.get(position).getProfileImageURL())
+                    .placeholder(R.drawable.logo_ic)
+                    .into(holder.ivUserAvatar);
+        }
+//        Picasso.with(context)
+//                .load(R.drawable.logo_ic)
+//                .centerCrop()
+//                .resize(avatarSize, avatarSize)
+//                .transform(new RoundedTransformation())
+//                .into(holder.ivUserAvatar);
     }
 
     private void runEnterAnimation(View view, int position) {

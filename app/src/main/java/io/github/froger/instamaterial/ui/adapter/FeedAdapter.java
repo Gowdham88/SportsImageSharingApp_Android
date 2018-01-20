@@ -219,7 +219,6 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             if(!this.postItem.getProfileImageURL().equals("") && this.postItem.getProfileImageURL() != null) {
 
                 Picasso.with(context).load(this.postItem.getProfileImageURL())
-                        .placeholder(R.drawable.ic_heart_outline_white)
                         .into(ivUserProfile);
             }
 
@@ -235,8 +234,7 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
             if(!this.postItem.getPostimage().equals("failed")) {
 
-                Picasso.with(context).load(this.postItem.getPostimage())
-                        .placeholder(R.drawable.ic_heart_outline_white).fit()
+                Picasso.with(context).load(this.postItem.getPostimage()).fit()
                         .into(ivFeedCenter);
             }
 
