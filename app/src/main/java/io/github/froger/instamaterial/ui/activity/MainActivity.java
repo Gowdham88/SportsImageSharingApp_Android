@@ -180,13 +180,13 @@ public class MainActivity extends BaseDrawerActivity implements FeedAdapter.OnFe
     }
 
     private void showFeedLoadingItemDelayed() {
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                rvFeed.smoothScrollToPosition(0);
-                feedAdapter.showLoadingView();
-            }
-        }, 500);
+//        new Handler().postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                rvFeed.smoothScrollToPosition(0);
+//                feedAdapter.showLoadingView();
+//            }
+//        }, 500);
     }
 
     @Override
