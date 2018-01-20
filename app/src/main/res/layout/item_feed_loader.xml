@@ -68,14 +68,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="center"
-                android:src="@drawable/ic_heart_outline_white"
                 android:visibility="invisible" />
 
             <View
                 android:id="@+id/vProgressBg"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#77ffffff" />
+                android:background="#D8D8D8" />
 
             <io.github.froger.instamaterial.ui.view.SendingProgressView
                 android:id="@+id/vSendingProgress"

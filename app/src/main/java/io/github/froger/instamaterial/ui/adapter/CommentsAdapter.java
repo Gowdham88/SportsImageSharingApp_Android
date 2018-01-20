@@ -3,6 +3,8 @@ package io.github.froger.instamaterial.ui.adapter;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.content.Context;
+import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,11 +13,19 @@ import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.BindView;
+import de.hdodenhof.circleimageview.CircleImageView;
 import io.github.froger.instamaterial.R;
+import io.github.froger.instamaterial.ui.Models.Comment;
+import io.github.froger.instamaterial.ui.Models.Post;
 import io.github.froger.instamaterial.ui.utils.RoundedTransformation;
 
 /**
@@ -30,40 +40,69 @@ public class CommentsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     private boolean animationsLocked = false;
     private boolean delayEnterAnimation = true;
+    List<Comment> commeList = new ArrayList<>();
+    Comment commentlis;
 
-    public CommentsAdapter(Context context) {
+    public CommentsAdapter(Context context, List<Comment> commeList) {
         this.context = context;
         avatarSize = context.getResources().getDimensionPixelSize(R.dimen.comment_avatar_size);
+        this.commeList=commeList;
     }
-
+    public  void addData(List<Comment> stringArrayList){
+        commeList.addAll(stringArrayList);
+    }
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         final View view = LayoutInflater.from(context).inflate(R.layout.item_comment, parent, false);
         return new CommentViewHolder(view);
+    }
+    public static class CommentViewHolder extends RecyclerView.ViewHolder {
+        @BindView(R.id.ivUserAvatar)
+        CircleImageView ivUserAvatar;
+        @BindView(R.id.tvComment)
+        TextView tvComment;
+        @BindView(R.id.tvName)
+        TextView tvname;
+
+
+        public CommentViewHolder(View view) {
+            super(view);
+            ButterKnife.bind(this, view);
+        }
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
         runEnterAnimation(viewHolder.itemView, position);
         CommentViewHolder holder = (CommentViewHolder) viewHolder;
-        switch (position % 3) {
-            case 0:
-                holder.tvComment.setText("Lorem ipsum dolor sit amet, consectetur adipisicing elit.");
-                break;
-            case 1:
-                holder.tvComment.setText("Cupcake ipsum dolor sit amet bear claw.");
-                break;
-            case 2:
-                holder.tvComment.setText("Cupcake ipsum dolor sit. Amet gingerbread cupcake. Gummies ice cream dessert icing marzipan apple pie dessert sugar plum.");
-                break;
-        }
+        String str=commeList.get(position).getComment();
+        holder.tvComment.setText(str);
+        String namestr=commeList.get(position).getuserName();
+        holder.tvname.setText(namestr);
 
-        Picasso.with(context)
-                .load(R.drawable.logo_ic)
-                .centerCrop()
-                .resize(avatarSize, avatarSize)
-                .transform(new RoundedTransformation())
-                .into(holder.ivUserAvatar);
+//        switch (position % 3) {
+//            case 0:
+//                holder.tvComment.setText("Lorem ipsum dolor sit amet, consectetur adipisicing elit.");
+//                break;
+//            case 1:
+//                holder.tvComment.setText("Cupcake ipsum dolor sit amet bear claw.");
+//                break;
+//            case 2:
+//                holder.tvComment.setText("Cupcake ipsum dolor sit. Amet gingerbread cupcake. Gummies ice cream dessert icing marzipan apple pie dessert sugar plum.");
+//                break;
+//        }
+        if(!this.commeList.get(position).getProfileImageURL().equals("") && this.commeList.get(position).getProfileImageURL()!= null) {
+
+            Picasso.with(context).load(this.commeList.get(position).getProfileImageURL())
+                    .placeholder(R.drawable.logo_ic)
+                    .into(holder.ivUserAvatar);
+        }
+//        Picasso.with(context)
+//                .load(R.drawable.logo_ic)
+//                .centerCrop()
+//                .resize(avatarSize, avatarSize)
+//                .transform(new RoundedTransformation())
+//                .into(holder.ivUserAvatar);
     }
 
     private void runEnterAnimation(View view, int position) {
@@ -90,7 +129,7 @@ public class CommentsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @Override
     public int getItemCount() {
-        return itemsCount;
+        return commeList.size();
     }
 
     public void updateItems() {
@@ -111,15 +150,5 @@ public class CommentsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         this.delayEnterAnimation = delayEnterAnimation;
     }
 
-    public static class CommentViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.ivUserAvatar)
-        ImageView ivUserAvatar;
-        @BindView(R.id.tvComment)
-        TextView tvComment;
 
-        public CommentViewHolder(View view) {
-            super(view);
-            ButterKnife.bind(this, view);
-        }
-    }
 }
