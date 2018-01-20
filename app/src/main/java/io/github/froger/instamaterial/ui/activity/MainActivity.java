@@ -472,8 +472,8 @@ public class MainActivity extends BaseDrawerActivity implements FeedAdapter.OnFe
                             Post post = document.toObject(Post.class);
                             postList.add(post);
                             postListId.add(document.getId());
-                            Log.e("dbbd",document.getId());
-                            Log.e("dbbd", String.valueOf(document.getData()));
+//                            Log.e("dbbd",document.getId());
+//                            Log.e("dbbd", String.valueOf(document.getData()));
 
                         }
 
