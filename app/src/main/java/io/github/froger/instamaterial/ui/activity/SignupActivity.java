@@ -34,6 +34,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Gallery;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -80,6 +81,7 @@ import static android.Manifest.permission.CAMERA;
 import static android.content.ContentValues.TAG;
 import static android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE;
 import static com.facebook.FacebookSdk.getApplicationContext;
+import static io.github.froger.instamaterial.Utils.hideKeyboard;
 
 public class SignupActivity extends AppCompatActivity implements EasyPermissions.PermissionCallbacks {
 EditText EmailEdt,UsernameEdt,PassEdt;
@@ -90,6 +92,7 @@ TextView AccntTxt;
     ImageView GalleryIcon, GenderDropimg;
     ImageView CameraIcon;
     Inflater inflater;
+    RelativeLayout Signuprellay;
     Animation slideUpAnimation, slideDownAnimation;
     private FirebaseAuth mAuth;
     private AlertDialog dialog;
@@ -112,6 +115,13 @@ TextView AccntTxt;
         UsernameEdt=(EditText)findViewById(R.id.username_edit);
         PassEdt=(EditText)findViewById(R.id.pass_edit);
         AccntTxt=(TextView)findViewById(R.id.accnt_txt);
+        Signuprellay=(RelativeLayout) findViewById(R.id.signuprel_lay);
+        Signuprellay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                hideKeyboard(SignupActivity.this);
+            }
+        });
         SignupBtn=(Button)findViewById(R.id.signup_btn);
         profileImg=(CircleImageView)findViewById(R.id.image_view);
         profileImg.setOnClickListener(new View.OnClickListener() {
