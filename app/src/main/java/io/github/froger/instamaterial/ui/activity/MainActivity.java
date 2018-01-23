@@ -689,6 +689,11 @@ public class MainActivity extends AppCompatActivity implements FeedAdapter.OnFee
 
 
     }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        this.finish();
+    }
 
 
 }
