@@ -6,9 +6,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.view.ViewCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -19,7 +21,9 @@ import android.view.animation.AnimationUtils;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -37,6 +41,8 @@ import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import io.github.froger.instamaterial.R;
 import io.github.froger.instamaterial.Utils;
 import io.github.froger.instamaterial.ui.Models.Comment;
@@ -49,7 +55,7 @@ import io.github.froger.instamaterial.ui.view.SendCommentButton;
 /**
  * Created by froger_mcs on 11.11.14.
  */
-public class CommentsActivity extends BaseDrawerActivity implements SendCommentButton.OnSendClickListener {
+public class CommentsActivity extends AppCompatActivity implements SendCommentButton.OnSendClickListener {
     public static final String ARG_DRAWING_START_LOCATION = "arg_drawing_start_location";
     public static final String POST_ID = "post_id";
 
@@ -69,11 +75,19 @@ public class CommentsActivity extends BaseDrawerActivity implements SendCommentB
     private int drawingStartLocation;
     String comment;
     String postId;
+    @BindView(R.id.toolbar_title)
+    TextView toolbarTitle;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+    @BindView(R.id.back_image)
+    ImageView backarrow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comments);
+        ButterKnife.bind(this);
+        setSupportActionBar(toolbar);
 
         drawingStartLocation = getIntent().getIntExtra(ARG_DRAWING_START_LOCATION, 0);
         postId = getIntent().getStringExtra(POST_ID);
@@ -132,7 +146,7 @@ public class CommentsActivity extends BaseDrawerActivity implements SendCommentB
 
     }
     private void startIntroAnimation() {
-        ViewCompat.setElevation(getToolbar(), 0);
+        ViewCompat.setElevation(toolbar, 0);
         contentRoot.setScaleY(0.1f);
         contentRoot.setPivotY(drawingStartLocation);
         llAddComment.setTranslationY(200);
@@ -144,7 +158,7 @@ public class CommentsActivity extends BaseDrawerActivity implements SendCommentB
                 .setListener(new AnimatorListenerAdapter() {
                     @Override
                     public void onAnimationEnd(Animator animation) {
-                        ViewCompat.setElevation(getToolbar(), Utils.dpToPx(8));
+                        ViewCompat.setElevation(toolbar, Utils.dpToPx(8));
                         animateContent();
                     }
                 })
@@ -159,9 +173,15 @@ public class CommentsActivity extends BaseDrawerActivity implements SendCommentB
                 .start();
     }
 
+    @OnClick(R.id.back_image)
+    public void setBackarrow() {
+
+        onBackPressed();
+    }
+
     @Override
     public void onBackPressed() {
-        ViewCompat.setElevation(getToolbar(), 0);
+        ViewCompat.setElevation(toolbar, 0);
         contentRoot.animate()
                 .translationY(Utils.getScreenHeight(this))
                 .setDuration(200)

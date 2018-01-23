@@ -16,6 +16,7 @@ import android.support.v7.widget.LinearLayoutCompat;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.animation.OvershootInterpolator;
@@ -97,6 +98,12 @@ public class PublishActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_publish);
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_grey600_24dp);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
         photoSize = getResources().getDimensionPixelSize(R.dimen.publish_photo_thumbnail_size);
 
         if (savedInstanceState == null) {
