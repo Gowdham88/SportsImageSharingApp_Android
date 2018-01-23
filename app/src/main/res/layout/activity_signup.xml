@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/signuprel_lay"
     android:background="#34495E">
 
     <de.hdodenhof.circleimageview.CircleImageView
@@ -21,25 +22,7 @@
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
         android:layout_below="@+id/image_view">
-        <EditText
-            android:id="@+id/email_edit"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:hint="Email"
-            android:textCursorDrawable="@drawable/color_cursor"
-            android:singleLine="true"
-            android:inputType="textEmailAddress"
-            android:imeOptions="actionNext"
-            android:textColorHint="#FFFFFF"
-            android:textColor="#FFFFFF"
-            android:textSize="18dp"
-            style="@style/FontAvenirBook"
-        android:background="@null"
-            android:gravity="center"/>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:background="#000000"/>
+
         <EditText
             android:id="@+id/username_edit"
             android:layout_width="match_parent"
@@ -56,6 +39,26 @@
             style="@style/FontAvenirBook"
             android:textColor="#FFFFFF"
             android:gravity="center"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#000000"/>
+        <EditText
+            android:id="@+id/email_edit"
+            style="@style/FontAvenirBook"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@null"
+            android:gravity="center"
+            android:hint="Email"
+            android:imeOptions="actionNext"
+            android:inputType="textEmailAddress"
+            android:singleLine="true"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#FFFFFF"
+            android:textCursorDrawable="@drawable/color_cursor"
+            android:textSize="18dp" />
+
         <View
             android:layout_width="match_parent"
             android:layout_height="0.5dp"

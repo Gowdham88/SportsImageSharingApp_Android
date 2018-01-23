@@ -13,6 +13,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +25,8 @@ import com.google.firebase.auth.FirebaseUser;
 
 import io.github.froger.instamaterial.R;
 
+import static io.github.froger.instamaterial.Utils.hideKeyboard;
+
 public class LoginScreen extends AppCompatActivity {
     EditText mEmailEdt,mPassEdt;
     Button mSininBtn;
@@ -31,6 +34,7 @@ public class LoginScreen extends AppCompatActivity {
     Animation slideUpAnimation, slideDownAnimation;
     private FirebaseAuth mAuth;
     private AlertDialog dialog;
+    RelativeLayout Signinrel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +43,13 @@ public class LoginScreen extends AppCompatActivity {
         mPassEdt=(EditText)findViewById(R.id.loginpass_edt);
         mAccntTxt=(TextView) findViewById(R.id.dont_txt);
         mSininBtn=(Button) findViewById(R.id.sinin_edt);
+        Signinrel=(RelativeLayout) findViewById(R.id.signinrel_lay);
+        Signinrel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                hideKeyboard(LoginScreen.this);
+            }
+        });
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser!=null) {
