@@ -78,9 +78,6 @@ public class LoginScreen extends AppCompatActivity {
                 slideUpAnimation = AnimationUtils.loadAnimation(getApplicationContext(),
                         R.anim.slide_up);
                 mAccntTxt.setAnimation(slideUpAnimation);
-//                slideDownAnimation = AnimationUtils.loadAnimation(getApplicationContext(),
-//                        R.anim.slide_down);
-//                mAccntTxt.setAnimation(slideDownAnimation);
                 startActivity(intent);
             }
         });
