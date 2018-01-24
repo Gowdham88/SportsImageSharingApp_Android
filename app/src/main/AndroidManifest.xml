@@ -54,19 +54,17 @@
         </activity>
         <activity
             android:name=".ui.activity.MainActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.TransparentActivity" />
-         <!--<activity-->
-         <!--android:name=".ui.activity.LoginScreen"-->
-         <!--android:screenOrientation="portrait"-->
-             <!--android:theme="@style/AppTheme.TransparentActivity" />-->
+            android:screenOrientation="portrait" />
+         <activity
+         android:name=".ui.activity.SignupActivity"
+         android:screenOrientation="portrait"
+             android:theme="@style/AppTheme.TransparentActivity" />
         <activity
             android:name=".ui.activity.LoginActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activity.CommentsActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.TransparentActivity" />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activity.UserProfileActivity"
             android:screenOrientation="portrait"

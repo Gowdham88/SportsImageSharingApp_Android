@@ -23,6 +23,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import czsm.github.froger.instamaterial.R;
 import czsm.github.froger.instamaterial.Utils;
 
 public class LoginScreen extends AppCompatActivity {
@@ -36,7 +37,7 @@ public class LoginScreen extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(czsm.github.froger.instamaterial.R.layout.activity_login_screen);
+        setContentView(R.layout.activity_login_screen);
         mEmailEdt=(EditText)findViewById(czsm.github.froger.instamaterial.R.id.login_edt);
         mPassEdt=(EditText)findViewById(czsm.github.froger.instamaterial.R.id.loginpass_edt);
         mAccntTxt=(TextView) findViewById(czsm.github.froger.instamaterial.R.id.dont_txt);
@@ -48,7 +49,7 @@ public class LoginScreen extends AppCompatActivity {
                 Utils.hideKeyboard(LoginScreen.this);
             }
         });
-        onBackPressed();
+
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser!=null) {
@@ -73,9 +74,6 @@ public class LoginScreen extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent(LoginScreen.this,SignupActivity.class);
-                slideUpAnimation = AnimationUtils.loadAnimation(getApplicationContext(),
-                        czsm.github.froger.instamaterial.R.anim.slide_up);
-                mAccntTxt.setAnimation(slideUpAnimation);
                 startActivity(intent);
             }
         });
@@ -119,7 +117,7 @@ public class LoginScreen extends AppCompatActivity {
 
         android.support.v7.app.AlertDialog.Builder alertDialog = new android.support.v7.app.AlertDialog.Builder(LoginScreen.this);
         //View view = getLayoutInflater().inflate(R.layout.progress);
-        alertDialog.setView(czsm.github.froger.instamaterial.R.layout.progress);
+        alertDialog.setView(R.layout.progress);
         dialog = alertDialog.create();
         dialog.show();
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
