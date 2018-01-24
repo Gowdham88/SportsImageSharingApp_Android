@@ -12,13 +12,16 @@ import android.graphics.BitmapFactory;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
+import android.support.design.widget.BottomSheetDialog;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.CursorLoader;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -49,14 +52,19 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import io.github.froger.instamaterial.BuildConfig;
+import io.github.froger.instamaterial.Constants;
 import io.github.froger.instamaterial.R;
 import io.github.froger.instamaterial.Utils;
 import io.github.froger.instamaterial.ui.Models.Post;
@@ -69,6 +77,7 @@ import pub.devrel.easypermissions.AppSettingsDialog;
 import pub.devrel.easypermissions.EasyPermissions;
 
 import static android.content.ContentValues.TAG;
+import static android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE;
 import static com.facebook.FacebookSdk.getApplicationContext;
 import static io.github.froger.instamaterial.ui.adapter.FeedAdapter.ACTION_LIKE_BUTTON_CLICKED;
 
@@ -96,6 +105,11 @@ public class MainActivity extends AppCompatActivity implements FeedAdapter.OnFee
     @BindView(R.id.back_image)
     ImageView backarrow;
 
+    TextView Camera,Gallery;
+    ImageView GalleryIcon, GenderDropimg;
+    ImageView CameraIcon;
+    private Uri fileUri;
+
 
     final private int RC_PICK_IMAGE = 1;
     private static final int PERMISSIONS_REQUEST_CAMERA = 1888;
@@ -103,7 +117,8 @@ public class MainActivity extends AppCompatActivity implements FeedAdapter.OnFee
     private static final String[] CAMERA = {Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE};
     ProgressDialog mProgressDialog;
     private String selectedImagePath = "";
-
+    private String mCurrentPhotoPath;
+    final private int RC_CAPTURE_IMAGE = 2;
     private FeedAdapter feedAdapter;
 
     private boolean pendingIntroAnimation;
@@ -320,8 +335,7 @@ public class MainActivity extends AppCompatActivity implements FeedAdapter.OnFee
     @OnClick(R.id.btnCreate)
     public void onTakePhotoClick() {
         if (hasPermissions()) {
-            Intent i = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-            startActivityForResult(i, RC_PICK_IMAGE);
+            captureImage();
         } else {
             EasyPermissions.requestPermissions(this, "Permissions required", PERMISSIONS_REQUEST_GALLERY, CAMERA);
         }
@@ -428,6 +442,22 @@ public class MainActivity extends AppCompatActivity implements FeedAdapter.OnFee
                         Toast.makeText(this, "Failed!", Toast.LENGTH_SHORT).show();
                     }
                 }
+            } else if (requestCode == RC_CAPTURE_IMAGE) {
+                // Show the thumbnail on ImageView
+//                showProgressDialog();
+                Uri imageUri = Uri.parse(mCurrentPhotoPath);
+
+               // ScanFile so it will be appeared on Gallery
+                MediaScannerConnection.scanFile(getApplicationContext(),
+                        new String[]{imageUri.getPath()}, null,
+                        new MediaScannerConnection.OnScanCompletedListener() {
+                            public void onScanCompleted(String path, Uri uri) {
+                            }
+                        });
+                selectedImagePath = imageUri.getPath();
+
+                PublishActivity.openWithPhotoUri(this, imageUri,selectedImagePath);
+
             }
 
         } else {
@@ -695,5 +725,91 @@ public class MainActivity extends AppCompatActivity implements FeedAdapter.OnFee
         this.finish();
     }
 
+
+    private void showBottomSheet() {
+
+        final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(MainActivity.this);
+        LayoutInflater factory = LayoutInflater.from(this);
+        View bottomSheetView = factory.inflate(R.layout.dialo_camera_bottomsheet, null);
+        bottomSheetDialog.setContentView(bottomSheetView);
+        bottomSheetDialog.show();
+
+        Camera = (TextView) bottomSheetView.findViewById(R.id.camera_title);
+        Gallery = (TextView) bottomSheetView.findViewById(R.id.gallery_title);
+        GalleryIcon = (ImageView) bottomSheetView.findViewById(R.id.gallery_icon);
+        CameraIcon = (ImageView) bottomSheetView.findViewById(R.id.camera_image);
+        Camera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                bottomSheetDialog.dismiss();
+
+                if (hasPermissions()) {
+                    captureImage();
+                } else {
+                    EasyPermissions.requestPermissions(MainActivity.this, "Permissions required", PERMISSIONS_REQUEST_CAMERA, CAMERA);
+                }
+            }
+        });
+
+        Gallery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (hasPermissions()) {
+                    Intent i = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                    startActivityForResult(i, RC_PICK_IMAGE);
+                } else {
+                    EasyPermissions.requestPermissions(MainActivity.this, "Permissions required", PERMISSIONS_REQUEST_GALLERY, CAMERA);
+                }
+
+                bottomSheetDialog.dismiss();
+            }
+        });
+
+
+    }
+
+    private void captureImage() {
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        fileUri = getOutputMediaFileUri(1);
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
+        startActivityForResult(intent, RC_CAPTURE_IMAGE);
+    }
+
+    public Uri getOutputMediaFileUri(int type) {
+        return FileProvider.getUriForFile(MainActivity.this,
+                BuildConfig.APPLICATION_ID + ".provider",
+                getOutputMediaFile(type));
+    }
+
+    private File getOutputMediaFile(int type) {
+
+        File mediaStorageDir = new File(
+                Environment
+                        .getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),
+                Constants.IMAGE_DIRECTORY_NAME);
+
+        if (!mediaStorageDir.exists()) {
+            if (!mediaStorageDir.mkdirs()) {
+                Log.d(TAG, "Oops! Failed create "
+                        + Constants.IMAGE_DIRECTORY_NAME + " directory");
+                return null;
+            }
+        }
+
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss",
+                Locale.getDefault()).format(new Date());
+        File mediaFile;
+        if (type == MEDIA_TYPE_IMAGE) {
+            mediaFile = new File(mediaStorageDir.getPath() + File.separator
+                    + "IMG_" + timeStamp + ".jpg");
+        } else {
+            return null;
+        }
+        // Save a file: path for use with ACTION_VIEW intents
+        mCurrentPhotoPath = "file:" + mediaFile.getAbsolutePath();
+
+        return mediaFile;
+    }
 
 }

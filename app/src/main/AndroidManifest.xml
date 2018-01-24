@@ -49,7 +49,7 @@
             android:value="@string/facebook_app_id" />
 
         <activity
-            android:name=".ui.activity.SignupActivity"
+            android:name=".ui.activity.LoginScreen"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -61,7 +61,7 @@
             android:name=".ui.activity.MainActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.activity.LoginActivity"
+            android:name=".ui.activity.SignupActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activity.CommentsActivity"
