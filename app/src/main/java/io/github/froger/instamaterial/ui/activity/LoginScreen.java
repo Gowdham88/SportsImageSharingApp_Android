@@ -50,6 +50,7 @@ public class LoginScreen extends AppCompatActivity {
                 hideKeyboard(LoginScreen.this);
             }
         });
+        onBackPressed();
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser!=null) {
@@ -168,5 +169,8 @@ public class LoginScreen extends AppCompatActivity {
 
         return valid;
     }
-
+    @Override
+    public void onBackPressed() {
+        this.finish();
+    }
 }

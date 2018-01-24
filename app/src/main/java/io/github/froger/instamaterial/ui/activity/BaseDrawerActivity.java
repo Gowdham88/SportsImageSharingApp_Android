@@ -45,14 +45,14 @@ public class BaseDrawerActivity extends BaseActivity {
     @Override
     protected void setupToolbar() {
         super.setupToolbar();
-        if (getToolbar() != null) {
-            getToolbar().setNavigationOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-//                    drawerLayout.openDrawer(Gravity.LEFT);
-                }
-            });
-        }
+//        if (getToolbar() != null) {
+//            getToolbar().setNavigationOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+////                    drawerLayout.openDrawer(Gravity.LEFT);
+//                }
+//            });
+//        }
     }
 
     private void setupHeader() {
