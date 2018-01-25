@@ -10,7 +10,87 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bc2e6760-a664-40f4-a40f-f97de6b4e726" name="Default" comment="" />
+    <list default="true" id="bc2e6760-a664-40f4-a40f-f97de6b4e726" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sarvodaya.iml" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/SarvodayaHB_Android.iml" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/4.4-20171031235950+0000/fileHashes/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/4.4-20171031235950+0000/fileHashes/fileHashes.bin" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/4.4-20171031235950+0000/fileHashes/fileHashes.lock" afterPath="$PROJECT_DIR$/.gradle/4.4-20171031235950+0000/fileHashes/fileHashes.lock" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/4.4-20171031235950+0000/javaCompile/classAnalysis.bin" afterPath="$PROJECT_DIR$/.gradle/4.4-20171031235950+0000/javaCompile/classAnalysis.bin" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/4.4-20171031235950+0000/javaCompile/javaCompile.lock" afterPath="$PROJECT_DIR$/.gradle/4.4-20171031235950+0000/javaCompile/javaCompile.lock" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/4.4-20171031235950+0000/javaCompile/taskHistory.bin" afterPath="$PROJECT_DIR$/.gradle/4.4-20171031235950+0000/javaCompile/taskHistory.bin" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/4.4-20171031235950+0000/javaCompile/taskJars.bin" afterPath="$PROJECT_DIR$/.gradle/4.4-20171031235950+0000/javaCompile/taskJars.bin" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/4.4-20171031235950+0000/taskHistory/taskHistory.bin" afterPath="$PROJECT_DIR$/.gradle/4.4-20171031235950+0000/taskHistory/taskHistory.bin" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/4.4-20171031235950+0000/taskHistory/taskHistory.lock" afterPath="$PROJECT_DIR$/.gradle/4.4-20171031235950+0000/taskHistory/taskHistory.lock" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/com_android_support_animated_vector_drawable_25_3_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/com_android_support_animated_vector_drawable_25_3_1.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/com_android_support_appcompat_v7_25_3_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/com_android_support_appcompat_v7_25_3_1.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/com_android_support_cardview_v7_25_3_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/com_android_support_cardview_v7_25_3_1.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/com_android_support_constraint_constraint_layout_1_0_2.xml" afterPath="$PROJECT_DIR$/.idea/libraries/com_android_support_constraint_constraint_layout_1_0_2.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/com_android_support_customtabs_25_3_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/com_android_support_customtabs_25_3_1.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/com_android_support_design_25_0_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/com_android_support_design_25_0_0.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/com_android_support_palette_v7_25_0_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/com_android_support_palette_v7_25_0_0.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/com_android_support_recyclerview_v7_25_0_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/com_android_support_recyclerview_v7_25_0_0.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/com_android_support_support_compat_25_3_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/com_android_support_support_compat_25_3_1.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/com_android_support_support_core_ui_25_3_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/com_android_support_support_core_ui_25_3_1.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/com_android_support_support_core_utils_25_3_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/com_android_support_support_core_utils_25_3_1.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/com_android_support_support_fragment_25_3_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/com_android_support_support_fragment_25_3_1.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/com_android_support_support_media_compat_25_3_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/com_android_support_support_media_compat_25_3_1.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/com_android_support_support_v13_25_0_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/com_android_support_support_v13_25_0_0.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/com_android_support_support_v4_25_3_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/com_android_support_support_v4_25_3_1.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/com_android_support_support_vector_drawable_25_3_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/com_android_support_support_vector_drawable_25_3_1.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/com_android_support_transition_25_0_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/com_android_support_transition_25_0_0.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/com_commonsware_cwac_camera_0_7_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/com_commonsware_cwac_camera_0_7_0.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/com_facebook_android_facebook_android_sdk_4_25_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/com_facebook_android_facebook_android_sdk_4_25_0.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/com_google_android_gms_play_services_base_11_6_2.xml" afterPath="$PROJECT_DIR$/.idea/libraries/com_google_android_gms_play_services_base_11_6_2.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/com_google_android_gms_play_services_base_license_11_6_2.xml" afterPath="$PROJECT_DIR$/.idea/libraries/com_google_android_gms_play_services_base_license_11_6_2.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/com_google_android_gms_play_services_basement_11_6_2.xml" afterPath="$PROJECT_DIR$/.idea/libraries/com_google_android_gms_play_services_basement_11_6_2.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/com_google_android_gms_play_services_basement_license_11_6_2.xml" afterPath="$PROJECT_DIR$/.idea/libraries/com_google_android_gms_play_services_basement_license_11_6_2.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/com_google_android_gms_play_services_tasks_11_6_2.xml" afterPath="$PROJECT_DIR$/.idea/libraries/com_google_android_gms_play_services_tasks_11_6_2.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/com_google_android_gms_play_services_tasks_license_11_6_2.xml" afterPath="$PROJECT_DIR$/.idea/libraries/com_google_android_gms_play_services_tasks_license_11_6_2.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/com_google_firebase_firebase_analytics_11_6_2.xml" afterPath="$PROJECT_DIR$/.idea/libraries/com_google_firebase_firebase_analytics_11_6_2.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/com_google_firebase_firebase_analytics_impl_11_6_2.xml" afterPath="$PROJECT_DIR$/.idea/libraries/com_google_firebase_firebase_analytics_impl_11_6_2.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/com_google_firebase_firebase_analytics_impl_license_11_6_2.xml" afterPath="$PROJECT_DIR$/.idea/libraries/com_google_firebase_firebase_analytics_impl_license_11_6_2.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/com_google_firebase_firebase_analytics_license_11_6_2.xml" afterPath="$PROJECT_DIR$/.idea/libraries/com_google_firebase_firebase_analytics_license_11_6_2.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/com_google_firebase_firebase_auth_11_6_2.xml" afterPath="$PROJECT_DIR$/.idea/libraries/com_google_firebase_firebase_auth_11_6_2.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/com_google_firebase_firebase_auth_license_11_6_2.xml" afterPath="$PROJECT_DIR$/.idea/libraries/com_google_firebase_firebase_auth_license_11_6_2.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/com_google_firebase_firebase_common_11_6_2.xml" afterPath="$PROJECT_DIR$/.idea/libraries/com_google_firebase_firebase_common_11_6_2.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/com_google_firebase_firebase_common_license_11_6_2.xml" afterPath="$PROJECT_DIR$/.idea/libraries/com_google_firebase_firebase_common_license_11_6_2.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/com_google_firebase_firebase_core_11_6_2.xml" afterPath="$PROJECT_DIR$/.idea/libraries/com_google_firebase_firebase_core_11_6_2.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/com_google_firebase_firebase_crash_11_6_2.xml" afterPath="$PROJECT_DIR$/.idea/libraries/com_google_firebase_firebase_crash_11_6_2.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/com_google_firebase_firebase_crash_license_11_6_2.xml" afterPath="$PROJECT_DIR$/.idea/libraries/com_google_firebase_firebase_crash_license_11_6_2.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/com_google_firebase_firebase_database_11_6_2.xml" afterPath="$PROJECT_DIR$/.idea/libraries/com_google_firebase_firebase_database_11_6_2.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/com_google_firebase_firebase_database_connection_11_6_2.xml" afterPath="$PROJECT_DIR$/.idea/libraries/com_google_firebase_firebase_database_connection_11_6_2.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/com_google_firebase_firebase_database_connection_license_11_6_2.xml" afterPath="$PROJECT_DIR$/.idea/libraries/com_google_firebase_firebase_database_connection_license_11_6_2.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/com_google_firebase_firebase_database_license_11_6_2.xml" afterPath="$PROJECT_DIR$/.idea/libraries/com_google_firebase_firebase_database_license_11_6_2.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/com_google_firebase_firebase_firestore_11_6_2.xml" afterPath="$PROJECT_DIR$/.idea/libraries/com_google_firebase_firebase_firestore_11_6_2.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/com_google_firebase_firebase_iid_11_6_2.xml" afterPath="$PROJECT_DIR$/.idea/libraries/com_google_firebase_firebase_iid_11_6_2.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/com_google_firebase_firebase_iid_license_11_6_2.xml" afterPath="$PROJECT_DIR$/.idea/libraries/com_google_firebase_firebase_iid_license_11_6_2.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/com_google_firebase_firebase_storage_11_6_2.xml" afterPath="$PROJECT_DIR$/.idea/libraries/com_google_firebase_firebase_storage_11_6_2.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/com_google_firebase_firebase_storage_common_11_6_2.xml" afterPath="$PROJECT_DIR$/.idea/libraries/com_google_firebase_firebase_storage_common_11_6_2.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/com_google_firebase_firebase_storage_common_license_11_6_2.xml" afterPath="$PROJECT_DIR$/.idea/libraries/com_google_firebase_firebase_storage_common_license_11_6_2.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/com_google_firebase_firebase_storage_license_11_6_2.xml" afterPath="$PROJECT_DIR$/.idea/libraries/com_google_firebase_firebase_storage_license_11_6_2.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/com_jakewharton_butterknife_8_4_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/com_jakewharton_butterknife_8_4_0.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/com_jakewharton_hugo_hugo_runtime_1_2_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/com_jakewharton_hugo_hugo_runtime_1_2_1.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/com_jakewharton_timber_timber_4_3_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/com_jakewharton_timber_timber_4_3_1.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/de_hdodenhof_circleimageview_2_1_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/de_hdodenhof_circleimageview_2_1_0.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/pub_devrel_easypermissions_1_0_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/pub_devrel_easypermissions_1_0_1.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/uk_co_chrisjenx_calligraphy_2_3_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/uk_co_chrisjenx_calligraphy_2_3_0.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.iml" afterPath="$PROJECT_DIR$/app/app.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/czsm/github/froger/instamaterial/ui/activity/LoginScreen.java" afterPath="$PROJECT_DIR$/app/src/main/java/czsm/github/froger/instamaterial/ui/activity/LoginScreen.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/czsm/github/froger/instamaterial/ui/activity/MainActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/czsm/github/froger/instamaterial/ui/activity/MainActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/czsm/github/froger/instamaterial/ui/activity/PublishActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/czsm/github/froger/instamaterial/ui/activity/PublishActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/czsm/github/froger/instamaterial/ui/activity/SignupActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/czsm/github/froger/instamaterial/ui/activity/SignupActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/czsm/github/froger/instamaterial/ui/activity/SplashActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/czsm/github/froger/instamaterial/ui/activity/SplashActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/czsm/github/froger/instamaterial/ui/activity/UserProfileActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/czsm/github/froger/instamaterial/ui/activity/UserProfileActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_user_profile.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_user_profile.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/item_feed.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/item_feed.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/toolbar_post.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/toolbar_post.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/local.properties" afterPath="$PROJECT_DIR$/local.properties" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -33,14 +113,12 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="LoginScreen.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="LoginScreen.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/czsm/github/froger/instamaterial/ui/activity/LoginScreen.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="495">
-              <caret line="120" column="49" lean-forward="true" selection-start-line="120" selection-start-column="49" selection-end-line="120" selection-end-column="49" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="210">
+              <caret line="14" column="25" lean-forward="false" selection-start-line="14" selection-start-column="25" selection-end-line="14" selection-end-column="25" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -48,97 +126,11 @@
       <file leaf-file-name="MyActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/czsm/github/froger/instamaterial/ui/activity/MyActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="523">
-              <caret line="80" column="5" lean-forward="false" selection-start-line="80" selection-start-column="5" selection-end-line="80" selection-end-column="5" />
+            <state relative-caret-position="1380">
+              <caret line="92" column="80" lean-forward="false" selection-start-line="92" selection-start-column="8" selection-end-line="92" selection-end-column="80" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="activity_login_screen.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_login_screen.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="530">
-              <caret line="95" column="35" lean-forward="false" selection-start-line="95" selection-start-column="35" selection-end-line="95" selection-end-column="35" />
-              <folding />
-            </state>
-          </provider>
-          <provider editor-type-id="android-designer2">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PublishActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/czsm/github/froger/instamaterial/ui/activity/PublishActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="177">
-              <caret line="68" column="23" lean-forward="false" selection-start-line="68" selection-start-column="23" selection-end-line="68" selection-end-column="23" />
-              <folding>
-                <element signature="e#3186#3335#0" expanded="true" />
-                <element signature="e#3334#3335#0" expanded="true" />
-                <element signature="e#3375#3552#0" expanded="true" />
-                <element signature="e#3551#3552#0" expanded="true" />
-                <element signature="e#3575#3649#0" expanded="true" />
-                <element signature="e#4085#4358#0" expanded="true" />
-                <element signature="e#4357#4358#0" expanded="true" />
-                <element signature="e#8043#9087#0" expanded="true" />
-                <element signature="e#8542#8722#0" expanded="true" />
-                <element signature="e#8721#8722#0" expanded="true" />
-                <element signature="e#9086#9087#0" expanded="true" />
-                <element signature="e#9110#9438#0" expanded="true" />
-                <element signature="e#9437#9438#0" expanded="true" />
-                <element signature="e#10587#11492#0" expanded="true" />
-                <element signature="e#11491#11492#0" expanded="true" />
-                <element signature="e#11536#11939#0" expanded="true" />
-                <element signature="e#11938#11939#0" expanded="true" />
-                <element signature="e#11984#12450#0" expanded="true" />
-                <element signature="e#12449#12450#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SignupActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/czsm/github/froger/instamaterial/ui/activity/SignupActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="634">
-              <caret line="600" column="32" lean-forward="false" selection-start-line="600" selection-start-column="32" selection-end-line="600" selection-end-column="32" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#5455#5887#0" expanded="true" />
-                <element signature="e#5886#5887#0" expanded="true" />
-                <element signature="e#8402#9003#0" expanded="true" />
-                <element signature="e#9002#9003#0" expanded="true" />
-                <element signature="e#9040#9204#0" expanded="true" />
-                <element signature="e#9203#9204#0" expanded="true" />
-                <element signature="e#25223#25511#0" expanded="true" />
-                <element signature="e#25510#25511#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="activity_signup.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_signup.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="515">
-              <caret line="100" column="35" lean-forward="false" selection-start-line="100" selection-start-column="35" selection-end-line="100" selection-end-column="35" />
-              <folding />
-            </state>
-          </provider>
-          <provider editor-type-id="android-designer2">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="genderpopup.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-v21/genderpopup.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="45">
-              <caret line="3" column="33" lean-forward="false" selection-start-line="3" selection-start-column="33" selection-end-line="3" selection-end-column="33" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -146,24 +138,34 @@
       <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/czsm/github/froger/instamaterial/ui/activity/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-356">
-              <caret line="737" column="34" lean-forward="false" selection-start-line="737" selection-start-column="34" selection-end-line="737" selection-end-column="34" />
+            <state relative-caret-position="2985">
+              <caret line="199" column="79" lean-forward="false" selection-start-line="199" selection-start-column="79" selection-end-line="199" selection-end-column="79" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#25663#26083#0" expanded="true" />
-                <element signature="e#26082#26083#0" expanded="true" />
-                <element signature="e#26122#26676#0" expanded="true" />
-                <element signature="e#26675#26676#0" expanded="true" />
+                <element signature="e#5656#5657#0" expanded="true" />
+                <element signature="e#5698#5699#0" expanded="true" />
+                <element signature="e#28478#28479#0" expanded="true" />
+                <element signature="e#28520#28521#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="activity_publish.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_publish.xml">
+      <file leaf-file-name="PublishActivity.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/czsm/github/froger/instamaterial/ui/activity/PublishActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+            <state relative-caret-position="625">
+              <caret line="201" column="5" lean-forward="true" selection-start-line="197" selection-start-column="4" selection-end-line="201" selection-end-column="5" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="activity_main.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -172,18 +174,64 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LoginActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/czsm/github/froger/instamaterial/ui/activity/LoginActivity.java">
+      <file leaf-file-name="SignupActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/czsm/github/froger/instamaterial/ui/activity/SignupActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="274">
-              <caret line="241" column="50" lean-forward="false" selection-start-line="241" selection-start-column="50" selection-end-line="241" selection-end-column="50" />
+            <state relative-caret-position="3015">
+              <caret line="205" column="39" lean-forward="false" selection-start-line="205" selection-start-column="39" selection-end-line="205" selection-end-column="39" />
               <folding>
-                <element signature="e#8546#9036#0" expanded="true" />
-                <element signature="e#9035#9036#0" expanded="true" />
-                <element signature="e#9727#10015#0" expanded="true" />
-                <element signature="e#10014#10015#0" expanded="true" />
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UserProfileActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/czsm/github/froger/instamaterial/ui/activity/UserProfileActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-2414">
+              <caret line="126" column="39" lean-forward="false" selection-start-line="126" selection-start-column="39" selection-end-line="126" selection-end-column="39" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="activity_user_profile.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_user_profile.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="546">
+              <caret line="183" column="56" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="297" selection-end-column="17" />
+              <folding />
+            </state>
+          </provider>
+          <provider editor-type-id="android-designer2">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FeedAdapter.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/czsm/github/froger/instamaterial/ui/adapter/FeedAdapter.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="465">
+              <caret line="67" column="73" lean-forward="false" selection-start-line="67" selection-start-column="73" selection-end-line="67" selection-end-column="73" />
+              <folding>
+                <element signature="e#6662#6663#0" expanded="true" />
+                <element signature="e#6700#6701#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="item_feed.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/item_feed.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1065">
+              <caret line="71" column="39" lean-forward="false" selection-start-line="71" selection-start-column="33" selection-end-line="71" selection-end-column="39" />
+              <folding />
+            </state>
+          </provider>
+          <provider editor-type-id="android-designer2">
+            <state />
           </provider>
         </entry>
       </file>
@@ -207,6 +255,12 @@
       <find>ivLike</find>
       <find>postList</find>
       <find>action_clear</find>
+      <find>vUserNameSub</find>
+      <find>Login</find>
+      <find>profileImg</find>
+      <find>uploadImage</find>
+      <find>selectedImagePath</find>
+      <find>val</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -2030,12 +2084,8 @@
         <option value="$PROJECT_DIR$/app/src/main/java/czsm/github/froger/instamaterial/ui/activity/LoginActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_login_screen2.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/czsm/github/froger/instamaterial/ui/activity/LoginScreenActivity.java" />
-        <option value="$PROJECT_DIR$/app/build.gradle" />
         <option value="$PROJECT_DIR$/build.gradle" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/item_feed.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/czsm/github/froger/instamaterial/ui/utils/PreferencesHelper.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/czsm/github/froger/instamaterial/ui/activity/SplashActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/czsm/github/froger/instamaterial/ui/activity/UserProfileActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_splash.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/anim/translate_anim.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/anim/slide_up.xml" />
@@ -2051,16 +2101,22 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_slice.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/czsm/github/froger/instamaterial/ui/activity/ImageDetailActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/czsm/github/froger/instamaterial/ui/adapter/FeedAdapter.java" />
-        <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/menu/menu_publish.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_signup.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_login_screen.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/czsm/github/froger/instamaterial/ui/activity/MainActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/czsm/github/froger/instamaterial/ui/activity/SignupActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/czsm/github/froger/instamaterial/ui/activity/PublishActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_publish.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/czsm/github/froger/instamaterial/ui/activity/MyActivity.java" />
+        <option value="$PROJECT_DIR$/app/build.gradle" />
+        <option value="$PROJECT_DIR$/app/src/main/java/czsm/github/froger/instamaterial/ui/activity/MainActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/czsm/github/froger/instamaterial/ui/activity/PublishActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/toolbar_post.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/czsm/github/froger/instamaterial/ui/activity/SplashActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_user_profile.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/item_feed.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/czsm/github/froger/instamaterial/ui/activity/LoginScreen.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/czsm/github/froger/instamaterial/ui/activity/UserProfileActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/czsm/github/froger/instamaterial/ui/activity/SignupActivity.java" />
       </list>
     </option>
   </component>
@@ -2086,36 +2142,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="ProjectPane">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="sarvodaya" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="sarvodaya" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="sarvodaya" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="sarvodaya" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
+      <pane id="Scope" />
       <pane id="Scratches" />
-      <pane id="PackagesPane" />
       <pane id="AndroidView">
         <subPane>
           <PATH>
@@ -2256,7 +2284,35 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sarvodaya" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sarvodaya" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sarvodaya" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sarvodaya" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -2265,7 +2321,7 @@
     <property name="android.project.structure.proportion" value="0.15" />
     <property name="settings.editor.selected.configurable" value="gradle.compiler" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="device.picker.selection" value="46a62518" />
+    <property name="device.picker.selection" value="Nexus_5X_API_25" />
   </component>
   <component name="RecentsManager">
     <key name="android.template.packageName">
@@ -2366,7 +2422,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1516882821065" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1516891085482" />
       </method>
     </configuration>
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Instrumented Tests">
@@ -2414,7 +2470,7 @@
       </Profilers>
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1516882821065" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1516891085482" />
       </method>
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -2576,7 +2632,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1516882821066" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1516891085485" />
       </method>
     </configuration>
     <list size="1">
@@ -2617,9 +2673,8 @@
   <component name="ToolWindowManager">
     <frame x="7" y="36" width="2041" height="1001" extended-state="0" />
     <layout>
-      <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32930845" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -2646,6 +2701,7 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32930845" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32930845" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
@@ -2667,26 +2723,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_login_screen2.xml" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/czsm/github/froger/instamaterial/ui/activity/LoginScreenActivity.java" />
-    <entry file="file://$PROJECT_DIR$/app/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="19" column="34" lean-forward="false" selection-start-line="19" selection-start-column="34" selection-end-line="19" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -2727,16 +2763,6 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_user_profile.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="187" column="41" lean-forward="false" selection-start-line="187" selection-start-column="41" selection-end-line="187" selection-end-column="41" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/toolbar_with_profile.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="570">
@@ -2764,18 +2790,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/czsm/github/froger/instamaterial/ui/activity/UserProfileActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3900">
-          <caret line="309" column="71" lean-forward="false" selection-start-line="309" selection-start-column="71" selection-end-line="309" selection-end-column="71" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#6178#6179#0" expanded="false" />
-            <element signature="e#6220#6221#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_splash.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
@@ -2784,13 +2798,6 @@
       </provider>
       <provider editor-type-id="android-designer2">
         <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/czsm/github/froger/instamaterial/ui/activity/SplashActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="26" column="82" lean-forward="false" selection-start-line="26" selection-start-column="82" selection-end-line="26" selection-end-column="82" />
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/anim/translate_anim.xml">
@@ -2865,14 +2872,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/colors.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="43" lean-forward="false" selection-start-line="4" selection-start-column="43" selection-end-line="4" selection-end-column="50" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/Library/Android/sdk/platforms/android-25/data/res/values/colors.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="194">
@@ -2896,16 +2895,6 @@
         <state relative-caret-position="-282">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/item_feed.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="291">
-          <caret line="71" column="39" lean-forward="false" selection-start-line="71" selection-start-column="33" selection-end-line="71" selection-end-column="39" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/image_popup.xml">
@@ -2949,33 +2938,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/czsm/github/froger/instamaterial/ui/adapter/FeedAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3915">
-          <caret line="301" column="44" lean-forward="false" selection-start-line="301" selection-start-column="44" selection-end-line="301" selection-end-column="44" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#2174#2175#0" expanded="false" />
-            <element signature="e#2222#2223#0" expanded="false" />
-            <element signature="e#10839#10840#0" expanded="false" />
-            <element signature="e#10878#10879#0" expanded="false" />
-            <element signature="e#11248#11249#0" expanded="false" />
-            <element signature="e#11305#11306#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="855">
-          <caret line="57" column="52" lean-forward="false" selection-start-line="57" selection-start-column="52" selection-end-line="57" selection-end-column="52" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-manifest">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/menu_publish.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
@@ -2997,7 +2959,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_signup.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="515">
+        <state relative-caret-position="1500">
           <caret line="100" column="35" lean-forward="false" selection-start-line="100" selection-start-column="35" selection-end-line="100" selection-end-column="35" />
           <folding />
         </state>
@@ -3008,7 +2970,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_login_screen.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="530">
+        <state relative-caret-position="1425">
           <caret line="95" column="35" lean-forward="false" selection-start-line="95" selection-start-column="35" selection-end-line="95" selection-end-column="35" />
           <folding />
         </state>
@@ -3022,34 +2984,6 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/czsm/github/froger/instamaterial/ui/activity/PublishActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="177">
-          <caret line="68" column="23" lean-forward="false" selection-start-line="68" selection-start-column="23" selection-end-line="68" selection-end-column="23" />
-          <folding>
-            <element signature="e#3186#3335#0" expanded="true" />
-            <element signature="e#3334#3335#0" expanded="true" />
-            <element signature="e#3375#3552#0" expanded="true" />
-            <element signature="e#3551#3552#0" expanded="true" />
-            <element signature="e#3575#3649#0" expanded="true" />
-            <element signature="e#4085#4358#0" expanded="true" />
-            <element signature="e#4357#4358#0" expanded="true" />
-            <element signature="e#8043#9087#0" expanded="true" />
-            <element signature="e#8542#8722#0" expanded="true" />
-            <element signature="e#8721#8722#0" expanded="true" />
-            <element signature="e#9086#9087#0" expanded="true" />
-            <element signature="e#9110#9438#0" expanded="true" />
-            <element signature="e#9437#9438#0" expanded="true" />
-            <element signature="e#10587#11492#0" expanded="true" />
-            <element signature="e#11491#11492#0" expanded="true" />
-            <element signature="e#11536#11939#0" expanded="true" />
-            <element signature="e#11938#11939#0" expanded="true" />
-            <element signature="e#11984#12450#0" expanded="true" />
-            <element signature="e#12449#12450#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_publish.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15">
@@ -3061,55 +2995,130 @@
         <state />
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="21" column="53" lean-forward="false" selection-start-line="21" selection-start-column="53" selection-end-line="21" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/czsm/github/froger/instamaterial/ui/activity/LoginActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="274">
+        <state relative-caret-position="319">
           <caret line="241" column="50" lean-forward="false" selection-start-line="241" selection-start-column="50" selection-end-line="241" selection-end-column="50" />
           <folding>
-            <element signature="e#8546#9036#0" expanded="true" />
-            <element signature="e#9035#9036#0" expanded="true" />
-            <element signature="e#9727#10015#0" expanded="true" />
-            <element signature="e#10014#10015#0" expanded="true" />
+            <element signature="e#8546#9036#0" expanded="false" />
+            <element signature="e#9035#9036#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/czsm/github/froger/instamaterial/ui/activity/MainActivity.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/toolbar_post.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-356">
-          <caret line="737" column="34" lean-forward="false" selection-start-line="737" selection-start-column="34" selection-end-line="737" selection-end-column="34" />
+        <state relative-caret-position="276">
+          <caret line="23" column="8" lean-forward="false" selection-start-line="23" selection-start-column="8" selection-end-line="23" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/czsm/github/froger/instamaterial/ui/activity/SplashActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="28" column="20" lean-forward="false" selection-start-line="28" selection-start-column="20" selection-end-line="28" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="283">
+          <caret line="56" column="52" lean-forward="false" selection-start-line="56" selection-start-column="52" selection-end-line="56" selection-end-column="52" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-manifest">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/appcompat-v7-25.3.1.aar/65bc3f48fc4b7c0ffcf35e77c057ddf8/res/values/values.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="294">
+          <caret line="111" column="3420" lean-forward="false" selection-start-line="111" selection-start-column="3420" selection-end-line="111" selection-end-column="3420" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/colors.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="45" lean-forward="false" selection-start-line="3" selection-start-column="39" selection-end-line="3" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/czsm/github/froger/instamaterial/ui/activity/MyActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1380">
+          <caret line="92" column="80" lean-forward="false" selection-start-line="92" selection-start-column="8" selection-end-line="92" selection-end-column="80" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#25663#26083#0" expanded="true" />
-            <element signature="e#26082#26083#0" expanded="true" />
-            <element signature="e#26122#26676#0" expanded="true" />
-            <element signature="e#26675#26676#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/czsm/github/froger/instamaterial/ui/adapter/FeedAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="465">
+          <caret line="67" column="73" lean-forward="false" selection-start-line="67" selection-start-column="73" selection-end-line="67" selection-end-column="73" />
+          <folding>
+            <element signature="e#6662#6663#0" expanded="true" />
+            <element signature="e#6700#6701#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/item_feed.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1065">
+          <caret line="71" column="39" lean-forward="false" selection-start-line="71" selection-start-column="33" selection-end-line="71" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/czsm/github/froger/instamaterial/ui/activity/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2985">
+          <caret line="199" column="79" lean-forward="false" selection-start-line="199" selection-start-column="79" selection-end-line="199" selection-end-column="79" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#5656#5657#0" expanded="true" />
+            <element signature="e#5698#5699#0" expanded="true" />
+            <element signature="e#28478#28479#0" expanded="true" />
+            <element signature="e#28520#28521#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/czsm/github/froger/instamaterial/ui/activity/SignupActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="634">
-          <caret line="600" column="32" lean-forward="false" selection-start-line="600" selection-start-column="32" selection-end-line="600" selection-end-column="32" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#5455#5887#0" expanded="true" />
-            <element signature="e#5886#5887#0" expanded="true" />
-            <element signature="e#8402#9003#0" expanded="true" />
-            <element signature="e#9002#9003#0" expanded="true" />
-            <element signature="e#9040#9204#0" expanded="true" />
-            <element signature="e#9203#9204#0" expanded="true" />
-            <element signature="e#25223#25511#0" expanded="true" />
-            <element signature="e#25510#25511#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/czsm/github/froger/instamaterial/ui/activity/MyActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="523">
-          <caret line="80" column="5" lean-forward="false" selection-start-line="80" selection-start-column="5" selection-end-line="80" selection-end-column="5" />
+        <state relative-caret-position="3015">
+          <caret line="205" column="39" lean-forward="false" selection-start-line="205" selection-start-column="39" selection-end-line="205" selection-end-column="39" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -3118,11 +3127,36 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/czsm/github/froger/instamaterial/ui/activity/LoginScreen.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="495">
-          <caret line="120" column="49" lean-forward="true" selection-start-line="120" selection-start-column="49" selection-end-line="120" selection-end-column="49" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="210">
+          <caret line="14" column="25" lean-forward="false" selection-start-line="14" selection-start-column="25" selection-end-line="14" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_user_profile.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="546">
+          <caret line="183" column="56" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="297" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/czsm/github/froger/instamaterial/ui/activity/UserProfileActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2414">
+          <caret line="126" column="39" lean-forward="false" selection-start-line="126" selection-start-column="39" selection-end-line="126" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/czsm/github/froger/instamaterial/ui/activity/PublishActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="625">
+          <caret line="201" column="5" lean-forward="true" selection-start-line="197" selection-start-column="4" selection-end-line="201" selection-end-column="5" />
+          <folding />
         </state>
       </provider>
     </entry>

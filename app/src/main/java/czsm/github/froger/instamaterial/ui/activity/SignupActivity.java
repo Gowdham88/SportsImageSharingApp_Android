@@ -139,6 +139,7 @@ TextView AccntTxt;
         SignupBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                hideKeyboard(SignupActivity.this);
                 createAccount(EmailEdt.getText().toString(), UsernameEdt.getText().toString(),PassEdt.getText().toString(),view);
 
 //                if(validateForm()){
@@ -392,7 +393,7 @@ showProgressDialog();
                                                 Log.e("user", String.valueOf(user));
 //                                                AddDatabase(user,view);
                                                     uploadImage(view);
-
+                                        hideProgressDialog();
                                                 // Sign in success, update UI with the signed-in user's information
                                             }
                                         }

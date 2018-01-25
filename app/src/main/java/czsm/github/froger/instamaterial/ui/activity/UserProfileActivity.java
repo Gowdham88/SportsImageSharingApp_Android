@@ -2,8 +2,10 @@ package czsm.github.froger.instamaterial.ui.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -81,8 +83,8 @@ public class UserProfileActivity extends AppCompatActivity implements RevealBack
     View vUserProfileRoot;
     @BindView(R.id.username_txt)
     TextView vUserName;
-    @BindView(R.id.username_simple)
-    TextView vUserNameSub;
+//    @BindView(R.id.username_simple)
+//    TextView vUserNameSub;
     @BindView(R.id.toolbar_title)
     TextView toolbarTitle;
     @BindView(R.id.logout_image)
@@ -127,14 +129,14 @@ public class UserProfileActivity extends AppCompatActivity implements RevealBack
         setSupportActionBar(toolbar);
         this.avatarSize = getResources().getDimensionPixelSize(R.dimen.user_profile_avatar_size);
 
-
+        mAuth = FirebaseAuth.getInstance();
         userId = getIntent().getStringExtra(USER_ID);
         userName = getIntent().getStringExtra(USER_NAME);
         userProfile = getIntent().getStringExtra(USER_IMAGE);
 
         this.profilePhoto = userProfile;
         vUserName.setText(userName);
-        vUserNameSub.setText("@"+userName);
+//        vUserNameSub.setText("@"+userName);
 
         Picasso.with(this)
                 .load(profilePhoto)
@@ -298,21 +300,24 @@ public class UserProfileActivity extends AppCompatActivity implements RevealBack
 
     }
 
-    @OnClick(R.id.back_image)
-    public void setBackarrow() {
+//    @OnClick(R.id.back_image)
+//    public void setBackarrow() {
+//
+//        finish();
+//    }
 
-        finish();
-    }
-
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @OnClick(R.id.logout_image)
     public void logout() {
 
         Intent intent = new Intent(getApplicationContext(), LoginScreen.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intent.putExtra("EXIT", true);
+        overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
         startActivity(intent);
         PreferencesHelper.signOut(UserProfileActivity.this);
         mAuth.signOut();
+        finishAffinity();
     }
 
 

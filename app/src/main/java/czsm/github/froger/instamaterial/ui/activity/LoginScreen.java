@@ -75,6 +75,7 @@ public class LoginScreen extends AppCompatActivity {
         mSininBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Utils.hideKeyboard(LoginScreen.this);
                 signIn(mEmailEdt.getText().toString(), mPassEdt.getText().toString());
 //                if(validateForm()){
 ////                    Toast.makeText(LoginScreen.this, "haii", Toast.LENGTH_SHORT).show();
@@ -144,6 +145,8 @@ public class LoginScreen extends AppCompatActivity {
 
                                         Intent in=new Intent(LoginScreen.this,MainActivity.class);
                                         startActivity(in);
+                                        finish();
+                                        hideProgressDialog();
 
                                     } else {
                                         Toast.makeText(LoginScreen.this, "No user exits", Toast.LENGTH_LONG).show();
@@ -157,6 +160,7 @@ public class LoginScreen extends AppCompatActivity {
 
                                     Log.w("Error", "Error adding document", e);
                                     Toast.makeText(getApplicationContext(),"Login failed",Toast.LENGTH_SHORT).show();
+                                    hideProgressDialog();
                                 }
                             });
 
@@ -227,8 +231,6 @@ public class LoginScreen extends AppCompatActivity {
 
         return valid;
     }
-//    @Override
-//    public void onBackPressed() {
-//        super.onBackPressed();
-//    }
+
+
 }
