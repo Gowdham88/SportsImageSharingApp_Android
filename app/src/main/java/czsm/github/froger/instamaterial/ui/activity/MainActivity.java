@@ -5,6 +5,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -25,11 +26,17 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
+import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.view.animation.OvershootInterpolator;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -97,10 +104,11 @@ public class MainActivity extends AppCompatActivity implements FeedAdapter.OnFee
     @BindView(R.id.back_image)
     ImageView backarrow;
 
-    TextView Camera,Gallery;
+    TextView Camera,Gallery,cancel;
     ImageView GalleryIcon, GenderDropimg;
     ImageView CameraIcon;
     private Uri fileUri;
+
 
 
     final private int RC_PICK_IMAGE = 1;
@@ -126,7 +134,7 @@ public class MainActivity extends AppCompatActivity implements FeedAdapter.OnFee
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
-
+        backarrow.setVisibility(View.GONE);
         loadPost(ACTION_SHOW_DEFAULT_ITEM);
 
         if (savedInstanceState == null) {
@@ -327,17 +335,18 @@ public class MainActivity extends AppCompatActivity implements FeedAdapter.OnFee
     @OnClick(R.id.btnCreate)
     public void onTakePhotoClick() {
         if (hasPermissions()) {
-            captureImage();
+//            captureImage();
+            showBottomSheet();
         } else {
             EasyPermissions.requestPermissions(this, "Permissions required", PERMISSIONS_REQUEST_GALLERY, CAMERA);
         }
     }
 
-    @OnClick(R.id.back_image)
-    public void setBackarrow() {
-
-        finish();
-    }
+//    @OnClick(R.id.back_image)
+//    public void setBackarrow() {
+//
+//        finish();
+//    }
 
     @OnClick(R.id.profile_image)
     public void profileArrow(View v) {
@@ -711,11 +720,6 @@ public class MainActivity extends AppCompatActivity implements FeedAdapter.OnFee
 
 
     }
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        this.finish();
-    }
 
 
     private void showBottomSheet() {
@@ -728,8 +732,9 @@ public class MainActivity extends AppCompatActivity implements FeedAdapter.OnFee
 
         Camera = (TextView) bottomSheetView.findViewById(R.id.camera_title);
         Gallery = (TextView) bottomSheetView.findViewById(R.id.gallery_title);
-        GalleryIcon = (ImageView) bottomSheetView.findViewById(R.id.gallery_icon);
-        CameraIcon = (ImageView) bottomSheetView.findViewById(R.id.camera_image);
+//        GalleryIcon = (ImageView) bottomSheetView.findViewById(R.id.gallery_icon);
+//        CameraIcon = (ImageView) bottomSheetView.findViewById(R.id.camera_image);
+        cancel=(TextView) bottomSheetView.findViewById(R.id.cancel_txt);
         Camera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -754,6 +759,11 @@ public class MainActivity extends AppCompatActivity implements FeedAdapter.OnFee
                     EasyPermissions.requestPermissions(MainActivity.this, "Permissions required", PERMISSIONS_REQUEST_GALLERY, CAMERA);
                 }
 
+            }
+        });
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
                 bottomSheetDialog.dismiss();
             }
         });
@@ -803,5 +813,10 @@ public class MainActivity extends AppCompatActivity implements FeedAdapter.OnFee
 
         return mediaFile;
     }
+    @Override
+    public void onBackPressed() {
+      finish();
+    }
+
 
 }

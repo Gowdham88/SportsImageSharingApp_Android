@@ -1,64 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="wrap_content"
-    android:id="@+id/custom_dialog_layout_design_user_input"
-    android:background="#FAFAFA"
-    android:layout_height="wrap_content">
+<LinearLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:background="#CC000000"
 
-    <ImageView
-        android:layout_width="60dp"
-        android:layout_height="30dp"
-        android:id="@+id/camera_image"
-        android:background="#FAFAFA"
-        android:layout_marginLeft="20dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="15dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:src="@drawable/camera"
-        android:layout_alignParentStart="true" />
+   >
 
+    <RelativeLayout
 
-    <TextView
-        style="@style/FontAvenirMedium"
-        android:id="@+id/camera_title"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:text="Camera"
-        android:gravity="center_vertical"
-        android:textColor="@color/darker_grey"
-        android:textSize="18sp"
-        android:layout_marginTop="15dp"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/gallery_icon"
-        android:layout_toEndOf="@+id/gallery_icon" />
+        android:id="@+id/custom_dialog_layout_design_user_input"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/genderpopup"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp">
 
-    <ImageView
-        android:layout_width="60dp"
-        android:layout_height="30dp"
-        android:id="@+id/gallery_icon"
-        android:layout_marginBottom="15dp"
-        android:background="#FAFAFA"
-        android:layout_alignTop="@+id/gallery_title"
-        android:layout_alignLeft="@+id/camera_image"
-        android:src="@drawable/gallery"
-        android:layout_alignStart="@+id/camera_image" />
+        <!--<ImageView-->
+        <!--android:layout_width="60dp"-->
+        <!--android:layout_height="30dp"-->
+        <!--android:id="@+id/camera_image"-->
+        <!--android:background="#FAFAFA"-->
+        <!--android:layout_marginLeft="20dp"-->
+        <!--android:layout_marginStart="20dp"-->
+        <!--android:layout_marginTop="15dp"-->
+        <!--android:layout_alignParentTop="true"-->
+        <!--android:layout_alignParentLeft="true"-->
+        <!--android:src="@drawable/camera"-->
+        <!--android:layout_alignParentStart="true" />-->
 
 
-    <TextView
-        style="@style/FontAvenirMedium"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:id="@+id/gallery_title"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Gallery"
-        android:gravity="center_vertical"
-        android:textColor="@color/darker_grey"
-        android:textSize="18sp"
-        android:layout_below="@+id/camera_title"
-        android:layout_alignLeft="@+id/camera_title"
-        android:layout_alignStart="@+id/camera_title"
-        android:layout_marginTop="20dp" />
-</RelativeLayout>
+        <TextView
+            android:id="@+id/camera_title"
+            style="@style/FontAvenirMedium"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:text="Camera"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/darker_grey"
+            android:textSize="18sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/camera_title"
+            android:background="@color/Edittxt_lineclr" />
+
+        <!--<ImageView-->
+        <!--android:layout_width="60dp"-->
+        <!--android:layout_height="30dp"-->
+        <!--android:id="@+id/gallery_icon"-->
+        <!--android:layout_marginBottom="15dp"-->
+        <!--android:background="#FAFAFA"-->
+        <!--android:layout_alignTop="@+id/gallery_title"-->
+        <!--android:layout_alignLeft="@+id/camera_image"-->
+        <!--android:src="@drawable/gallery"-->
+        <!--android:layout_alignStart="@+id/camera_image" />-->
+
+
+        <TextView
+            android:id="@+id/gallery_title"
+            style="@style/FontAvenirMedium"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_alignLeft="@+id/camera_title"
+            android:layout_alignStart="@+id/camera_title"
+            android:layout_below="@+id/camera_title"
+            android:gravity="center"
+            android:text="Gallery"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/darker_grey"
+            android:textSize="18sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/gallery_title"
+            android:background="@color/Edittxt_lineclr" />
+
+        <TextView
+            android:id="@+id/cancel_txt"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_below="@+id/gallery_title"
+            android:gravity="center"
+            android:text="Cancel"
+            android:textColor="@color/darker_grey"
+            android:textSize="18sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_below="@+id/cancel_txt"
+            android:background="@color/Edittxt_lineclr" />
+    </RelativeLayout>
+</LinearLayout>

@@ -1,16 +1,24 @@
 package czsm.github.froger.instamaterial.ui.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextSwitcher;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -20,7 +28,9 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import czsm.github.froger.instamaterial.ui.Models.Post;
+import czsm.github.froger.instamaterial.ui.activity.ImageDetailActivity;
 import czsm.github.froger.instamaterial.ui.activity.MainActivity;
+import czsm.github.froger.instamaterial.ui.utils.TouchImageView;
 import czsm.github.froger.instamaterial.ui.view.LoadingFeedItemView;
 import czsm.github.froger.instamaterial.R;
 import czsm.github.froger.instamaterial.ui.activity.UserProfileActivity;
@@ -78,12 +88,12 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 onFeedItemClickListener.onCommentsClick(view, cellFeedViewHolder.getAdapterPosition());
             }
         });
-        cellFeedViewHolder.btnMore.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onFeedItemClickListener.onMoreClick(v, cellFeedViewHolder.getAdapterPosition());
-            }
-        });
+//        cellFeedViewHolder.btnMore.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                onFeedItemClickListener.onMoreClick(v, cellFeedViewHolder.getAdapterPosition());
+//            }
+//        });
         cellFeedViewHolder.ivFeedCenter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -197,8 +207,8 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         ImageButton btnComments;
         @BindView(R.id.btnLike)
         ImageButton btnLike;
-        @BindView(R.id.btnMore)
-        ImageButton btnMore;
+//        @BindView(R.id.btnMore)
+//        ImageButton btnMore;
         @BindView(R.id.vBgLike)
         View vBgLike;
         @BindView(R.id.ivLike)
@@ -212,7 +222,7 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         @BindView(R.id.ivUserName)
         TextView vUsername;
 
-
+         PopupWindow pw;
         Post postItem;
         Context context;
 
@@ -221,7 +231,7 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             ButterKnife.bind(this, view);
         }
 
-        public void bindView(Post postItem,Context context) {
+        public void bindView(Post postItem, final Context context) {
             this.postItem = postItem;
             this.context  = context;
             int adapterPosition = getAdapterPosition();
@@ -278,12 +288,31 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             tsLikesCounter.setCurrentText(vImageRoot.getResources().getQuantityString(
                     R.plurals.likes_count, postItem.getLikecount(), postItem.getLikecount()
             ));
+            ivLike.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    initiatePopupWindow();
+                }
+            });
+        }
+
+        private  void initiatePopupWindow() {
+
+
+//            if(imgPath!=null){
+                Intent intent=new Intent(context, ImageDetailActivity.class);
+//                intent.putExtra("imagepath",imgPath.toString());
+                context.startActivity(intent);
+//            }
+//            else{
+//                Toast.makeText(context, "server error", Toast.LENGTH_SHORT).show();
+//            }
+
         }
 
         public Post getPostItem() {
             return postItem;
         }
-
 
 
     }
@@ -322,4 +351,5 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         void onProfileClick(View v,int position);
     }
+
 }

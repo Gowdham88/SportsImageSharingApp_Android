@@ -101,5 +101,17 @@ public class PreferencesHelper {
     private static SharedPreferences getSharedPreferences(Context context) {
         return context.getSharedPreferences(USER_PREFERENCES, Context.MODE_PRIVATE);
     }
+
+
+    private SharedPreferences getSharedPreferences(String preference_name, int i) {
+
+        SharedPreferences settings = getSharedPreferences("your_preference_name", 0);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putBoolean("LoggedIn", true);
+        editor.commit();
+        return settings;
+    }
+
+
     // endregion
 }

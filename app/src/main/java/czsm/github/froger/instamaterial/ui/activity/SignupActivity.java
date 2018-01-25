@@ -1,6 +1,8 @@
 package czsm.github.froger.instamaterial.ui.activity;
 
 import android.Manifest;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -83,7 +85,7 @@ EditText EmailEdt,UsernameEdt,PassEdt;
 Button SignupBtn;
 TextView AccntTxt;
     CircleImageView profileImg;
-    TextView Camera,Gallery;
+    TextView Camera,Gallery,cancel;
     ImageView GalleryIcon, GenderDropimg;
     ImageView CameraIcon;
     Inflater inflater;
@@ -148,13 +150,21 @@ TextView AccntTxt;
         AccntTxt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(SignupActivity.this,LoginScreen.class);
-//                slideDownAnimation = AnimationUtils.loadAnimation(getApplicationContext(),
-//                        R.anim.slide_down);
-//                AccntTxt.setAnimation(slideDownAnimation);
-                startActivity(intent);
+                 finish();
+               startActivity(new Intent(SignupActivity.this, LoginScreen.class));
+                overridePendingTransition(R.anim.slide_down,R.anim.stay);
             }
         });
+    }
+    public static ObjectAnimator createTopDownAnimation(View view, AnimatorListenerAdapter listener,
+                                                        float distance) {
+        view.setTranslationY(-distance);
+        ObjectAnimator animator = ObjectAnimator.ofFloat(view, "translationY", 0);
+        animator.removeAllListeners();
+        if (listener != null) {
+            animator.addListener(listener);
+        }
+        return animator;
     }
     @Override
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
@@ -173,8 +183,9 @@ TextView AccntTxt;
 
             Camera = (TextView) bottomSheetView.findViewById(R.id.camera_title);
             Gallery = (TextView) bottomSheetView.findViewById(R.id.gallery_title);
-            GalleryIcon = (ImageView) bottomSheetView.findViewById(R.id.gallery_icon);
-            CameraIcon = (ImageView) bottomSheetView.findViewById(R.id.camera_image);
+//            GalleryIcon = (ImageView) bottomSheetView.findViewById(R.id.gallery_icon);
+//            CameraIcon = (ImageView) bottomSheetView.findViewById(R.id.camera_image);
+        cancel=(TextView) bottomSheetView.findViewById(R.id.cancel_txt);
             Camera.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -199,9 +210,15 @@ TextView AccntTxt;
                         EasyPermissions.requestPermissions(SignupActivity.this, "Permissions required", PERMISSIONS_REQUEST_GALLERY, CAMERA);
                     }
 
-                    bottomSheetDialog.dismiss();
+
                 }
             });
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                bottomSheetDialog.dismiss();
+            }
+        });
 
 
     }
@@ -529,6 +546,7 @@ showProgressDialog();
         return valid;
     }
     private void AddDatabase(final FirebaseUser user, final View view){
+
 
 
         final FirebaseFirestore db = FirebaseFirestore.getInstance();

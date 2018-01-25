@@ -22,6 +22,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -97,6 +98,7 @@ public class UserProfileActivity extends AppCompatActivity implements RevealBack
     String userId;
     String userName;
     String userProfile;
+    private FirebaseAuth mAuth;
 //    private UserProfileAdapter userPhotosAdapter;
 
     private FeedAdapter feedAdapter;
@@ -305,10 +307,11 @@ public class UserProfileActivity extends AppCompatActivity implements RevealBack
     @OnClick(R.id.logout_image)
     public void logout() {
 
-        Intent intent = new Intent(getApplicationContext(), SignupActivity.class);
+        Intent intent = new Intent(getApplicationContext(), LoginScreen.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intent.putExtra("EXIT", true);
         startActivity(intent);
+        mAuth.signOut();
     }
 
 

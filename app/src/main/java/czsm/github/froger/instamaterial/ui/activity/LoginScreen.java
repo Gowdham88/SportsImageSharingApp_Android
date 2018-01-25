@@ -1,6 +1,9 @@
 package czsm.github.froger.instamaterial.ui.activity;
 
+import android.animation.AnimatorListenerAdapter;
+import android.animation.ObjectAnimator;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.NonNull;
 import android.os.Bundle;
@@ -73,10 +76,26 @@ public class LoginScreen extends AppCompatActivity {
         mAccntTxt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(LoginScreen.this,SignupActivity.class);
-                startActivity(intent);
+                startActivity(new Intent(LoginScreen.this, SignupActivity.class));
+                overridePendingTransition(R.anim.slide_up, R.anim.stay);
+                finish();
             }
         });
+
+    }
+    private static ObjectAnimator createBottomUpAnimation(View view,
+                                                          AnimatorListenerAdapter listener, float distance) {
+        ObjectAnimator animator = ObjectAnimator.ofFloat(view, "translationY", -distance);
+//        animator.setDuration(???)
+        animator.removeAllListeners();
+        if (listener != null) {
+            animator.addListener(listener);
+        }
+        return animator;
+    }
+
+    private void startBottomToTopAnimation(View view) {
+        view.startAnimation(AnimationUtils.loadAnimation(this, R.anim.translate_anim));
     }
 
     private void signIn(final String email, final String password) {
@@ -162,8 +181,8 @@ public class LoginScreen extends AppCompatActivity {
 
         return valid;
     }
-    @Override
-    public void onBackPressed() {
-        this.finish();
-    }
+//    @Override
+//    public void onBackPressed() {
+//        super.onBackPressed();
+//    }
 }
