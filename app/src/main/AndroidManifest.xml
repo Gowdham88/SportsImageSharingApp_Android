@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    package="io.github.froger.instamaterial">
+    package="czsm.github.froger.instamaterial">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
-
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -29,10 +27,9 @@
 
     <application
         android:name=".InstaMaterialApplication"
-        android:icon="@drawable/logo_i"
+        android:icon="@drawable/logoicon"
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
-
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="${applicationId}.provider"
@@ -43,13 +40,13 @@
                 android:resource="@xml/provider_paths" />
         </provider>
 
-
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
 
         <activity
-            android:name=".ui.activity.LoginScreen"
+            android:name=".ui.activity.SplashActivity"
+            android:noHistory="true"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -59,14 +56,22 @@
         </activity>
         <activity
             android:name=".ui.activity.MainActivity"
+            android:noHistory="true"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".ui.activity.LoginScreen"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.TransparentActivity" />
+        <activity
             android:name=".ui.activity.SignupActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.TransparentActivity" />
+        <activity
+            android:name=".ui.activity.LoginActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activity.CommentsActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.TransparentActivity" />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activity.UserProfileActivity"
             android:screenOrientation="portrait"
@@ -80,24 +85,27 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateHidden" />
-        <activity
-            android:name="com.facebook.FacebookActivity"
-            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
-            android:label="@string/app_name" />
-        <activity
-            android:name="com.facebook.CustomTabActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
+        <!-- <activity -->
+        <!-- android:name="com.facebook.FacebookActivity" -->
+        <!-- android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation" -->
+        <!-- android:label="@string/app_name" /> -->
+        <!-- <activity -->
+        <!-- android:name="com.facebook.CustomTabActivity" -->
+        <!-- android:exported="true"> -->
+        <!-- <intent-filter> -->
+        <!-- <action android:name="android.intent.action.VIEW" /> -->
 
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
 
-                <data android:scheme="@string/facebook_app_id" />
-            </intent-filter>
-        </activity>
-        <!-- <activity android:name=".ui.activity.SignupActivity"></activity> -->
-        <activity android:name=".ui.activity.LoginScreen"></activity>
+        <!-- <category android:name="android.intent.category.DEFAULT" /> -->
+        <!-- <category android:name="android.intent.category.BROWSABLE" /> -->
+
+
+        <!-- <data android:scheme="@string/facebook_app_id" /> -->
+        <!-- </intent-filter> -->
+        <!-- </activity> -->
+        <!-- <activity android:name=".ui.activity.LoginScreenActivity"></activity> -->
+        <!-- <activity android:name=".ui.activity.SplashActivity"></activity> -->
+        <activity android:name=".ui.activity.ImageDetailActivity"></activity>
     </application>
 
 </manifest>

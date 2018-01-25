@@ -1,0 +1,28 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/linearpopup"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/black"
+    android:orientation="vertical">
+
+    <com.numnu.android.utils.TouchImageView
+        android:id="@+id/popup_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:src="@drawable/background" />
+
+    <LinearLayout
+        android:id="@+id/btncancelcat"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="12dp">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/closebtnone" />
+    </LinearLayout>
+
+</RelativeLayout>
