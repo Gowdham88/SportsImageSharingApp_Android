@@ -21,8 +21,6 @@
             android:layout_alignParentLeft="true"
             android:src="@drawable/ic_arrow_back_white_24dp"/>
 
-
-
         <TextView
             style="@style/FontAvenirMedium"
             android:id="@+id/toolbar_title"
