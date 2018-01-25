@@ -176,46 +176,46 @@ TextView AccntTxt;
         EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
     }
 
+
     private void showBottomSheet() {
 
-            final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(SignupActivity.this);
-                LayoutInflater factory = LayoutInflater.from(this);
-             View bottomSheetView = factory.inflate(R.layout.dialo_camera_bottomsheet, null);
-            bottomSheetDialog.setContentView(bottomSheetView);
-            bottomSheetDialog.show();
+        final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(SignupActivity.this);
+        LayoutInflater factory = LayoutInflater.from(this);
+        View bottomSheetView = factory.inflate(R.layout.dialo_camera_bottomsheet, null);
+        bottomSheetDialog.setContentView(bottomSheetView);
+        bottomSheetDialog.show();
 
-            Camera = (TextView) bottomSheetView.findViewById(R.id.camera_title);
-            Gallery = (TextView) bottomSheetView.findViewById(R.id.gallery_title);
-//            GalleryIcon = (ImageView) bottomSheetView.findViewById(R.id.gallery_icon);
-//            CameraIcon = (ImageView) bottomSheetView.findViewById(R.id.camera_image);
+        Camera = (TextView) bottomSheetView.findViewById(R.id.camera_title);
+        Gallery = (TextView) bottomSheetView.findViewById(R.id.gallery_title);
+//        GalleryIcon = (ImageView) bottomSheetView.findViewById(R.id.gallery_icon);
+//        CameraIcon = (ImageView) bottomSheetView.findViewById(R.id.camera_image);
         cancel=(TextView) bottomSheetView.findViewById(R.id.cancel_txt);
-            Camera.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
+        Camera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
-                    bottomSheetDialog.dismiss();
+                bottomSheetDialog.dismiss();
 
-                    if (hasPermissions()) {
-                        captureImage();
-                    } else {
-                        EasyPermissions.requestPermissions(SignupActivity.this, "Permissions required", PERMISSIONS_REQUEST_CAMERA, CAMERA);
-                    }
+                if (hasPermissions()) {
+                    captureImage();
+                } else {
+                    EasyPermissions.requestPermissions(SignupActivity.this, "Permissions required", PERMISSIONS_REQUEST_CAMERA, CAMERA);
                 }
-            });
+            }
+        });
 
-            Gallery.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if (hasPermissions()) {
-                        Intent i = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                        startActivityForResult(i, RC_PICK_IMAGE);
-                    } else {
-                        EasyPermissions.requestPermissions(SignupActivity.this, "Permissions required", PERMISSIONS_REQUEST_GALLERY, CAMERA);
-                    }
-                    bottomSheetDialog.dismiss();
-
+        Gallery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (hasPermissions()) {
+                    Intent i = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                    startActivityForResult(i, RC_PICK_IMAGE);
+                } else {
+                    EasyPermissions.requestPermissions(SignupActivity.this, "Permissions required", PERMISSIONS_REQUEST_GALLERY, CAMERA);
                 }
-            });
+                bottomSheetDialog.dismiss();
+            }
+        });
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
