@@ -25,8 +25,9 @@ public class SplashActivity extends AppCompatActivity {
                 if(isLoggedIn )
                 {
                     Intent in1=new Intent(SplashActivity.this,MainActivity.class);
+                    in1.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(in1);
-                    //Go directly to Homescreen.
+
                 }
                 else {
                     Intent in=new Intent(SplashActivity.this,LoginScreen.class);

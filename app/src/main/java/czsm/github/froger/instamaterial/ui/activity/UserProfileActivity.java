@@ -311,6 +311,7 @@ public class UserProfileActivity extends AppCompatActivity implements RevealBack
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intent.putExtra("EXIT", true);
         startActivity(intent);
+        PreferencesHelper.signOut(UserProfileActivity.this);
         mAuth.signOut();
     }
 

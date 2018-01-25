@@ -45,18 +45,9 @@ public class PreferencesHelper {
         editor.remove(USER_PREFERENCES);
         editor.remove(PREFERENCE_USER_NAME);
         editor.remove(PREFERENCE_EMAIL);
-        editor.remove(PREFERENCE_ID);
-        editor.remove(PREFERENCE_IS_FIRST);
-        editor.remove(PREFERENCE_STATUS);
-        editor.remove(PREFERENCE_NAME);
-        editor.remove(PREFERENCE_CITY);
-        editor.remove(PREFERENCE_DOB);
-        editor.remove(PREFERENCE_GENDER);
-        editor.remove(PREFERENCE_FIREBASE_TOKEN);
         editor.remove(PREFERENCE_FIREBASE_UUID);
-        editor.remove(PREFERENCE_USER_DESCRIPTION);
-        editor.remove(PREFERENCE_TAGS);
-        editor.remove(PREFERENCE_TAG_IDS);
+        editor.remove(PREFERENCE_PROFILE_PIC);
+        editor.remove(PREFERENCE_LOGGED_IN);
         editor.apply();
     }
     public static void setPreference(Context context, String preference_name, String details) {

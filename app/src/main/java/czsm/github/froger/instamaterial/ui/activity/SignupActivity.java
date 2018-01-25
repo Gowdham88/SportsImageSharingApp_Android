@@ -150,9 +150,11 @@ TextView AccntTxt;
         AccntTxt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                 finish();
-               startActivity(new Intent(SignupActivity.this, LoginScreen.class));
-                overridePendingTransition(R.anim.slide_down,R.anim.stay);
+
+                Intent intent = new Intent(getApplicationContext(),LoginScreen.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+
             }
         });
     }
@@ -564,6 +566,7 @@ showProgressDialog();
                     Toast.makeText(getApplicationContext(),"Success",Toast.LENGTH_SHORT).show();
 
                     PreferencesHelper.setPreference(getApplicationContext(), PreferencesHelper.PREFERENCE_EMAIL,UsernameEdt.getText().toString());
+                    PreferencesHelper.setPreferenceBoolean(getApplicationContext(), PreferencesHelper.PREFERENCE_LOGGED_IN,true);
 
                     PreferencesHelper.setPreference(getApplicationContext(), PreferencesHelper.PREFERENCE_PROFILE_PIC, String.valueOf(postimageurl));
                     PreferencesHelper.setPreference(getApplicationContext(), PreferencesHelper.PREFERENCE_FIREBASE_UUID, user.getUid());
@@ -591,6 +594,7 @@ showProgressDialog();
                     startActivity(intent);
                     overridePendingTransition(0, 0);
 
+                    PreferencesHelper.setPreferenceBoolean(getApplicationContext(), PreferencesHelper.PREFERENCE_LOGGED_IN,true);
                     PreferencesHelper.setPreference(getApplicationContext(), PreferencesHelper.PREFERENCE_EMAIL,UsernameEdt.getText().toString());
                     PreferencesHelper.setPreference(getApplicationContext(), PreferencesHelper.PREFERENCE_PROFILE_PIC, String.valueOf(postimageurl));
                     PreferencesHelper.setPreference(getApplicationContext(), PreferencesHelper.PREFERENCE_FIREBASE_UUID, user.getUid());
