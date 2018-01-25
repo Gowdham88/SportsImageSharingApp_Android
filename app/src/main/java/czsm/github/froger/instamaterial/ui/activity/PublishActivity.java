@@ -10,7 +10,9 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutCompat;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -22,6 +24,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
@@ -45,7 +48,9 @@ import java.util.Map;
 import java.util.UUID;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnCheckedChanged;
+import butterknife.OnClick;
 import czsm.github.froger.instamaterial.ui.view.LoadingFeedItemView;
 import czsm.github.froger.instamaterial.R;
 import czsm.github.froger.instamaterial.Utils;
@@ -55,7 +60,7 @@ import czsm.github.froger.instamaterial.ui.utils.PreferencesHelper;
 /**
  * Created by Miroslaw Stanek on 21.02.15.
  */
-public class PublishActivity extends BaseActivity {
+public class PublishActivity extends AppCompatActivity {
     public static final String ARG_TAKEN_PHOTO_URI = "arg_taken_photo_uri";
 
     @BindView(R.id.tbFollowers)
@@ -68,6 +73,16 @@ public class PublishActivity extends BaseActivity {
     EditText edt_description;
     @BindView(R.id.parent_Lay)
     LinearLayout LinearLay;
+    @BindView(R.id.toolbar_title)
+    TextView toolbarTitle;
+    @BindView(R.id.publish_image)
+    ImageView publish;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+    @BindView(R.id.back_image)
+    ImageView backarrow;
+    @BindView(R.id.clear_image)
+    TextView clear;
 
     private boolean propagatingToggleState = false;
     private Uri photoUri;
@@ -88,6 +103,8 @@ public class PublishActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_publish);
+        ButterKnife.bind(this);
+        setSupportActionBar(toolbar);
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_grey600_24dp);
         toolbar.setNavigationContentDescription("Post");
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -156,25 +173,27 @@ public class PublishActivity extends BaseActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_publish, menu);
+
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.action_publish) {
-            bringMainActivityToTop();
 
-            return true;
-        }
-        else if(item.getItemId() == R.id.action_clear){
-            Clear();
-
-            return true;
-        }
-        else {
             return super.onOptionsItemSelected(item);
-        }
+
+    }
+
+    @OnClick(R.id.publish_image)
+    public void publish(View v) {
+
+        bringMainActivityToTop();
+    }
+
+    @OnClick(R.id.clear_image)
+    public void clear(View v) {
+
+       Clear();
     }
 
     private void Clear() {
