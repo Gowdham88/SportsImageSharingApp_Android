@@ -758,7 +758,7 @@ public class MainActivity extends AppCompatActivity implements FeedAdapter.OnFee
                 } else {
                     EasyPermissions.requestPermissions(MainActivity.this, "Permissions required", PERMISSIONS_REQUEST_GALLERY, CAMERA);
                 }
-
+                bottomSheetDialog.dismiss();
             }
         });
         cancel.setOnClickListener(new View.OnClickListener() {

@@ -77,7 +77,7 @@ public class MyActivity extends AppCompatActivity {
     @Override
     public void finish() {
         super.finish();
-        overridePendingTransitionExit();
+//        overridePendingTransitionExit();
     }
 
     @Override
