@@ -20,6 +20,8 @@ import android.view.ViewTreeObserver;
 import android.view.animation.OvershootInterpolator;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
@@ -64,6 +66,8 @@ public class PublishActivity extends BaseActivity {
     ImageView ivPhoto;
     @BindView(R.id.etDescription)
     EditText edt_description;
+    @BindView(R.id.parent_Lay)
+    LinearLayout LinearLay;
 
     private boolean propagatingToggleState = false;
     private Uri photoUri;
@@ -71,6 +75,7 @@ public class PublishActivity extends BaseActivity {
     String postimageurl = "";
     String postcaption  = "";
     String PATH;
+
 
     public static void openWithPhotoUri(Activity openingActivity, Uri photoUri,String path) {
         Intent intent = new Intent(openingActivity, PublishActivity.class);
@@ -84,10 +89,17 @@ public class PublishActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_publish);
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_grey600_24dp);
+        toolbar.setNavigationContentDescription("Post");
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onBackPressed();
+            }
+        });
+        LinearLay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Utils.hideKeyboard(PublishActivity.this);
             }
         });
         photoSize = getResources().getDimensionPixelSize(R.dimen.publish_photo_thumbnail_size);
@@ -154,13 +166,26 @@ public class PublishActivity extends BaseActivity {
             bringMainActivityToTop();
 
             return true;
-        } else {
+        }
+        else if(item.getItemId() == R.id.action_clear){
+            Clear();
+
+            return true;
+        }
+        else {
             return super.onOptionsItemSelected(item);
         }
     }
 
-    private void bringMainActivityToTop() {
+    private void Clear() {
 
+        edt_description.setText("");
+        Utils.hideKeyboard(PublishActivity.this);
+
+    }
+
+    private void bringMainActivityToTop() {
+        Utils.hideKeyboard(PublishActivity.this);
         String caption =  edt_description.getText().toString();
 
         if(photoUri != null)

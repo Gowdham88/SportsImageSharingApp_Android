@@ -211,7 +211,7 @@ TextView AccntTxt;
                     } else {
                         EasyPermissions.requestPermissions(SignupActivity.this, "Permissions required", PERMISSIONS_REQUEST_GALLERY, CAMERA);
                     }
-
+                    bottomSheetDialog.dismiss();
 
                 }
             });

@@ -11,7 +11,7 @@ import com.squareup.picasso.Picasso;
 
 import czsm.github.froger.instamaterial.R;
 
-public class ImageDetailActivity extends AppCompatActivity {
+public class ImageDetailActivity extends MyActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,22 +21,23 @@ public class ImageDetailActivity extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         ImageView image=(ImageView)findViewById(R.id.popup_image);
         LinearLayout btncancel = (LinearLayout) findViewById(R.id.btncancelcat);
-//        try{
-//            Bundle in=getIntent().getExtras();
-//            String uri= in != null ? in.getString("imagepath") : null;
-//
-//            Picasso.with(getApplicationContext()).load(uri)
-//                    .placeholder(R.drawable.background)
-//                    .into(image);
-//        }
-//        catch (NullPointerException e){
-//            e.printStackTrace();
-//        }
+        try{
+            Bundle in=getIntent().getExtras();
+            String uri= in != null ? in.getString("imagepath") : null;
+
+            Picasso.with(getApplicationContext()).load(uri)
+                    .placeholder(R.drawable.background)
+                    .into(image);
+        }
+        catch (NullPointerException e){
+            e.printStackTrace();
+        }
         btncancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 onBackPressed();
             }
         });
+
     }
 }

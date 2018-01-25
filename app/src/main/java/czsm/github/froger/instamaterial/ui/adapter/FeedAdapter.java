@@ -225,6 +225,7 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
          PopupWindow pw;
         Post postItem;
         Context context;
+        String Profileimg;
 
         public CellFeedViewHolder(View view) {
             super(view);
@@ -298,15 +299,15 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         private  void initiatePopupWindow() {
 
-
-//            if(imgPath!=null){
+          Profileimg=postItem.getPostimage();
+            if(Profileimg!=null){
                 Intent intent=new Intent(context, ImageDetailActivity.class);
-//                intent.putExtra("imagepath",imgPath.toString());
+                intent.putExtra("imagepath",Profileimg.toString());
                 context.startActivity(intent);
-//            }
-//            else{
-//                Toast.makeText(context, "server error", Toast.LENGTH_SHORT).show();
-//            }
+            }
+            else{
+                Toast.makeText(context, "server error", Toast.LENGTH_SHORT).show();
+            }
 
         }
 
