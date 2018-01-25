@@ -83,16 +83,17 @@
     <Button
         android:id="@+id/sinin_edt"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="60dp"
         android:layout_below="@+id/user_lay"
         android:layout_marginLeft="30dp"
         android:text="Sign In"
+        android:background="@drawable/genderpopup"
         android:textAllCaps="false"
         android:textSize="18dp"
         style="@style/FontAvenirBook"
-        android:textColor="#ECF0F1"
+        android:textColor="#34495E"
         android:layout_marginRight="30dp"
-        android:layout_marginTop="10dp"/>
+        android:layout_marginTop="20dp"/>
 
     <TextView
         android:id="@+id/dont_txt"

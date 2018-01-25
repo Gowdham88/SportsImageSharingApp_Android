@@ -813,10 +813,6 @@ public class MainActivity extends AppCompatActivity implements FeedAdapter.OnFee
 
         return mediaFile;
     }
-    @Override
-    public void onBackPressed() {
-      finish();
-    }
 
 
 }

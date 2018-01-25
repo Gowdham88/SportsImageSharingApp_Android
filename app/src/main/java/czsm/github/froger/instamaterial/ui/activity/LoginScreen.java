@@ -181,8 +181,4 @@ public class LoginScreen extends AppCompatActivity {
 
         return valid;
     }
-//    @Override
-//    public void onBackPressed() {
-//        super.onBackPressed();
-//    }
 }

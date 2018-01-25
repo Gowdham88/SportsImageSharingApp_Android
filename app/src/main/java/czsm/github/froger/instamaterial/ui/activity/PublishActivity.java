@@ -84,6 +84,7 @@ public class PublishActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_publish);
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_grey600_24dp);
+        toolbar.setTitle("Post");
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -154,13 +155,26 @@ public class PublishActivity extends BaseActivity {
             bringMainActivityToTop();
 
             return true;
-        } else {
+        }
+        else if(item.getItemId() == R.id.action_clear){
+            Clear();
+
+            return true;
+        }
+        else {
             return super.onOptionsItemSelected(item);
         }
     }
 
-    private void bringMainActivityToTop() {
+    private void Clear() {
 
+        edt_description.setText("");
+        Utils.hideKeyboard(PublishActivity.this);
+
+    }
+
+    private void bringMainActivityToTop() {
+        Utils.hideKeyboard(PublishActivity.this);
         String caption =  edt_description.getText().toString();
 
         if(photoUri != null)
