@@ -111,6 +111,7 @@ public class LoginScreen extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             Intent in=new Intent(LoginScreen.this,MainActivity.class);
                             startActivity(in);
+                            finish();
                             // Sign in success, update UI with the signed-in user's information
 
 
@@ -181,8 +182,4 @@ public class LoginScreen extends AppCompatActivity {
 
         return valid;
     }
-//    @Override
-//    public void onBackPressed() {
-//        super.onBackPressed();
-//    }
 }
