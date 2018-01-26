@@ -86,24 +86,12 @@
 
     </LinearLayout>
 
-    <TextView
-        style="@style/FontAvenirBook"
-        android:id="@+id/forget_txt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/user_lay"
-        android:gravity="end"
-        android:textStyle="bold"
-        android:textColor="#ffffff"
-        android:layout_marginLeft="220dp"
-        android:layout_marginTop="10dp"
-        android:text="Forget Password"
-     />
+
     <Button
         android:id="@+id/sinin_edt"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_below="@+id/forget_txt"
+        android:layout_below="@+id/user_lay"
         android:layout_marginLeft="30dp"
         android:text="Sign In"
         android:background="@drawable/genderpopup"
@@ -113,7 +101,19 @@
         android:textColor="#34495E"
         android:layout_marginRight="30dp"
         android:layout_marginTop="20dp"/>
-
+    <TextView
+        style="@style/FontAvenirBook"
+        android:id="@+id/forget_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/sinin_edt"
+        android:gravity="end"
+        android:textStyle="bold"
+        android:textColor="#ffffff"
+        android:layout_marginLeft="220dp"
+        android:layout_marginTop="10dp"
+        android:text="Forget Password"
+        />
     <TextView
         android:id="@+id/dont_txt"
         style="@style/FontAvenirBook"
