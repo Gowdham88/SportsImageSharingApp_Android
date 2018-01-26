@@ -30,6 +30,7 @@ import butterknife.ButterKnife;
 import czsm.github.froger.instamaterial.ui.Models.Post;
 import czsm.github.froger.instamaterial.ui.activity.ImageDetailActivity;
 import czsm.github.froger.instamaterial.ui.activity.MainActivity;
+import czsm.github.froger.instamaterial.ui.activity.ProfileActivity;
 import czsm.github.froger.instamaterial.ui.utils.TouchImageView;
 import czsm.github.froger.instamaterial.ui.view.LoadingFeedItemView;
 import czsm.github.froger.instamaterial.R;
@@ -88,12 +89,12 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 onFeedItemClickListener.onCommentsClick(view, cellFeedViewHolder.getAdapterPosition());
             }
         });
-//        cellFeedViewHolder.btnMore.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                onFeedItemClickListener.onMoreClick(v, cellFeedViewHolder.getAdapterPosition());
-//            }
-//        });
+        cellFeedViewHolder.btnMore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onFeedItemClickListener.onMoreClick(v, cellFeedViewHolder.getAdapterPosition());
+            }
+        });
         cellFeedViewHolder.ivFeedCenter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -102,9 +103,9 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
                     ((MainActivity) context).getDocument(adapterPosition,ACTION_LIKE_IMAGE_CLICKED);
 
-                } else if  (context instanceof UserProfileActivity) {
+                } else if  (context instanceof ProfileActivity) {
 
-                    ((UserProfileActivity) context).getDocument(adapterPosition, ACTION_LIKE_IMAGE_CLICKED);
+                    ((ProfileActivity) context).getDocument(adapterPosition, ACTION_LIKE_IMAGE_CLICKED);
 
                 }
 
@@ -120,9 +121,9 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
                     ((MainActivity) context).getDocument(adapterPosition,ACTION_LIKE_BUTTON_CLICKED);
 
-                } else if  (context instanceof UserProfileActivity) {
+                } else if  (context instanceof ProfileActivity) {
 
-                    ((UserProfileActivity) context).getDocument(adapterPosition, ACTION_LIKE_IMAGE_CLICKED);
+                    ((ProfileActivity) context).getDocument(adapterPosition, ACTION_LIKE_IMAGE_CLICKED);
 
 
                 }
@@ -207,8 +208,8 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         ImageButton btnComments;
         @BindView(R.id.btnLike)
         ImageButton btnLike;
-//        @BindView(R.id.btnMore)
-//        ImageButton btnMore;
+        @BindView(R.id.btnMore)
+        ImageButton btnMore;
         @BindView(R.id.vBgLike)
         View vBgLike;
         @BindView(R.id.ivLike)
@@ -239,7 +240,7 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
             if(!this.postItem.getProfileImageURL().equals("") && this.postItem.getProfileImageURL() != null) {
 
-                Picasso.with(context).load(this.postItem.getProfileImageURL())
+                Picasso.with(context).load(this.postItem.getProfileImageURL()).fit().centerInside()
                         .into(ivUserProfile);
             }
 
@@ -255,7 +256,7 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
             if(!this.postItem.getPostimage().equals("failed")) {
 
-                Picasso.with(context).load(this.postItem.getPostimage())
+                Picasso.with(context).load(this.postItem.getPostimage()).fit().centerInside()
                         .into(ivFeedCenter);
             }
 

@@ -1,6 +1,7 @@
 package czsm.github.froger.instamaterial.ui.activity;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -96,6 +97,11 @@ public class UserProfileActivity extends AppCompatActivity implements RevealBack
     @BindView(R.id.back_image)
     ImageView backarrow;
 
+    @BindView(R.id.count_txt)
+    TextView vpostCount;
+
+    @BindView(R.id.flwcount_txt)
+    TextView vfolowerCount;
 
     private int avatarSize;
     private String profilePhoto;
@@ -110,6 +116,9 @@ public class UserProfileActivity extends AppCompatActivity implements RevealBack
     private boolean pendingIntroAnimation;
     List<Post> postList = new ArrayList<Post>();
     List<String> postListId = new ArrayList<String>();
+    List<String> postCount  = new ArrayList<String>();
+    List<String> userCount  = new ArrayList<String>();
+
     DocumentSnapshot lastVisible = null;
     private int visibleThreshold = 1;
     private boolean isLoading=false;
@@ -162,6 +171,8 @@ public class UserProfileActivity extends AppCompatActivity implements RevealBack
         setupUserProfileGrid();
         setupRevealBackground(savedInstanceState);
         loadPost();
+        PostCount();
+        UserCount();
     }
 
     private void setupTabs() {
@@ -491,7 +502,7 @@ public class UserProfileActivity extends AppCompatActivity implements RevealBack
     }
 
 
-    public void checkUserLikes(int position,Post post,String type){
+    public void checkUserLikes(int position,Post post,String type) {
 
         int likecount = post.getLikecount();
         if (post.getUserlikes().size() > 0) {
@@ -560,11 +571,81 @@ public class UserProfileActivity extends AppCompatActivity implements RevealBack
 
             }
 
-
-
-
         }
 
 
     }
+
+
+    public void PostCount() {
+
+        postCount.clear();
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        Query first = db.collection("Post");
+
+        first.get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot documentSnapshots) {
+
+                        if (documentSnapshots.getDocuments().size() < 1) {
+
+                            return;
+
+                        }
+
+                        for(DocumentSnapshot document : documentSnapshots.getDocuments()) {
+
+                            postCount.add(document.getId());
+
+                        }
+
+                        vpostCount.setText(""+postCount.size());
+
+
+                    }
+
+                });
+
+    }
+
+    public void UserCount() {
+
+        userCount.clear();
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        Query first = db.collection("users");
+
+        first.get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot documentSnapshots) {
+
+                        if (documentSnapshots.getDocuments().size() < 1) {
+
+                            return;
+
+                        }
+
+                        for(DocumentSnapshot document : documentSnapshots.getDocuments()) {
+
+                          userCount.add(document.getId());
+
+
+                        }
+
+                        vfolowerCount.setText(""+userCount.size());
+
+                    }
+
+                });
+
+    }
+
+
 }
+
+

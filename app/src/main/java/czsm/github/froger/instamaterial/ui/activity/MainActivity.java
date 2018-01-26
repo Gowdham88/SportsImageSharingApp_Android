@@ -104,6 +104,8 @@ public class MainActivity extends AppCompatActivity implements FeedAdapter.OnFee
     @BindView(R.id.back_image)
     ImageView backarrow;
 
+
+
     TextView Camera,Gallery,cancel;
     ImageView GalleryIcon, GenderDropimg;
     ImageView CameraIcon;
@@ -306,7 +308,7 @@ public class MainActivity extends AppCompatActivity implements FeedAdapter.OnFee
         int[] startingLocation = new int[2];
         v.getLocationOnScreen(startingLocation);
         startingLocation[0] += v.getWidth() / 2;
-        UserProfileActivity.startUserProfileFromLocation(startingLocation, this,postList.get(position).getUid(),name,profile);
+        ProfileActivity.startProfileUserProfileFromLocation(startingLocation, this,postList.get(position).getUid(),name,profile);
         overridePendingTransition(0, 0);
     }
 
@@ -330,6 +332,32 @@ public class MainActivity extends AppCompatActivity implements FeedAdapter.OnFee
     @Override
     public void onCancelClick(int feedItem) {
         FeedContextMenuManager.getInstance().hideContextMenu();
+    }
+
+    @Override
+    public void onDeleteClick(final int feedItem) {
+
+        FeedContextMenuManager.getInstance().hideContextMenu();
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("Post").document(postListId.get(feedItem))
+                .delete()
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, "DocumentSnapshot successfully deleted!");
+
+                        postListId.remove(feedItem);
+                        postList.remove(feedItem);
+                        feedAdapter.updateItems(false);
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error deleting document", e);
+                    }
+                });
+
     }
 
     @OnClick(R.id.btnCreate)
