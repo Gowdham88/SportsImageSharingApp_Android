@@ -29,6 +29,7 @@
         android:name=".InstaMaterialApplication"
         android:icon="@drawable/logoicon"
         android:label="@string/app_name"
+        android:largeHeap="true"
         android:theme="@style/AppTheme">
         <provider
             android:name="android.support.v4.content.FileProvider"
@@ -58,10 +59,12 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activity.LoginScreen"
+            android:noHistory="true"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.TransparentActivity" />
         <activity
             android:name=".ui.activity.SignupActivity"
+            android:noHistory="true"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.TransparentActivity" />
         <activity
@@ -103,7 +106,13 @@
         <!-- </activity> -->
         <!-- <activity android:name=".ui.activity.LoginScreenActivity"></activity> -->
         <!-- <activity android:name=".ui.activity.SplashActivity"></activity> -->
-        <activity android:name=".ui.activity.ImageDetailActivity"></activity>
+        <activity android:name=".ui.activity.ImageDetailActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.activity.ForgetPasswordActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.activity.SignupScreenActivity"
+            android:screenOrientation="portrait"
+            android:noHistory="true"/>
     </application>
 
 </manifest>

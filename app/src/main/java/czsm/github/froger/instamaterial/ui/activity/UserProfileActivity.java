@@ -2,8 +2,10 @@ package czsm.github.froger.instamaterial.ui.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,6 +19,7 @@ import android.view.animation.Interpolator;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -46,6 +49,7 @@ import czsm.github.froger.instamaterial.ui.view.RevealBackgroundView;
 import czsm.github.froger.instamaterial.R;
 import czsm.github.froger.instamaterial.ui.adapter.FeedItemAnimator;
 import czsm.github.froger.instamaterial.ui.utils.CircleTransformation;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 import static android.content.ContentValues.TAG;
 
@@ -70,7 +74,7 @@ public class UserProfileActivity extends AppCompatActivity implements RevealBack
     TabLayout tlUserProfileTabs;
 
     @BindView(R.id.ivUserProfilePhoto)
-    ImageView ivUserProfilePhoto;
+    CircleImageView ivUserProfilePhoto;
     @BindView(R.id.vUserDetails)
     View vUserDetails;
     @BindView(R.id.btnFollow)
@@ -81,8 +85,8 @@ public class UserProfileActivity extends AppCompatActivity implements RevealBack
     View vUserProfileRoot;
     @BindView(R.id.username_txt)
     TextView vUserName;
-    @BindView(R.id.username_simple)
-    TextView vUserNameSub;
+//    @BindView(R.id.username_simple)
+//    TextView vUserNameSub;
     @BindView(R.id.toolbar_title)
     TextView toolbarTitle;
     @BindView(R.id.logout_image)
@@ -127,22 +131,32 @@ public class UserProfileActivity extends AppCompatActivity implements RevealBack
         setSupportActionBar(toolbar);
         this.avatarSize = getResources().getDimensionPixelSize(R.dimen.user_profile_avatar_size);
 
-
+        mAuth = FirebaseAuth.getInstance();
         userId = getIntent().getStringExtra(USER_ID);
         userName = getIntent().getStringExtra(USER_NAME);
         userProfile = getIntent().getStringExtra(USER_IMAGE);
 
         this.profilePhoto = userProfile;
         vUserName.setText(userName);
-        vUserNameSub.setText("@"+userName);
+//        vUserNameSub.setText("@"+userName);
+        if(!profilePhoto.equals(null)&&!profilePhoto.isEmpty()){
+            Picasso.with(this)
+                    .load(profilePhoto)
+                    .resize(avatarSize, avatarSize)
+                    .centerCrop()
+                    .transform(new CircleTransformation())
+                    .into(ivUserProfilePhoto);
+        }
+        else{
+//            Picasso.with(this)
+//                    .load(profilePhoto)
+//                    .placeholder(R.drawable.background)
+//                    .resize(avatarSize, avatarSize)
+//                    .centerCrop()
+//                    .transform(new CircleTransformation())
+//                    .into(ivUserProfilePhoto);
+        }
 
-        Picasso.with(this)
-                .load(profilePhoto)
-                .placeholder(R.drawable.img_circle_placeholder)
-                .resize(avatarSize, avatarSize)
-                .centerCrop()
-                .transform(new CircleTransformation())
-                .into(ivUserProfilePhoto);
 
         setupTabs();
         setupUserProfileGrid();
@@ -298,21 +312,24 @@ public class UserProfileActivity extends AppCompatActivity implements RevealBack
 
     }
 
-    @OnClick(R.id.back_image)
-    public void setBackarrow() {
+//    @OnClick(R.id.back_image)
+//    public void setBackarrow() {
+//
+//        finish();
+//    }
 
-        finish();
-    }
-
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @OnClick(R.id.logout_image)
     public void logout() {
 
         Intent intent = new Intent(getApplicationContext(), LoginScreen.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intent.putExtra("EXIT", true);
+        overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
         startActivity(intent);
         PreferencesHelper.signOut(UserProfileActivity.this);
         mAuth.signOut();
+        finishAffinity();
     }
 
 

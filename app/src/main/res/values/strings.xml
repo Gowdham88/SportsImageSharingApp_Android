@@ -31,4 +31,5 @@
         <item>http://scontent-b-fra.cdninstagram.com/hphotos-xaf1/t51.2885-15/s306x306/e15/10899087_405295322969722_20422376_n.jpg</item>
     </string-array>
     <string name="user_profile_photo">http://igcdn-photos-f-a.akamaihd.net/hphotos-ak-xpa1/t51.2885-19/929118_455075441302693_1605108410_a.jpg</string>
+    <string name="resetpass">A reset link has been sent your email</string>
 </resources>

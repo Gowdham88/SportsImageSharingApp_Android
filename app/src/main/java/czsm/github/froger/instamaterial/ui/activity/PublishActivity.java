@@ -105,14 +105,14 @@ public class PublishActivity extends AppCompatActivity {
         setContentView(R.layout.activity_publish);
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
-        toolbar.setNavigationIcon(R.drawable.ic_arrow_back_grey600_24dp);
-        toolbar.setNavigationContentDescription("Post");
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
+//        toolbar.setNavigationIcon(R.drawable.ic_arrow_back_grey600_24dp);
+//        toolbar.setNavigationContentDescription("Post");
+//        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                onBackPressed();
+//            }
+//        });
         LinearLay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -195,7 +195,11 @@ public class PublishActivity extends AppCompatActivity {
 
        Clear();
     }
+    @OnClick(R.id.back_image)
+    public void back(View v) {
 
+        onBackPressed();
+    }
     private void Clear() {
 
         edt_description.setText("");

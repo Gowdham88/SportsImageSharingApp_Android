@@ -27,13 +27,14 @@ public class SplashActivity extends AppCompatActivity {
                     Intent in1=new Intent(SplashActivity.this,MainActivity.class);
                     in1.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(in1);
+                    finish();
 
                 }
                 else {
                     Intent in=new Intent(SplashActivity.this,LoginScreen.class);
                     in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(in);
-
+                    finish();
                 }
 
             }
