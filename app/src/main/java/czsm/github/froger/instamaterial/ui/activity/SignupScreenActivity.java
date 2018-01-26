@@ -432,7 +432,7 @@ public class SignupScreenActivity extends AppCompatActivity implements EasyPermi
                             postimageurl = taskSnapshot.getDownloadUrl().toString();
 
 //                            String caption =  edt_description.getText().toString();
-                
+
                             if (postimageurl.equals("failed")) {
 
 
