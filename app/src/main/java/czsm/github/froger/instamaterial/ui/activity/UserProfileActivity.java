@@ -19,6 +19,7 @@ import android.view.animation.Interpolator;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -48,6 +49,7 @@ import czsm.github.froger.instamaterial.ui.view.RevealBackgroundView;
 import czsm.github.froger.instamaterial.R;
 import czsm.github.froger.instamaterial.ui.adapter.FeedItemAnimator;
 import czsm.github.froger.instamaterial.ui.utils.CircleTransformation;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 import static android.content.ContentValues.TAG;
 
@@ -72,7 +74,7 @@ public class UserProfileActivity extends AppCompatActivity implements RevealBack
     TabLayout tlUserProfileTabs;
 
     @BindView(R.id.ivUserProfilePhoto)
-    ImageView ivUserProfilePhoto;
+    CircleImageView ivUserProfilePhoto;
     @BindView(R.id.vUserDetails)
     View vUserDetails;
     @BindView(R.id.btnFollow)
@@ -137,14 +139,24 @@ public class UserProfileActivity extends AppCompatActivity implements RevealBack
         this.profilePhoto = userProfile;
         vUserName.setText(userName);
 //        vUserNameSub.setText("@"+userName);
+        if(!profilePhoto.equals(null)&&!profilePhoto.isEmpty()){
+            Picasso.with(this)
+                    .load(profilePhoto)
+                    .resize(avatarSize, avatarSize)
+                    .centerCrop()
+                    .transform(new CircleTransformation())
+                    .into(ivUserProfilePhoto);
+        }
+        else{
+//            Picasso.with(this)
+//                    .load(profilePhoto)
+//                    .placeholder(R.drawable.background)
+//                    .resize(avatarSize, avatarSize)
+//                    .centerCrop()
+//                    .transform(new CircleTransformation())
+//                    .into(ivUserProfilePhoto);
+        }
 
-        Picasso.with(this)
-                .load(profilePhoto)
-                .placeholder(R.drawable.img_circle_placeholder)
-                .resize(avatarSize, avatarSize)
-                .centerCrop()
-                .transform(new CircleTransformation())
-                .into(ivUserProfilePhoto);
 
         setupTabs();
         setupUserProfileGrid();

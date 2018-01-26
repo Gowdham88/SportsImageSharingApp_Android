@@ -49,4 +49,12 @@
         <item name="fontPath">fonts/Avenir-Medium.ttf</item>
     </style>
 
+    <style name="ok_button">
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">15sp</item>
+        <item name="fontPath">fonts/Avenir-Black.ttf</item>
+        <item name="android:background">@drawable/custom_alert_background</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
 </resources>

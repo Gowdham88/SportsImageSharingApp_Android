@@ -22,4 +22,6 @@
     <color name="darker_grey">#2A2A2A</color>
     <color name="bg_comments">#ffffff</color>
     <color name="Edittxt_lineclr">#E5E5E5</color>
+    <color name="weblink_color">#4A90E2</color>
+    <color name="colorred">#f13a30</color>
 </resources>

@@ -54,19 +54,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".ui.activity.MainActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activity.LoginScreen"
-            android:screenOrientation="portrait"
             android:noHistory="true"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.TransparentActivity" />
         <activity
             android:name=".ui.activity.SignupActivity"
-            android:screenOrientation="portrait"
             android:noHistory="true"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.TransparentActivity" />
         <activity
             android:name=".ui.activity.LoginActivity"
@@ -107,7 +106,13 @@
         <!-- </activity> -->
         <!-- <activity android:name=".ui.activity.LoginScreenActivity"></activity> -->
         <!-- <activity android:name=".ui.activity.SplashActivity"></activity> -->
-        <activity android:name=".ui.activity.ImageDetailActivity"></activity>
+        <activity android:name=".ui.activity.ImageDetailActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.activity.ForgetPasswordActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.activity.SignupScreenActivity"
+            android:screenOrientation="portrait"
+            android:noHistory="true"/>
     </application>
 
 </manifest>

@@ -264,8 +264,9 @@ TextView AccntTxt;
 
 
     private boolean hasPermissions() {
-        return EasyPermissions.hasPermissions(SignupActivity.this, CAMERA);
+        return EasyPermissions.hasPermissions(this, CAMERA);
     }
+
 
     private void captureImage() {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
