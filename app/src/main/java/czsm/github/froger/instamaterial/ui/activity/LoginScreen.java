@@ -95,7 +95,7 @@ public class LoginScreen extends AppCompatActivity {
         mAccntTxt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(),SignupScreenActivity.class);
+                Intent intent = new Intent(getApplicationContext(),SignUpActivity.class);
 //                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_up, R.anim.stay);

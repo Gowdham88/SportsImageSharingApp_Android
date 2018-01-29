@@ -78,7 +78,7 @@ import static android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE;
 import static com.facebook.FacebookSdk.getApplicationContext;
 import static czsm.github.froger.instamaterial.Utils.hideKeyboard;
 
-public class SignupScreenActivity extends AppCompatActivity implements EasyPermissions.PermissionCallbacks {
+public class SignupScreenActivity extends AppCompatActivity  implements EasyPermissions.PermissionCallbacks {
     EditText EmailEdt,UsernameEdt,PassEdt;
     Button SignupBtn;
     TextView AccntTxt;
@@ -141,10 +141,10 @@ public class SignupScreenActivity extends AppCompatActivity implements EasyPermi
                 hideKeyboard(SignupScreenActivity.this);
                 createAccount(EmailEdt.getText().toString(), UsernameEdt.getText().toString(),PassEdt.getText().toString(),view);
 
-//                if(validateForm()){
-//                    Intent in=new Intent(SignupActivity.this,LoginScreen.class);
-//                    startActivity(in);
-//                }
+                if(validateForm()){
+                    Intent in=new Intent(SignupScreenActivity.this,LoginScreen.class);
+                    startActivity(in);
+                }
             }
         });
         AccntTxt.setOnClickListener(new View.OnClickListener() {
