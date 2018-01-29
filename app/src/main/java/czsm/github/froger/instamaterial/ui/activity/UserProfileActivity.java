@@ -1,7 +1,10 @@
 package czsm.github.froger.instamaterial.ui.activity;
 
 import android.app.Activity;
+
+import android.app.AlertDialog;
 import android.content.Context;
+
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -10,7 +13,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.TabLayout;
-import android.support.v7.app.AlertDialog;
+
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -108,6 +111,11 @@ public class UserProfileActivity extends AppCompatActivity implements RevealBack
     @BindView(R.id.edit_btn)
     Button EditProfileBtn;
 
+    @BindView(R.id.count_txt)
+    TextView vpostCount;
+
+    @BindView(R.id.flwcount_txt)
+    TextView vfolowerCount;
 
     private int avatarSize;
     private String profilePhoto;
@@ -124,6 +132,9 @@ public class UserProfileActivity extends AppCompatActivity implements RevealBack
     private boolean pendingIntroAnimation;
     List<Post> postList = new ArrayList<Post>();
     List<String> postListId = new ArrayList<String>();
+    List<String> postCount  = new ArrayList<String>();
+    List<String> userCount  = new ArrayList<String>();
+
     DocumentSnapshot lastVisible = null;
     private int visibleThreshold = 1;
     private boolean isLoading=false;
@@ -176,6 +187,10 @@ public class UserProfileActivity extends AppCompatActivity implements RevealBack
         setupUserProfileGrid();
         setupRevealBackground(savedInstanceState);
         loadPost();
+
+        PostCount();
+        UserCount();
+
 
         EditProfileBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -234,6 +249,7 @@ public class UserProfileActivity extends AppCompatActivity implements RevealBack
         lp.gravity = Gravity.CENTER;
 //        lp.windowAnimations = R.style.DialogAnimation;
         alertDialog1.getWindow().setAttributes(lp);
+
     }
 
     private void setupTabs() {
@@ -566,6 +582,7 @@ public class UserProfileActivity extends AppCompatActivity implements RevealBack
     }
 
 
+
 //    public void checkUserLikes(int position,Post post,String type){
 //
 //        int likecount = post.getLikecount();
@@ -644,6 +661,7 @@ public class UserProfileActivity extends AppCompatActivity implements RevealBack
 //    }
     public void saveUserName(final String name, final AlertDialog dialog) {
 
+
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         DocumentReference ref = db.collection("users").document(userId);
 
@@ -654,20 +672,93 @@ public class UserProfileActivity extends AppCompatActivity implements RevealBack
                     public void onSuccess(Void aVoid) {
                         Log.d(TAG, "DocumentSnapshot successfully updated!");
                         vUserName.setText(name);
-                        Toast.makeText(UserProfileActivity.this,"Update Successfully",Toast.LENGTH_SHORT).show();
-                        PreferencesHelper.setPreference(getApplicationContext(), PreferencesHelper.PREFERENCE_EMAIL,name);
+                        Toast.makeText(UserProfileActivity.this, "Update Successfully", Toast.LENGTH_SHORT).show();
+                        PreferencesHelper.setPreference(getApplicationContext(), PreferencesHelper.PREFERENCE_EMAIL, name);
                         dialog.dismiss();
                     }
-                })
-                .addOnFailureListener(new OnFailureListener() {
+
+                }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         Log.w(TAG, "Error updating document", e);
                         Toast.makeText(UserProfileActivity.this,"Update failed",Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
                     }
+
                 });
 
+    }
+
+public void PostCount() {
+
+    postCount.clear();
+
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+    Query first = db.collection("Post");
+
+    first.get()
+            .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                @Override
+                public void onSuccess(QuerySnapshot documentSnapshots) {
+
+                    if (documentSnapshots.getDocuments().size() < 1) {
+
+                        return;
+
+                    }
+
+                    for (DocumentSnapshot document : documentSnapshots.getDocuments()) {
+
+                        postCount.add(document.getId());
+
+                    }
+
+                    vpostCount.setText("" + postCount.size());
+
+
+                }
+
+
+            });
+
+}
+
+    public void UserCount() {
+
+        userCount.clear();
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        Query first = db.collection("users");
+
+        first.get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot documentSnapshots) {
+
+                        if (documentSnapshots.getDocuments().size() < 1) {
+
+                            return;
+
+                        }
+
+                        for(DocumentSnapshot document : documentSnapshots.getDocuments()) {
+
+                          userCount.add(document.getId());
+
+
+                        }
+
+                        vfolowerCount.setText(""+userCount.size());
+
+                    }
+
+                });
 
     }
+
+
 }
+
+

@@ -103,7 +103,8 @@ TextView AccntTxt;
     Uri imageUri;
     String postimageurl = "";
     Uri contentURI;
-    private String mCurrentPhotoPath;
+    boolean isPhotoValid = false;
+    private String mCurrentPhotoPath = "empty";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -140,7 +141,18 @@ TextView AccntTxt;
             @Override
             public void onClick(View view) {
                 hideKeyboard(SignupActivity.this);
-                createAccount(EmailEdt.getText().toString(), UsernameEdt.getText().toString(),PassEdt.getText().toString(),view);
+
+                if (isPhotoValid) {
+
+                    createAccount(EmailEdt.getText().toString(), UsernameEdt.getText().toString(),PassEdt.getText().toString(),view);
+
+                } else {
+
+                    Toast.makeText(SignupActivity.this, "Select Profile image.", Toast.LENGTH_SHORT).show();
+
+                }
+
+
 
 //                if(validateForm()){
 //                    Intent in=new Intent(SignupActivity.this,LoginScreen.class);
@@ -307,6 +319,7 @@ TextView AccntTxt;
         }
         // Save a file: path for use with ACTION_VIEW intents
         mCurrentPhotoPath = "file:" + mediaFile.getAbsolutePath();
+        isPhotoValid = true;
 
         return mediaFile;
     }
@@ -335,6 +348,7 @@ TextView AccntTxt;
                 // Show the thumbnail on ImageView
 //                showProgressDialog();
                  imageUri = Uri.parse(mCurrentPhotoPath);
+                isPhotoValid = true;
                 File file = new File(imageUri.getPath());
                 try {
                     InputStream ims = new FileInputStream(file);
@@ -511,13 +525,16 @@ showProgressDialog();
     //    public void startSlideDownAnimation(View view) {
 //        AccntTxt.startAnimation(slideDownAnimation);
 //    }
-    private boolean validateForm() {
+    public boolean validateForm() {
         boolean valid = true;
 
         String email = EmailEdt.getText().toString();
         String username = UsernameEdt.getText().toString();
         String password = PassEdt.getText().toString();
-        if (!TextUtils.isEmpty(email) && !TextUtils.isEmpty(password)) {
+        Toast.makeText(this, ""+isPhotoValid, Toast.LENGTH_SHORT).show();
+        Log.e("Dsdsd",""+isPhotoValid);
+
+        if (!TextUtils.isEmpty(email) && !TextUtils.isEmpty(password) && !TextUtils.isEmpty(mCurrentPhotoPath) && isPhotoValid) {
 
             valid = true;
 
@@ -538,6 +555,10 @@ showProgressDialog();
             }
             else if (TextUtils.isEmpty(password) || password.length()<4) {
                 Toast.makeText(this, "Enter password.", Toast.LENGTH_SHORT).show();
+                valid = false;
+            }
+            else if (!isPhotoValid) {
+                Toast.makeText(this, "Select Profile image.", Toast.LENGTH_SHORT).show();
                 valid = false;
             } else {
                 Toast.makeText(this, "Enter email address.", Toast.LENGTH_SHORT).show();

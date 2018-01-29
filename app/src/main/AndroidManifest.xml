@@ -110,6 +110,8 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".ui.activity.ForgetPasswordActivity"
             android:screenOrientation="portrait"/>
+        <activity android:name=".ui.activity.ProfileActivity"
+            android:screenOrientation="portrait"/>
         <activity android:name=".ui.activity.SignupScreenActivity"
             android:screenOrientation="portrait"
             android:noHistory="true"/>

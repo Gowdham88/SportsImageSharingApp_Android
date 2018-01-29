@@ -87,7 +87,7 @@ public class CommentsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         if(!this.commeList.get(position).getProfileImageURL().equals("") && this.commeList.get(position).getProfileImageURL()!= null) {
 
             Picasso.with(context).load(this.commeList.get(position).getProfileImageURL())
-                    .placeholder(R.drawable.logo_ic)
+                    .placeholder(R.drawable.logo_ic).fit().centerInside()
                     .into(holder.ivUserAvatar);
         }
 //        Picasso.with(context)

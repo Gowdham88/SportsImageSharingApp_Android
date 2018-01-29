@@ -26,7 +26,7 @@ public class FeedContextMenu extends LinearLayout {
     }
 
     private void init() {
-        LayoutInflater.from(getContext()).inflate(R.layout.view_context_menu, this, true);
+        LayoutInflater.from(getContext()).inflate(R.layout.view_list_menu, this, true);
         setBackgroundResource(R.drawable.bg_container_shadow);
         setOrientation(VERTICAL);
         setLayoutParams(new LayoutParams(CONTEXT_MENU_WIDTH, ViewGroup.LayoutParams.WRAP_CONTENT));
@@ -46,24 +46,12 @@ public class FeedContextMenu extends LinearLayout {
         ((ViewGroup) getParent()).removeView(FeedContextMenu.this);
     }
 
-    @OnClick(R.id.btnReport)
-    public void onReportClick() {
-        if (onItemClickListener != null) {
-            onItemClickListener.onReportClick(feedItem);
-        }
-    }
 
-    @OnClick(R.id.btnSharePhoto)
-    public void onSharePhotoClick() {
-        if (onItemClickListener != null) {
-            onItemClickListener.onSharePhotoClick(feedItem);
-        }
-    }
 
-    @OnClick(R.id.btnCopyShareUrl)
-    public void onCopyShareUrlClick() {
+    @OnClick(R.id.btnDelete)
+    public void onDeleteClick() {
         if (onItemClickListener != null) {
-            onItemClickListener.onCopyShareUrlClick(feedItem);
+            onItemClickListener.onDeleteClick(feedItem);
         }
     }
 
@@ -86,5 +74,7 @@ public class FeedContextMenu extends LinearLayout {
         public void onCopyShareUrlClick(int feedItem);
 
         public void onCancelClick(int feedItem);
+
+        public void onDeleteClick(int feedItem);
     }
 }
