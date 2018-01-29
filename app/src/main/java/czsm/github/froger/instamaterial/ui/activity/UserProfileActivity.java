@@ -249,7 +249,7 @@ public class UserProfileActivity extends AppCompatActivity implements RevealBack
         lp.gravity = Gravity.CENTER;
 //        lp.windowAnimations = R.style.DialogAnimation;
         alertDialog1.getWindow().setAttributes(lp);
->>>>>>> eccbbae213a8d2be6aace7f5850525613bf3dbe2
+
     }
 
     private void setupTabs() {
@@ -659,7 +659,7 @@ public class UserProfileActivity extends AppCompatActivity implements RevealBack
 //
 //
 //    }
-    public void saveUserName(final String name, final android.support.v7.app.AlertDialog dialog) {
+    public void saveUserName(final String name, final AlertDialog dialog) {
 
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();

@@ -101,6 +101,7 @@ public class SignupScreenActivity extends AppCompatActivity implements EasyPermi
     Uri imageUri;
     String postimageurl = "";
     Uri contentURI;
+    boolean isPhotoValid = false;
     private String mCurrentPhotoPath;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -288,7 +289,7 @@ public class SignupScreenActivity extends AppCompatActivity implements EasyPermi
         }
         // Save a file: path for use with ACTION_VIEW intents
         mCurrentPhotoPath = "file:" + mediaFile.getAbsolutePath();
-
+        isPhotoValid = true;
         return mediaFile;
     }
 
@@ -300,7 +301,7 @@ public class SignupScreenActivity extends AppCompatActivity implements EasyPermi
         if (resultCode != Activity.RESULT_CANCELED) {
             if (requestCode == RC_PICK_IMAGE) {
                 if (data != null) {
-                    contentURI = data.getData();
+                    Uri contentURI = data.getData();
                     try {
                         Bitmap bitmap = MediaStore.Images.Media.getBitmap(getApplicationContext().getContentResolver(), contentURI);
                         profileImg.setImageBitmap(bitmap);
@@ -315,7 +316,8 @@ public class SignupScreenActivity extends AppCompatActivity implements EasyPermi
             } else if (requestCode == RC_CAPTURE_IMAGE) {
                 // Show the thumbnail on ImageView
 //                showProgressDialog();
-                imageUri = Uri.parse(mCurrentPhotoPath);
+                Uri imageUri = Uri.parse(mCurrentPhotoPath);
+                isPhotoValid = true;
                 File file = new File(imageUri.getPath());
                 try {
                     InputStream ims = new FileInputStream(file);
@@ -512,7 +514,7 @@ public class SignupScreenActivity extends AppCompatActivity implements EasyPermi
         String email = EmailEdt.getText().toString();
         String username = UsernameEdt.getText().toString();
         String password = PassEdt.getText().toString();
-        if (!TextUtils.isEmpty(email) && !TextUtils.isEmpty(password)) {
+        if (!TextUtils.isEmpty(email) && !TextUtils.isEmpty(password) && isPhotoValid) {
 
             valid = true;
 
@@ -535,7 +537,7 @@ public class SignupScreenActivity extends AppCompatActivity implements EasyPermi
                 Toast.makeText(this, "Enter password.", Toast.LENGTH_SHORT).show();
                 valid = false;
             }
-            else if (mCurrentPhotoPath.equals(null)) {
+            else if (!isPhotoValid) {
                 Toast.makeText(this, "" +
                         "please fill the image", Toast.LENGTH_SHORT).show();
                 valid = false;
