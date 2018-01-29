@@ -408,7 +408,7 @@ public class UserProfileActivity extends AppCompatActivity implements RevealBack
     @OnClick(R.id.back_image)
     public void setBackarrow() {
 
-        finish();
+       onBackPressed();
     }
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
@@ -426,6 +426,15 @@ public class UserProfileActivity extends AppCompatActivity implements RevealBack
     }
 
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        Intent intent = new Intent(UserProfileActivity.this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        intent.setAction(MainActivity.ACTION_SHOW_LOADING_ITEM);
+        startActivity(intent);
+    }
 
     public void loadPost() {
 

@@ -17,6 +17,8 @@ import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.BindView;
+import czsm.github.froger.instamaterial.ui.activity.CommentsActivity;
+import czsm.github.froger.instamaterial.ui.utils.PreferencesHelper;
 import de.hdodenhof.circleimageview.CircleImageView;
 import czsm.github.froger.instamaterial.R;
 import czsm.github.froger.instamaterial.ui.Models.Comment;
@@ -70,8 +72,20 @@ public class CommentsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         CommentViewHolder holder = (CommentViewHolder) viewHolder;
         String str=commeList.get(position).getComment();
         holder.tvComment.setText(str);
-        String namestr=commeList.get(position).getuserName();
-        holder.tvname.setText(namestr);
+        if (this.commeList.get(position).getUid().equals(PreferencesHelper.getPreference(context,PreferencesHelper.PREFERENCE_FIREBASE_UUID))) {
+
+            holder.tvname.setText(PreferencesHelper.getPreference(context,PreferencesHelper.PREFERENCE_EMAIL));
+
+        } else {
+
+            if(this.commeList.get(position).getuserName() != null) {
+
+                holder.tvname.setText(this.commeList.get(position).getuserName());
+
+            }
+
+        }
+
 
 //        switch (position % 3) {
 //            case 0:

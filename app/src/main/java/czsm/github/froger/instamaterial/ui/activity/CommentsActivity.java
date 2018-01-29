@@ -207,7 +207,7 @@ public class CommentsActivity extends AppCompatActivity implements SendCommentBu
         if (comment != null && comment.length() > 0) {
 
             addcomment(comment);
-            Toast.makeText(this, comment, Toast.LENGTH_SHORT).show();
+
 
 
         } else {

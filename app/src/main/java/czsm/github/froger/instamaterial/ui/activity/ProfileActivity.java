@@ -44,6 +44,7 @@ import butterknife.OnClick;
 import czsm.github.froger.instamaterial.ui.Models.Post;
 import czsm.github.froger.instamaterial.ui.adapter.FeedAdapter;
 import czsm.github.froger.instamaterial.ui.utils.PreferencesHelper;
+import czsm.github.froger.instamaterial.ui.view.FeedContextMenu;
 import czsm.github.froger.instamaterial.ui.view.FeedContextMenuManager;
 import czsm.github.froger.instamaterial.ui.view.RevealBackgroundView;
 import czsm.github.froger.instamaterial.R;
@@ -56,7 +57,7 @@ import static android.content.ContentValues.TAG;
 /**
  * Created by Miroslaw Stanek on 14.01.15.
  */
-public class ProfileActivity extends AppCompatActivity implements RevealBackgroundView.OnStateChangeListener,FeedAdapter.OnFeedItemClickListener {
+public class ProfileActivity extends AppCompatActivity implements RevealBackgroundView.OnStateChangeListener,FeedAdapter.OnFeedItemClickListener,FeedContextMenu.OnFeedContextMenuItemClickListener  {
     public static final String ARG_REVEAL_START_LOCATION = "reveal_start_location";
     public static final String USER_ID = "user_id";
     public static final String USER_IMAGE = "user_image";
@@ -85,8 +86,8 @@ public class ProfileActivity extends AppCompatActivity implements RevealBackgrou
     View vUserProfileRoot;
     @BindView(R.id.username_txt1)
     TextView vUserName;
-    //    @BindView(R.id.username_simple)
-//    TextView vUserNameSub;
+    @BindView(R.id.username_simple1)
+    TextView vUserNameSub;
     @BindView(R.id.toolbar_title)
     TextView toolbarTitle;
     @BindView(R.id.logout_image)
@@ -139,7 +140,7 @@ public class ProfileActivity extends AppCompatActivity implements RevealBackgrou
 
         this.profilePhoto = userProfile;
         vUserName.setText(userName);
-//        vUserNameSub.setText("@"+userName);
+        vUserNameSub.setText("@"+userName);
         if(!profilePhoto.equals(null)&&!profilePhoto.isEmpty()){
             Picasso.with(this)
                     .load(profilePhoto)
@@ -304,18 +305,20 @@ public class ProfileActivity extends AppCompatActivity implements RevealBackgrou
     @Override
     public void onMoreClick(View v, int position) {
 
+        FeedContextMenuManager.getInstance().toggleContextMenuFromView(v, position, this);
     }
 
     @Override
     public void onProfileClick(View v, int position) {
 
+
     }
 
-//    @OnClick(R.id.back_image)
-//    public void setBackarrow() {
-//
-//        finish();
-//    }
+    @OnClick(R.id.back_image)
+    public void setBackarrow() {
+
+        onBackPressed();
+    }
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @OnClick(R.id.logout_image)
@@ -379,8 +382,6 @@ public class ProfileActivity extends AppCompatActivity implements RevealBackgrou
     public void loadMorePost() {
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-
 
         Query first = db.collection("Post").whereEqualTo("uid", userId)
                 .startAfter(lastVisible)
@@ -562,6 +563,60 @@ public class ProfileActivity extends AppCompatActivity implements RevealBackgrou
     }
 
 
+    @Override
+    public void onReportClick(int feedItem) {
+        FeedContextMenuManager.getInstance().hideContextMenu();
+    }
 
+    @Override
+    public void onSharePhotoClick(int feedItem) {
+        FeedContextMenuManager.getInstance().hideContextMenu();
+    }
+
+    @Override
+    public void onCopyShareUrlClick(int feedItem) {
+        FeedContextMenuManager.getInstance().hideContextMenu();
+    }
+
+    @Override
+    public void onCancelClick(int feedItem) {
+        FeedContextMenuManager.getInstance().hideContextMenu();
+    }
+
+    @Override
+    public void onDeleteClick(final int feedItem) {
+
+        FeedContextMenuManager.getInstance().hideContextMenu();
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("Post").document(postListId.get(feedItem))
+                .delete()
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, "DocumentSnapshot successfully deleted!");
+
+                        postListId.remove(feedItem);
+                        postList.remove(feedItem);
+                        feedAdapter.updateItems(false);
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error deleting document", e);
+                    }
+                });
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        Intent intent = new Intent(ProfileActivity.this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        intent.setAction(MainActivity.ACTION_SHOW_LOADING_ITEM);
+        startActivity(intent);
+    }
 }
 
