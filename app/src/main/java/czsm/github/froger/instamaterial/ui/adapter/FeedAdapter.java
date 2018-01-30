@@ -20,6 +20,8 @@ import android.widget.TextSwitcher;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -50,12 +52,13 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Context context;
     private OnFeedItemClickListener onFeedItemClickListener;
     List<Post> postList = new ArrayList<>();
-
+    private FirebaseAuth mAuth;
     private boolean showLoadingView = false;
 
     public FeedAdapter(Context context,List<Post> postList) {
         this.context  = context;
         this.postList = postList;
+
     }
 
     public  void addData(List<Post> stringArrayList){
@@ -249,10 +252,21 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 ivFeedBottom.setText(postItem.getCaption());
             }
 
-            if(this.postItem.getCaption() != null) {
+            if (this.postItem.getUid().equals(PreferencesHelper.getPreference(context,PreferencesHelper.PREFERENCE_FIREBASE_UUID))) {
 
-                vUsername.setText(postItem.getuserName());
+                    vUsername.setText(PreferencesHelper.getPreference(context,PreferencesHelper.PREFERENCE_EMAIL));
+
+            } else {
+
+                if(this.postItem.getuserName() != null) {
+
+                    vUsername.setText(this.postItem.getuserName());
+
+                }
+
             }
+
+
 
             if(!this.postItem.getPostimage().equals("failed")) {
 

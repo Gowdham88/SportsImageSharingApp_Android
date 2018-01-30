@@ -54,11 +54,14 @@
                         android:layout_height="wrap_content"
                         android:clipChildren="false">
 
-                        <ImageView
+                        <de.hdodenhof.circleimageview.CircleImageView
                             android:id="@+id/ivUserProfilePhoto1"
                             android:layout_width="88dp"
                             android:layout_height="88dp"
-                            android:layout_marginRight="16dp" />
+                            android:src="@drawable/background"
+                            android:layout_gravity="center"
+                            android:layout_marginRight="16dp"/>
+
 
                         <LinearLayout
                             android:id="@+id/vUserDetails1"
