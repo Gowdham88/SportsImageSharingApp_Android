@@ -107,8 +107,8 @@ public class SignupScreenActivity extends AppCompatActivity  implements EasyPerm
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup_screen);
 
-        EmailEdt=(EditText)findViewById(R.id.email_edit);
-        UsernameEdt=(EditText)findViewById(R.id.username_edit);
+        EmailEdt    =(EditText)findViewById(R.id.email_edit);
+        UsernameEdt =(EditText)findViewById(R.id.username_edit);
         PassEdt=(EditText)findViewById(R.id.pass_edit);
         AccntTxt=(TextView)findViewById(R.id.accnt_txt);
         Signuprellay=(RelativeLayout) findViewById(R.id.signuprel_lay);
@@ -288,7 +288,7 @@ public class SignupScreenActivity extends AppCompatActivity  implements EasyPerm
         }
         // Save a file: path for use with ACTION_VIEW intents
         mCurrentPhotoPath = "file:" + mediaFile.getAbsolutePath();
-        isPhotoValid = true;
+
         return mediaFile;
     }
 
@@ -301,6 +301,8 @@ public class SignupScreenActivity extends AppCompatActivity  implements EasyPerm
             if (requestCode == RC_PICK_IMAGE) {
                 if (data != null) {
                     Uri contentURI = data.getData();
+                    isPhotoValid = true;
+                    this.contentURI = contentURI;
                     try {
                         Bitmap bitmap = MediaStore.Images.Media.getBitmap(getApplicationContext().getContentResolver(), contentURI);
                         profileImg.setImageBitmap(bitmap);
@@ -316,6 +318,7 @@ public class SignupScreenActivity extends AppCompatActivity  implements EasyPerm
                 // Show the thumbnail on ImageView
 //                showProgressDialog();
                 Uri imageUri = Uri.parse(mCurrentPhotoPath);
+                this.contentURI = imageUri;
                 isPhotoValid = true;
                 File file = new File(imageUri.getPath());
                 try {
@@ -375,9 +378,9 @@ public class SignupScreenActivity extends AppCompatActivity  implements EasyPerm
 //                                                startActivity(in);
                                                 final FirebaseUser user = mAuth.getCurrentUser();
                                                 Log.e("user", String.valueOf(user));
-//                                                AddDatabase(user,view);
-                                                uploadImage(view);
                                                 hideProgressDialog();
+                                                uploadImage(view);
+
                                                 // Sign in success, update UI with the signed-in user's information
                                             }
                                         }
@@ -432,8 +435,6 @@ public class SignupScreenActivity extends AppCompatActivity  implements EasyPerm
                             Toast.makeText(SignupScreenActivity.this, "Uploaded", Toast.LENGTH_SHORT).show();
                             postimageurl = taskSnapshot.getDownloadUrl().toString();
 
-//                            String caption =  edt_description.getText().toString();
-
                             if (postimageurl.equals("failed")) {
 
 
@@ -441,11 +442,6 @@ public class SignupScreenActivity extends AppCompatActivity  implements EasyPerm
                             }
                             final FirebaseUser user = mAuth.getCurrentUser();
                             AddDatabase(user,view);
-//                            if (caption == null && caption.length() == 0) {
-//
-//                                caption = "empty";
-//
-//                            }
 
                         }
                     })
@@ -471,7 +467,7 @@ public class SignupScreenActivity extends AppCompatActivity  implements EasyPerm
 
         }
 
-        return ;
+
 
     }
 
@@ -554,11 +550,9 @@ public class SignupScreenActivity extends AppCompatActivity  implements EasyPerm
     }
     private void AddDatabase(final FirebaseUser user, final View view){
 
-
-
         final FirebaseFirestore db = FirebaseFirestore.getInstance();
         final Users users = new Users("",String.valueOf(postimageurl),UsernameEdt.getText().toString());
-        hideProgressDialog();
+        showProgressDialog();
 
         DocumentReference docRef = db.collection("users").document(user.getUid());
         docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -568,6 +562,8 @@ public class SignupScreenActivity extends AppCompatActivity  implements EasyPerm
 
                 if (documentSnapshot.exists()){
 
+                    hideProgressDialog();
+
                     Toast.makeText(getApplicationContext(),"Success",Toast.LENGTH_SHORT).show();
 
                     PreferencesHelper.setPreference(getApplicationContext(), PreferencesHelper.PREFERENCE_EMAIL,UsernameEdt.getText().toString());
@@ -576,11 +572,14 @@ public class SignupScreenActivity extends AppCompatActivity  implements EasyPerm
                     PreferencesHelper.setPreference(getApplicationContext(), PreferencesHelper.PREFERENCE_PROFILE_PIC, String.valueOf(postimageurl));
                     PreferencesHelper.setPreference(getApplicationContext(), PreferencesHelper.PREFERENCE_FIREBASE_UUID, user.getUid());
 
-                    final Intent intent = new Intent(SignupScreenActivity.this, LoginScreen.class);
+                    final Intent intent = new Intent(SignupScreenActivity.this, MainActivity.class);
                     startActivity(intent);
                     overridePendingTransition(0, 0);
 
                 } else {
+
+                    hideProgressDialog();
+
                     db.collection("users").document(user.getUid())
                             .set(users)
                             .addOnFailureListener(new OnFailureListener() {
@@ -595,7 +594,7 @@ public class SignupScreenActivity extends AppCompatActivity  implements EasyPerm
 
                             });
 
-                    final Intent intent = new Intent(SignupScreenActivity.this, LoginScreen.class);
+                    final Intent intent = new Intent(SignupScreenActivity.this, MainActivity.class);
                     startActivity(intent);
                     overridePendingTransition(0, 0);
 

@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/SarvodayaHB_Android.iml" filepath="$PROJECT_DIR$/SarvodayaHB_Android.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/sarvodaya.iml" filepath="$PROJECT_DIR$/sarvodaya.iml" />
     </modules>
   </component>
 </project>

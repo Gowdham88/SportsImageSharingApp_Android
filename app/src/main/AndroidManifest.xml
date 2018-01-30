@@ -100,6 +100,9 @@
         <!-- <activity android:name=".ui.activity.LoginScreenActivity"></activity> -->
         <!-- <activity android:name=".ui.activity.SplashActivity"></activity> -->
         <activity
+            android:name=".ui.activity.ProfileActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".ui.activity.ImageDetailActivity"
             android:screenOrientation="portrait" />
         <activity
