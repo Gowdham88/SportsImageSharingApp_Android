@@ -24,7 +24,7 @@
         android:required="false" />
 
     <application
-        android:name=".InstaMaterialApplication"
+        android:name=".MyApplication"
         android:icon="@drawable/logoicon"
         android:label="@string/app_name"
         android:largeHeap="true"
@@ -113,10 +113,14 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activity.signup"
-            android:noHistory="true"
             android:screenOrientation="portrait" />
-        <activity android:name=".ui.activity.SignUpActivity"
-            android:noHistory="true"
+        <activity
+            android:name=".ui.activity.SignUpActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.ProfileActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".ui.activity.InfoActivity"
             android:screenOrientation="portrait"/>
     </application>
 

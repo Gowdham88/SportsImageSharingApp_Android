@@ -102,6 +102,7 @@ public class ProfileActivity extends AppCompatActivity implements RevealBackgrou
     String userId;
     String userName;
     String userProfile;
+    ImageView infoimg;
     private FirebaseAuth mAuth;
 //    private UserProfileAdapter userPhotosAdapter;
 
@@ -132,7 +133,15 @@ public class ProfileActivity extends AppCompatActivity implements RevealBackgrou
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
         this.avatarSize = getResources().getDimensionPixelSize(R.dimen.user_profile_avatar_size);
-
+        infoimg=(ImageView)findViewById(R.id.info_image);
+        infoimg.setVisibility(View.VISIBLE);
+        infoimg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent infointent=new Intent(ProfileActivity.this,InfoActivity.class);
+                startActivity(infointent);
+            }
+        });
         mAuth = FirebaseAuth.getInstance();
         userId = getIntent().getStringExtra(USER_ID);
         userName = getIntent().getStringExtra(USER_NAME);
