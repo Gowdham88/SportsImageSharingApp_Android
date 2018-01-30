@@ -191,6 +191,14 @@ public class MainActivity extends AppCompatActivity implements FeedAdapter.OnFee
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+
+
+    }
+
     private void setupFeed() {
 
 
@@ -214,6 +222,8 @@ public class MainActivity extends AppCompatActivity implements FeedAdapter.OnFee
 
             showFeedLoadingItemDelayed();
 
+            rvFeed.getRecycledViewPool().clear();
+            feedAdapter.notifyDataSetChanged();
             loadPost(ACTION_SHOW_LOADING_ITEM);
 
         }
@@ -304,6 +314,15 @@ public class MainActivity extends AppCompatActivity implements FeedAdapter.OnFee
 
         String name    = postList.get(position).getuserName();
         String profile = postList.get(position).getProfileImageURL();
+
+        if (postList.get(position).getUid().equals(PreferencesHelper.getPreference(MainActivity.this,PreferencesHelper.PREFERENCE_FIREBASE_UUID))) {
+
+            name =  PreferencesHelper.getPreference(MainActivity.this,PreferencesHelper.PREFERENCE_EMAIL);
+
+        } else {
+
+            name    = postList.get(position).getuserName();
+        }
 
         int[] startingLocation = new int[2];
         v.getLocationOnScreen(startingLocation);
