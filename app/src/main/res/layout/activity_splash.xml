@@ -4,20 +4,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#ffffff"
     android:orientation="vertical"
     tools:context="czsm.github.froger.instamaterial.ui.activity.SplashActivity">
-<ImageView
-    android:layout_width="match_parent"
-    android:layout_height="420dp"
-    android:src="@drawable/logoicon"/>
-<TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="SarvodayaHB"
-    android:gravity="center"
-    android:layout_gravity="center"
-    style="@style/FontAvenirBook"
-    android:textStyle="italic"
-    android:textSize="35dp"
-    android:layout_marginTop="25dp"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:src="@drawable/hanfballsplash" />
+
+    <TextView
+        style="@style/FontAvenirheavy"
+        android:id="@+id/splash_txt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="Sarvodaya Hand Ball"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        android:layout_marginTop="15dp"
+        android:textColor="#000000"
+    />
 </LinearLayout>
