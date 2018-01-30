@@ -19,7 +19,7 @@ dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
 
-
+    compile 'com.android.support:appcompat-v7:25.2.0'
     compile 'com.android.support:support-v13:25.0.0'
     compile 'com.android.support:support-v4:25.0.0'
     compile 'com.android.support:palette-v7:25.0.0'
@@ -44,5 +44,11 @@ dependencies {
     compile 'uk.co.chrisjenx:calligraphy:2.3.0'
     compile 'pub.devrel:easypermissions:1.0.1'
     compile 'de.hdodenhof:circleimageview:2.1.0'
+
+//    compile 'com.google.android.gms:play-services:11.6.2'
+//    compile 'com.android.support:multidex:1.0.2'
+//    compile 'com.android.support:design:25.4.0'
+//    compile 'com.google.maps:google-maps-services:0.1.17'
+//    compile 'pl.droidsonroids.gif:android-gif-drawable:1.1.6'
 }
 apply plugin: 'com.google.gms.google-services'

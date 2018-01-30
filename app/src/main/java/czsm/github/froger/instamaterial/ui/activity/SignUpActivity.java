@@ -3,16 +3,22 @@ package czsm.github.froger.instamaterial.ui.activity;
 import android.Manifest;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.ColorDrawable;
+import android.media.MediaScannerConnection;
 import android.net.Uri;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetDialog;
 import android.support.design.widget.Snackbar;
+import android.support.v4.content.CursorLoader;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -24,6 +30,7 @@ import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -47,23 +54,38 @@ import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
 import java.util.UUID;
 import java.util.zip.Inflater;
 
+import czsm.github.froger.instamaterial.BuildConfig;
+import czsm.github.froger.instamaterial.Constants;
 import czsm.github.froger.instamaterial.R;
 import czsm.github.froger.instamaterial.ui.Models.Users;
 import czsm.github.froger.instamaterial.ui.utils.PreferencesHelper;
 import de.hdodenhof.circleimageview.CircleImageView;
+import pub.devrel.easypermissions.AppSettingsDialog;
 import pub.devrel.easypermissions.EasyPermissions;
 
+import static android.content.ContentValues.TAG;
+import static android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE;
+import static com.facebook.FacebookSdk.getApplicationContext;
 import static czsm.github.froger.instamaterial.Utils.hideKeyboard;
 
-public class SignUpActivity extends AppCompatActivity {
+public class SignUpActivity extends AppCompatActivity implements EasyPermissions.PermissionCallbacks{
     EditText EmailEdt,UsernameEdt,PassEdt;
     Button SignupBtn;
     TextView AccntTxt;
     CircleImageView profileImg;
     TextView Camera,Gallery,cancel;
+    LinearLayout cancelLay;
     ImageView GalleryIcon, GenderDropimg;
     ImageView CameraIcon;
     Inflater inflater;
@@ -71,17 +93,18 @@ public class SignUpActivity extends AppCompatActivity {
     Animation slideUpAnimation, slideDownAnimation;
     private FirebaseAuth mAuth;
     private AlertDialog dialog;
-    private static final int PERMISSIONS_REQUEST_CAMERA = 1888;
-    private static final int PERMISSIONS_REQUEST_GALLERY = 1889;
-    private static final String[] CAMERA = {Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE};
-    private String selectedImagePath = "";
-    final private int RC_PICK_IMAGE = 1;
-    final private int RC_CAPTURE_IMAGE = 2;
     private Uri fileUri;
     Uri imageUri;
     String postimageurl = "";
     Uri contentURI;
+    boolean isPhotoValid = false;
     private String mCurrentPhotoPath;
+    private String selectedImagePath = "";
+    private static final int PERMISSIONS_REQUEST_CAMERA = 1888;
+    private static final int PERMISSIONS_REQUEST_GALLERY = 1889;
+    private static final String[] CAMERA = {Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE};
+    final private int RC_PICK_IMAGE = 1;
+    final private int RC_CAPTURE_IMAGE = 2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -94,7 +117,7 @@ public class SignUpActivity extends AppCompatActivity {
         Signuprellay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                hideKeyboard(SignUpActivity.this);
+//                hideKeyboard(SignUpActivity.this);
             }
         });
         SignupBtn=(Button)findViewById(R.id.signup_btn);
@@ -119,11 +142,11 @@ public class SignUpActivity extends AppCompatActivity {
             public void onClick(View view) {
                 hideKeyboard(SignUpActivity.this);
                 createAccount(EmailEdt.getText().toString(), UsernameEdt.getText().toString(),PassEdt.getText().toString(),view);
-
-                if(validateForm()){
-                    Intent in=new Intent(SignUpActivity.this,LoginScreen.class);
-                    startActivity(in);
-                }
+//                validateForm();
+//                if(validateForm()){
+//                    Intent in=new Intent(SignUpActivity.this,Login.class);
+//                    startActivity(in);
+//                }
             }
         });
         AccntTxt.setOnClickListener(new View.OnClickListener() {
@@ -136,59 +159,6 @@ public class SignUpActivity extends AppCompatActivity {
 
             }
         });
-    }
-
-    private void showBottomSheet() {
-
-        final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(MainActivity.this);
-        LayoutInflater factory = LayoutInflater.from(this);
-        View bottomSheetView = factory.inflate(R.layout.dialo_camera_bottomsheet, null);
-        bottomSheetDialog.setContentView(bottomSheetView);
-        bottomSheetDialog.show();
-
-        Camera = (TextView) bottomSheetView.findViewById(R.id.camera_title);
-        Gallery = (TextView) bottomSheetView.findViewById(R.id.gallery_title);
-//        GalleryIcon = (ImageView) bottomSheetView.findViewById(R.id.gallery_icon);
-//        CameraIcon = (ImageView) bottomSheetView.findViewById(R.id.camera_image);
-        cancel=(TextView) bottomSheetView.findViewById(R.id.cancel_txt);
-        Camera.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                bottomSheetDialog.dismiss();
-
-                if (hasPermissions()) {
-                    captureImage();
-                } else {
-                    EasyPermissions.requestPermissions(MainActivity.this, "Permissions required", PERMISSIONS_REQUEST_CAMERA, CAMERA);
-                }
-            }
-        });
-
-        Gallery.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (hasPermissions()) {
-                    Intent i = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                    startActivityForResult(i, RC_PICK_IMAGE);
-                } else {
-                    EasyPermissions.requestPermissions(MainActivity.this, "Permissions required", PERMISSIONS_REQUEST_GALLERY, CAMERA);
-                }
-                bottomSheetDialog.dismiss();
-            }
-        });
-        cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                bottomSheetDialog.dismiss();
-            }
-        });
-
-
-    }
-
-    private boolean hasPermissions() {
-        return EasyPermissions.hasPermissions(this, CAMERA);
     }
 
     private void createAccount(final String email, final String username, final String password,final  View view) {
@@ -208,8 +178,8 @@ public class SignUpActivity extends AppCompatActivity {
                                     .addOnCompleteListener(new OnCompleteListener<GetTokenResult>() {
                                         public void onComplete(@NonNull Task<GetTokenResult> task) {
                                             if (task.isSuccessful()) {
-//                                                Intent in=new Intent(SignupActivity.this,LoginScreen.class);
-//                                                startActivity(in);
+                                                Intent in=new Intent(SignUpActivity.this,LoginScreen.class);
+                                                startActivity(in);
                                                 final FirebaseUser user = mAuth.getCurrentUser();
                                                 Log.e("user", String.valueOf(user));
 //                                                AddDatabase(user,view);
@@ -236,7 +206,8 @@ public class SignUpActivity extends AppCompatActivity {
                 });
 
     }
-    public String uploadImage(final View view) {
+
+    public void uploadImage(final View view) {
 
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageRef = storage.getReference();
@@ -303,87 +274,14 @@ public class SignUpActivity extends AppCompatActivity {
                     });
         } else {
 
-            return "empty";
+            return;
 
         }
 
-        return "empty";
+        return;
 
     }
 
-    public static ObjectAnimator createTopDownAnimation(View view, AnimatorListenerAdapter listener,
-                                                        float distance) {
-        view.setTranslationY(-distance);
-        ObjectAnimator animator = ObjectAnimator.ofFloat(view, "translationY", 0);
-        animator.removeAllListeners();
-        if (listener != null) {
-            animator.addListener(listener);
-        }
-        return animator;
-    }
-
-    public void showProgressDialog() {
-
-
-        android.support.v7.app.AlertDialog.Builder alertDialog = new android.support.v7.app.AlertDialog.Builder(SignUpActivity.this);
-        //View view = getLayoutInflater().inflate(R.layout.progress);
-        alertDialog.setView(R.layout.progress);
-        dialog = alertDialog.create();
-        dialog.show();
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-
-    }
-
-    public void hideProgressDialog(){
-        if(dialog!=null)
-            dialog.dismiss();
-    }
-
-    private boolean validateForm() {
-        boolean valid = true;
-
-        String email = EmailEdt.getText().toString();
-        String username = UsernameEdt.getText().toString();
-        String password = PassEdt.getText().toString();
-        if (!TextUtils.isEmpty(email) && !TextUtils.isEmpty(password)) {
-
-            valid = true;
-
-        } else {
-
-            if(TextUtils.isEmpty(email) && TextUtils.isEmpty(password)) {
-                Toast.makeText(this, "Enter email address and password.", Toast.LENGTH_SHORT).show();
-                valid = false;
-            }
-            else if((email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()))
-            {
-                Toast.makeText(getApplicationContext(), "enter a valid email address", Toast.LENGTH_SHORT).show();
-//            mEmail.setError("enter a valid email address");
-                valid = false;
-            }else if (username.isEmpty()&&username.equals(null)) {
-                Toast.makeText(this, "Enter username.", Toast.LENGTH_SHORT).show();
-                valid = false;
-            }
-            else if (TextUtils.isEmpty(password) || password.length()<4) {
-                Toast.makeText(this, "Enter password.", Toast.LENGTH_SHORT).show();
-                valid = false;
-            }
-            else if (mCurrentPhotoPath.equals(null)) {
-                Toast.makeText(this, "" +
-                        "please fill the image", Toast.LENGTH_SHORT).show();
-                valid = false;
-            }
-
-            else {
-                Toast.makeText(this, "Enter email address.", Toast.LENGTH_SHORT).show();
-                valid = false;
-            }
-
-
-        }
-
-        return valid;
-    }
     private void AddDatabase(final FirebaseUser user, final View view){
 
 
@@ -450,4 +348,258 @@ public class SignUpActivity extends AppCompatActivity {
 
 
     }
+
+    private boolean validateForm() {
+        boolean valid = true;
+
+        String email = EmailEdt.getText().toString();
+        String username = UsernameEdt.getText().toString();
+        String password = PassEdt.getText().toString();
+        String str= String.valueOf(isPhotoValid);
+//        Toast.makeText(this,str, Toast.LENGTH_SHORT).show();
+        if (!TextUtils.isEmpty(email) && !TextUtils.isEmpty(password) && isPhotoValid) {
+
+            valid = true;
+
+        } else {
+
+            if(TextUtils.isEmpty(email) && TextUtils.isEmpty(password)) {
+                Toast.makeText(this, "Enter email address and password.", Toast.LENGTH_SHORT).show();
+                valid = false;
+            }
+            else if((email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()))
+            {
+                Toast.makeText(getApplicationContext(), "enter a valid email address", Toast.LENGTH_SHORT).show();
+//            mEmail.setError("enter a valid email address");
+                valid = false;
+            }else if (username.isEmpty()&&username.equals(null)) {
+                Toast.makeText(this, "Enter username.", Toast.LENGTH_SHORT).show();
+                valid = false;
+            }
+            else if (TextUtils.isEmpty(password) || password.length()<4) {
+                Toast.makeText(this, "Enter password.", Toast.LENGTH_SHORT).show();
+                valid = false;
+            }
+            else if (!isPhotoValid) {
+                Toast.makeText(this, "" +
+                        "please fill the image", Toast.LENGTH_SHORT).show();
+                valid = false;
+            }
+
+            else {
+                Toast.makeText(this, "" +
+                        "success", Toast.LENGTH_SHORT).show();
+
+            }
+
+
+        }
+
+        return valid;
+    }
+
+
+
+    private String getRealPathFromURI(Uri contentUri) {
+        String[] proj = {MediaStore.Images.Media.DATA};
+        CursorLoader loader = new CursorLoader(getApplicationContext(), contentUri, proj, null, null, null);
+        Cursor cursor = loader.loadInBackground();
+        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        cursor.moveToFirst();
+        String result = cursor.getString(column_index);
+        cursor.close();
+        return result;
+    }
+    private void showBottomSheet() {
+        final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this);
+        LayoutInflater factory = LayoutInflater.from(this);
+        View bottomSheetView = factory.inflate(R.layout.dialo_camera_bottomsheet, null);
+        bottomSheetDialog.setContentView(bottomSheetView);
+        bottomSheetDialog.show();
+
+        Camera = (TextView)bottomSheetView.findViewById(R.id.camera_title);
+        Gallery = (TextView)bottomSheetView.findViewById(R.id.gallery_title);
+        Camera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                bottomSheetDialog.dismiss();
+
+                if (hasPermissions()) {
+                    captureImage();
+                } else {
+                    EasyPermissions.requestPermissions(SignUpActivity.this, "Permissions required", PERMISSIONS_REQUEST_CAMERA, CAMERA);
+                }
+            }
+        });
+
+        Gallery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (hasPermissions()) {
+                    Intent i = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                    startActivityForResult(i, RC_PICK_IMAGE);
+                } else {
+                    EasyPermissions.requestPermissions(SignUpActivity.this, "Permissions required", PERMISSIONS_REQUEST_GALLERY, CAMERA);
+                }
+
+                bottomSheetDialog.dismiss();
+            }
+        });
+    }
+
+    @Override
+    public void onPermissionsGranted(int requestCode, List<String> perms) {
+
+        switch (requestCode){
+
+            case PERMISSIONS_REQUEST_GALLERY:
+                if(perms.contains(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)&&perms.contains(android.Manifest.permission.READ_EXTERNAL_STORAGE)) {
+                    Intent i = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                    startActivityForResult(i, RC_PICK_IMAGE);
+                }
+                break;
+
+            case PERMISSIONS_REQUEST_CAMERA:
+                if(perms.contains(Manifest.permission.CAMERA)) {
+                    captureImage();
+                }
+                break;
+
+        }
+
+
+    }
+
+    @Override
+    public void onPermissionsDenied(int requestCode, List<String> perms) {
+        Log.d(TAG, "onPermissionsDenied:" + requestCode + ":" + perms.size());
+
+        // (Optional) Check whether the user denied any permissions and checked "NEVER ASK AGAIN."
+        // This will display a dialog directing them to enable the permission in app settings.
+        if (EasyPermissions.somePermissionPermanentlyDenied(this, perms)) {
+            new AppSettingsDialog.Builder(this).build().show();
+        }
+
+    }
+
+
+
+    private boolean hasPermissions() {
+        return EasyPermissions.hasPermissions(this, CAMERA);
+    }
+
+    private void captureImage() {
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        fileUri = getOutputMediaFileUri(1);
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
+        startActivityForResult(intent, RC_CAPTURE_IMAGE);
+    }
+
+    public Uri getOutputMediaFileUri(int type) {
+        return FileProvider.getUriForFile(getApplicationContext(),
+                BuildConfig.APPLICATION_ID + ".provider",
+                getOutputMediaFile(type));
+    }
+
+    private File getOutputMediaFile(int type) {
+
+        File mediaStorageDir = new File(
+                Environment
+                        .getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),
+                Constants.IMAGE_DIRECTORY_NAME);
+
+        if (!mediaStorageDir.exists()) {
+            if (!mediaStorageDir.mkdirs()) {
+                Log.d(TAG, "Oops! Failed create "
+                        + Constants.IMAGE_DIRECTORY_NAME + " directory");
+                return null;
+            }
+        }
+
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss",
+                Locale.getDefault()).format(new Date());
+        File mediaFile;
+        if (type == MEDIA_TYPE_IMAGE) {
+            mediaFile = new File(mediaStorageDir.getPath() + File.separator
+                    + "IMG_" + timeStamp + ".jpg");
+        } else {
+            return null;
+        }
+        // Save a file: path for use with ACTION_VIEW intents
+        mCurrentPhotoPath = "file:" + mediaFile.getAbsolutePath();
+        isPhotoValid=true;
+        return mediaFile;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode,
+                                 Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+//        showProgressDialog();
+        if (resultCode != Activity.RESULT_CANCELED) {
+            if (requestCode == RC_PICK_IMAGE) {
+                if (data != null) {
+                    Uri contentURI = data.getData();
+                    try {
+                        Bitmap bitmap = MediaStore.Images.Media.getBitmap(getApplicationContext().getContentResolver(), contentURI);
+                        profileImg.setImageBitmap(bitmap);
+                        isPhotoValid=true;
+                        selectedImagePath=getRealPathFromURI(contentURI);
+//                        uploadImage(getRealPathFromURI(contentURI));
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        Toast.makeText(getApplicationContext(), "Failed!", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            } else if (requestCode == RC_CAPTURE_IMAGE) {
+                // Show the thumbnail on ImageView
+//                showProgressDialog();
+                Uri imageUri = Uri.parse(mCurrentPhotoPath);
+                isPhotoValid=true;
+                File file = new File(imageUri.getPath());
+                try {
+                    InputStream ims = new FileInputStream(file);
+                    profileImg.setImageBitmap(BitmapFactory.decodeStream(ims));
+                } catch (FileNotFoundException e) {
+                    return;
+                }
+
+                // ScanFile so it will be appeared on Gallery
+                MediaScannerConnection.scanFile(getApplicationContext(),
+                        new String[]{imageUri.getPath()}, null,
+                        new MediaScannerConnection.OnScanCompletedListener() {
+                            public void onScanCompleted(String path, Uri uri) {
+                            }
+                        });
+                selectedImagePath = imageUri.getPath();
+//                uploadImage(imageUri.getPath());
+
+            }
+
+        } else {
+            super.onActivityResult(requestCode, resultCode,
+                    data);
+        }
+    }
+
+
+    public void showProgressDialog() {
+
+
+        android.support.v7.app.AlertDialog.Builder alertDialog = new android.support.v7.app.AlertDialog.Builder(SignUpActivity.this);
+        //View view = getLayoutInflater().inflate(R.layout.progress);
+        alertDialog.setView(R.layout.progress);
+        dialog = alertDialog.create();
+        dialog.show();
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+
+    }
+
+    public void hideProgressDialog(){
+        if(dialog!=null)
+            dialog.dismiss();
+    }
+
 }
