@@ -15,10 +15,8 @@ import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
-
 import android.support.design.widget.BottomSheetDialog;
 import android.support.design.widget.Snackbar;
-
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
@@ -29,7 +27,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -68,11 +65,11 @@ import java.util.UUID;
 import java.util.zip.Inflater;
 
 import czsm.github.froger.instamaterial.BuildConfig;
-import czsm.github.froger.instamaterial.ui.utils.PreferencesHelper;
-import de.hdodenhof.circleimageview.CircleImageView;
 import czsm.github.froger.instamaterial.Constants;
 import czsm.github.froger.instamaterial.R;
 import czsm.github.froger.instamaterial.ui.Models.Users;
+import czsm.github.froger.instamaterial.ui.utils.PreferencesHelper;
+import de.hdodenhof.circleimageview.CircleImageView;
 import pub.devrel.easypermissions.AppSettingsDialog;
 import pub.devrel.easypermissions.EasyPermissions;
 
@@ -80,10 +77,10 @@ import static android.content.ContentValues.TAG;
 import static android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE;
 import static czsm.github.froger.instamaterial.Utils.hideKeyboard;
 
-public class SignupActivity extends AppCompatActivity implements EasyPermissions.PermissionCallbacks {
-EditText EmailEdt,UsernameEdt,PassEdt;
-Button SignupBtn;
-TextView AccntTxt;
+public class signup extends AppCompatActivity  implements EasyPermissions.PermissionCallbacks {
+    EditText EmailEdt,UsernameEdt,PassEdt;
+    Button SignupBtn;
+    TextView AccntTxt;
     CircleImageView profileImg;
     TextView Camera,Gallery,cancel;
     ImageView GalleryIcon, GenderDropimg;
@@ -96,7 +93,6 @@ TextView AccntTxt;
     private static final int PERMISSIONS_REQUEST_CAMERA = 1888;
     private static final int PERMISSIONS_REQUEST_GALLERY = 1889;
     private static final String[] CAMERA = {Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE};
-    private String selectedImagePath = "";
     final private int RC_PICK_IMAGE = 1;
     final private int RC_CAPTURE_IMAGE = 2;
     private Uri fileUri;
@@ -104,7 +100,8 @@ TextView AccntTxt;
     String postimageurl = "";
     Uri contentURI;
     boolean isPhotoValid = false;
-    private String mCurrentPhotoPath = "empty";
+    private String mCurrentPhotoPath;
+    private String selectedImagePath = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -117,7 +114,7 @@ TextView AccntTxt;
         Signuprellay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                hideKeyboard(SignupActivity.this);
+                hideKeyboard(signup.this);
             }
         });
         SignupBtn=(Button)findViewById(R.id.signup_btn);
@@ -140,22 +137,11 @@ TextView AccntTxt;
         SignupBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                hideKeyboard(SignupActivity.this);
-
-                if (isPhotoValid) {
-
-                    createAccount(EmailEdt.getText().toString(), UsernameEdt.getText().toString(),PassEdt.getText().toString(),view);
-
-                } else {
-
-                    Toast.makeText(SignupActivity.this, "Select Profile image.", Toast.LENGTH_SHORT).show();
-
-                }
-
-
-
+                hideKeyboard(signup.this);
+                createAccount(EmailEdt.getText().toString(), UsernameEdt.getText().toString(),PassEdt.getText().toString(),view);
+//
 //                if(validateForm()){
-//                    Intent in=new Intent(SignupActivity.this,LoginScreen.class);
+//                    Intent in=new Intent(signup.this,LoginScreen.class);
 //                    startActivity(in);
 //                }
             }
@@ -171,37 +157,26 @@ TextView AccntTxt;
             }
         });
     }
-    public static ObjectAnimator createTopDownAnimation(View view, AnimatorListenerAdapter listener,
-                                                        float distance) {
-        view.setTranslationY(-distance);
-        ObjectAnimator animator = ObjectAnimator.ofFloat(view, "translationY", 0);
-        animator.removeAllListeners();
-        if (listener != null) {
-            animator.addListener(listener);
-        }
-        return animator;
-    }
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        // Forward results to EasyPermissions
-        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
-    }
 
-
+    private String getRealPathFromURI(Uri contentUri) {
+        String[] proj = {MediaStore.Images.Media.DATA};
+        CursorLoader loader = new CursorLoader(getApplicationContext(), contentUri, proj, null, null, null);
+        Cursor cursor = loader.loadInBackground();
+        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        cursor.moveToFirst();
+        String result = cursor.getString(column_index);
+        cursor.close();
+        return result;
+    }
     private void showBottomSheet() {
-
-        final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(SignupActivity.this);
+        final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this);
         LayoutInflater factory = LayoutInflater.from(this);
         View bottomSheetView = factory.inflate(R.layout.dialo_camera_bottomsheet, null);
         bottomSheetDialog.setContentView(bottomSheetView);
         bottomSheetDialog.show();
 
-        Camera = (TextView) bottomSheetView.findViewById(R.id.camera_title);
-        Gallery = (TextView) bottomSheetView.findViewById(R.id.gallery_title);
-//        GalleryIcon = (ImageView) bottomSheetView.findViewById(R.id.gallery_icon);
-//        CameraIcon = (ImageView) bottomSheetView.findViewById(R.id.camera_image);
-        cancel=(TextView) bottomSheetView.findViewById(R.id.cancel_txt);
+        Camera = (TextView)bottomSheetView.findViewById(R.id.camera_title);
+        Gallery = (TextView)bottomSheetView.findViewById(R.id.gallery_title);
         Camera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -211,7 +186,7 @@ TextView AccntTxt;
                 if (hasPermissions()) {
                     captureImage();
                 } else {
-                    EasyPermissions.requestPermissions(SignupActivity.this, "Permissions required", PERMISSIONS_REQUEST_CAMERA, CAMERA);
+                    EasyPermissions.requestPermissions(signup.this, "Permissions required", PERMISSIONS_REQUEST_CAMERA, CAMERA);
                 }
             }
         });
@@ -223,19 +198,12 @@ TextView AccntTxt;
                     Intent i = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                     startActivityForResult(i, RC_PICK_IMAGE);
                 } else {
-                    EasyPermissions.requestPermissions(SignupActivity.this, "Permissions required", PERMISSIONS_REQUEST_GALLERY, CAMERA);
+                    EasyPermissions.requestPermissions(signup.this, "Permissions required", PERMISSIONS_REQUEST_GALLERY, CAMERA);
                 }
+
                 bottomSheetDialog.dismiss();
             }
         });
-        cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                bottomSheetDialog.dismiss();
-            }
-        });
-
-
     }
 
     @Override
@@ -244,7 +212,7 @@ TextView AccntTxt;
         switch (requestCode){
 
             case PERMISSIONS_REQUEST_GALLERY:
-                if(perms.contains(Manifest.permission.WRITE_EXTERNAL_STORAGE)&&perms.contains(Manifest.permission.READ_EXTERNAL_STORAGE)) {
+                if(perms.contains(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)&&perms.contains(android.Manifest.permission.READ_EXTERNAL_STORAGE)) {
                     Intent i = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                     startActivityForResult(i, RC_PICK_IMAGE);
                 }
@@ -279,7 +247,6 @@ TextView AccntTxt;
         return EasyPermissions.hasPermissions(this, CAMERA);
     }
 
-
     private void captureImage() {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         fileUri = getOutputMediaFileUri(1);
@@ -288,7 +255,7 @@ TextView AccntTxt;
     }
 
     public Uri getOutputMediaFileUri(int type) {
-        return FileProvider.getUriForFile(SignupActivity.this,
+        return FileProvider.getUriForFile(getApplicationContext(),
                 BuildConfig.APPLICATION_ID + ".provider",
                 getOutputMediaFile(type));
     }
@@ -319,7 +286,6 @@ TextView AccntTxt;
         }
         // Save a file: path for use with ACTION_VIEW intents
         mCurrentPhotoPath = "file:" + mediaFile.getAbsolutePath();
-        isPhotoValid = true;
 
         return mediaFile;
     }
@@ -332,7 +298,7 @@ TextView AccntTxt;
         if (resultCode != Activity.RESULT_CANCELED) {
             if (requestCode == RC_PICK_IMAGE) {
                 if (data != null) {
-                     contentURI = data.getData();
+                    Uri contentURI = data.getData();
                     try {
                         Bitmap bitmap = MediaStore.Images.Media.getBitmap(getApplicationContext().getContentResolver(), contentURI);
                         profileImg.setImageBitmap(bitmap);
@@ -347,8 +313,7 @@ TextView AccntTxt;
             } else if (requestCode == RC_CAPTURE_IMAGE) {
                 // Show the thumbnail on ImageView
 //                showProgressDialog();
-                 imageUri = Uri.parse(mCurrentPhotoPath);
-                isPhotoValid = true;
+                Uri imageUri = Uri.parse(mCurrentPhotoPath);
                 File file = new File(imageUri.getPath());
                 try {
                     InputStream ims = new FileInputStream(file);
@@ -375,25 +340,62 @@ TextView AccntTxt;
         }
     }
 
-    private String getRealPathFromURI(Uri contentUri) {
-        String[] proj = {MediaStore.Images.Media.DATA};
-        CursorLoader loader = new CursorLoader(getApplicationContext(), contentUri, proj, null, null, null);
-        Cursor cursor = loader.loadInBackground();
-        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-        cursor.moveToFirst();
-        String result = cursor.getString(column_index);
-        cursor.close();
-        return result;
+
+
+    private boolean validateForm() {
+        boolean valid = true;
+
+        String email = EmailEdt.getText().toString();
+        String username = UsernameEdt.getText().toString();
+        String password = PassEdt.getText().toString();
+        if (!TextUtils.isEmpty(email) && !TextUtils.isEmpty(password) && isPhotoValid) {
+
+            valid = true;
+
+        } else {
+
+            if(TextUtils.isEmpty(email) && TextUtils.isEmpty(password)) {
+                Toast.makeText(this, "Enter email address and password.", Toast.LENGTH_SHORT).show();
+                valid = false;
+            }
+            else if((email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()))
+            {
+                Toast.makeText(getApplicationContext(), "enter a valid email address", Toast.LENGTH_SHORT).show();
+//            mEmail.setError("enter a valid email address");
+                valid = false;
+            }else if (username.isEmpty()&&username.equals(null)) {
+                Toast.makeText(this, "Enter username.", Toast.LENGTH_SHORT).show();
+                valid = false;
+            }
+            else if (TextUtils.isEmpty(password) || password.length()<4) {
+                Toast.makeText(this, "Enter password.", Toast.LENGTH_SHORT).show();
+                valid = false;
+            }
+            else if (!isPhotoValid) {
+                Toast.makeText(this, "" +
+                        "please fill the image", Toast.LENGTH_SHORT).show();
+                valid = false;
+            }
+
+            else {
+                Toast.makeText(this, "Enter email address.", Toast.LENGTH_SHORT).show();
+                valid = false;
+            }
+
+
+        }
+
+        return valid;
     }
     private void createAccount(final String email, final String username, final String password,final  View view) {
 
         if (!validateForm()) {
             return;
         }
-showProgressDialog();
+        showProgressDialog();
         // [START create_user_with_email]
         mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(SignupActivity.this, new OnCompleteListener<AuthResult>() {
+                .addOnCompleteListener(signup.this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
@@ -402,13 +404,13 @@ showProgressDialog();
                                     .addOnCompleteListener(new OnCompleteListener<GetTokenResult>() {
                                         public void onComplete(@NonNull Task<GetTokenResult> task) {
                                             if (task.isSuccessful()) {
-//                                                Intent in=new Intent(SignupActivity.this,LoginScreen.class);
-//                                                startActivity(in);
+                                                Intent in=new Intent(signup.this,LoginScreen.class);
+                                                startActivity(in);
                                                 final FirebaseUser user = mAuth.getCurrentUser();
                                                 Log.e("user", String.valueOf(user));
 //                                                AddDatabase(user,view);
-                                                    uploadImage(view);
-                                        hideProgressDialog();
+                                                uploadImage(view);
+                                                hideProgressDialog();
                                                 // Sign in success, update UI with the signed-in user's information
                                             }
                                         }
@@ -416,9 +418,9 @@ showProgressDialog();
 
 
                         }else{
-                                Toast.makeText(getApplicationContext(), "Registration failed! " + "\n" + task.getException().getMessage(), Toast.LENGTH_LONG).show();
-                                hideProgressDialog();
-                                // If sign in fails, display a message to the user.
+                            Toast.makeText(getApplicationContext(), "Registration failed! " + "\n" + task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                            hideProgressDialog();
+                            // If sign in fails, display a message to the user.
 
 
 
@@ -430,7 +432,7 @@ showProgressDialog();
                 });
 
     }
-    public String uploadImage(final View view) {
+    public void uploadImage(final View view) {
 
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageRef = storage.getReference();
@@ -459,7 +461,7 @@ showProgressDialog();
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                             progressDialog.dismiss();
-                            Toast.makeText(SignupActivity.this, "Uploaded", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(signup.this, "Uploaded", Toast.LENGTH_SHORT).show();
                             postimageurl = taskSnapshot.getDownloadUrl().toString();
 
 //                            String caption =  edt_description.getText().toString();
@@ -483,7 +485,7 @@ showProgressDialog();
                         @Override
                         public void onFailure(@NonNull Exception e) {
                             progressDialog.dismiss();
-                            Toast.makeText(SignupActivity.this, "Failed "+e.getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(signup.this, "Failed "+e.getMessage(), Toast.LENGTH_SHORT).show();
                             postimageurl = "failed";
                         }
                     })
@@ -497,18 +499,29 @@ showProgressDialog();
                     });
         } else {
 
-            return "empty";
+            return;
 
         }
 
-        return "empty";
+        return;
 
+    }
+
+    public static ObjectAnimator createTopDownAnimation(View view, AnimatorListenerAdapter listener,
+                                                        float distance) {
+        view.setTranslationY(-distance);
+        ObjectAnimator animator = ObjectAnimator.ofFloat(view, "translationY", 0);
+        animator.removeAllListeners();
+        if (listener != null) {
+            animator.addListener(listener);
+        }
+        return animator;
     }
 
     public void showProgressDialog() {
 
 
-        android.support.v7.app.AlertDialog.Builder alertDialog = new android.support.v7.app.AlertDialog.Builder(SignupActivity.this);
+        android.support.v7.app.AlertDialog.Builder alertDialog = new android.support.v7.app.AlertDialog.Builder(signup.this);
         //View view = getLayoutInflater().inflate(R.layout.progress);
         alertDialog.setView(R.layout.progress);
         dialog = alertDialog.create();
@@ -522,54 +535,6 @@ showProgressDialog();
             dialog.dismiss();
     }
 
-    //    public void startSlideDownAnimation(View view) {
-//        AccntTxt.startAnimation(slideDownAnimation);
-//    }
-    public boolean validateForm() {
-        boolean valid = true;
-
-        String email = EmailEdt.getText().toString();
-        String username = UsernameEdt.getText().toString();
-        String password = PassEdt.getText().toString();
-        Toast.makeText(this, ""+isPhotoValid, Toast.LENGTH_SHORT).show();
-        Log.e("Dsdsd",""+isPhotoValid);
-
-        if (!TextUtils.isEmpty(email) && !TextUtils.isEmpty(password) && !TextUtils.isEmpty(mCurrentPhotoPath) && isPhotoValid) {
-
-            valid = true;
-
-        } else {
-
-            if(TextUtils.isEmpty(email) && TextUtils.isEmpty(password)) {
-                Toast.makeText(this, "Enter email address and password.", Toast.LENGTH_SHORT).show();
-                valid = false;
-            }
-            else if((email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()))
-            {
-                Toast.makeText(getApplicationContext(), "enter a valid email address", Toast.LENGTH_SHORT).show();
-//            mEmail.setError("enter a valid email address");
-                valid = false;
-            }else if (username.isEmpty()&&username.equals(null)) {
-                Toast.makeText(this, "Enter username.", Toast.LENGTH_SHORT).show();
-                valid = false;
-            }
-            else if (TextUtils.isEmpty(password) || password.length()<4) {
-                Toast.makeText(this, "Enter password.", Toast.LENGTH_SHORT).show();
-                valid = false;
-            }
-            else if (!isPhotoValid) {
-                Toast.makeText(this, "Select Profile image.", Toast.LENGTH_SHORT).show();
-                valid = false;
-            } else {
-                Toast.makeText(this, "Enter email address.", Toast.LENGTH_SHORT).show();
-                valid = false;
-            }
-
-
-        }
-
-        return valid;
-    }
     private void AddDatabase(final FirebaseUser user, final View view){
 
 
@@ -594,7 +559,7 @@ showProgressDialog();
                     PreferencesHelper.setPreference(getApplicationContext(), PreferencesHelper.PREFERENCE_PROFILE_PIC, String.valueOf(postimageurl));
                     PreferencesHelper.setPreference(getApplicationContext(), PreferencesHelper.PREFERENCE_FIREBASE_UUID, user.getUid());
 
-                    final Intent intent = new Intent(SignupActivity.this, LoginScreen.class);
+                    final Intent intent = new Intent(signup.this, LoginScreen.class);
                     startActivity(intent);
                     overridePendingTransition(0, 0);
 
@@ -613,7 +578,7 @@ showProgressDialog();
 
                             });
 
-                    final Intent intent = new Intent(SignupActivity.this, LoginScreen.class);
+                    final Intent intent = new Intent(signup.this, LoginScreen.class);
                     startActivity(intent);
                     overridePendingTransition(0, 0);
 

@@ -75,10 +75,9 @@ import pub.devrel.easypermissions.EasyPermissions;
 
 import static android.content.ContentValues.TAG;
 import static android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE;
-import static com.facebook.FacebookSdk.getApplicationContext;
 import static czsm.github.froger.instamaterial.Utils.hideKeyboard;
 
-public class SignupScreenActivity extends AppCompatActivity implements EasyPermissions.PermissionCallbacks {
+public class SignupScreenActivity extends AppCompatActivity  implements EasyPermissions.PermissionCallbacks {
     EditText EmailEdt,UsernameEdt,PassEdt;
     Button SignupBtn;
     TextView AccntTxt;
@@ -143,7 +142,7 @@ public class SignupScreenActivity extends AppCompatActivity implements EasyPermi
                 createAccount(EmailEdt.getText().toString(), UsernameEdt.getText().toString(),PassEdt.getText().toString(),view);
 
 //                if(validateForm()){
-//                    Intent in=new Intent(SignupActivity.this,LoginScreen.class);
+//                    Intent in=new Intent(SignupScreenActivity.this,LoginScreen.class);
 //                    startActivity(in);
 //                }
             }
@@ -401,7 +400,7 @@ public class SignupScreenActivity extends AppCompatActivity implements EasyPermi
 
     }
 
-    public String uploadImage(final View view) {
+    public void uploadImage(final View view) {
 
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageRef = storage.getReference();
@@ -468,11 +467,11 @@ public class SignupScreenActivity extends AppCompatActivity implements EasyPermi
                     });
         } else {
 
-            return "empty";
+            return ;
 
         }
 
-        return "empty";
+        return ;
 
     }
 
