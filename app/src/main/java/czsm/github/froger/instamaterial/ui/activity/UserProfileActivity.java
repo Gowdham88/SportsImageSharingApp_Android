@@ -374,12 +374,14 @@ public class UserProfileActivity extends AppCompatActivity implements RevealBack
            vUserProfileRoot.setTranslationY(-vUserProfileRoot.getHeight());
            ivUserProfilePhoto.setTranslationY(-ivUserProfilePhoto.getHeight());
            vUserDetails.setTranslationY(-vUserDetails.getHeight());
-           vUserStats.setAlpha(0);
+           vUserStats.setTranslationY(-vUserStats.getHeight());
 
            vUserProfileRoot.animate().translationY(0).setDuration(300).setInterpolator(INTERPOLATOR);
-           ivUserProfilePhoto.animate().translationY(0).setDuration(300).setStartDelay(100).setInterpolator(INTERPOLATOR);
+           vUserStats.animate().translationY(0).setDuration(300).setStartDelay(100).setInterpolator(INTERPOLATOR);;
            vUserDetails.animate().translationY(0).setDuration(300).setStartDelay(200).setInterpolator(INTERPOLATOR);
-           vUserStats.animate().alpha(1).setDuration(200).setStartDelay(400).setInterpolator(INTERPOLATOR).start();
+           ivUserProfilePhoto.animate().translationY(0).setDuration(300).setStartDelay(300).setInterpolator(INTERPOLATOR);
+
+
     }
 
     @Override
