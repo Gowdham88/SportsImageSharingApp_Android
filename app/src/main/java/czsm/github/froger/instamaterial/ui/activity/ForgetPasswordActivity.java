@@ -8,14 +8,19 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -31,6 +36,7 @@ public class ForgetPasswordActivity extends AppCompatActivity {
     EditText emailEdit;
     Button resetBtn;
     LinearLayout LinLay;
+    TextView txt_error;
     private android.support.v7.app.AlertDialog dialog;
 
     @Override
@@ -40,6 +46,7 @@ public class ForgetPasswordActivity extends AppCompatActivity {
         emailEdit=(EditText)findViewById(R.id.email_edit);
         backBtn=(ImageView)findViewById(R.id.btn_back);
         resetBtn=(Button)findViewById(R.id.sinin_edt);
+        txt_error = (TextView)findViewById(R.id.txt_error);
         LinLay=(LinearLayout)findViewById(R.id.const_lay);
 
         resetBtn.setOnClickListener(new View.OnClickListener() {
@@ -47,9 +54,9 @@ public class ForgetPasswordActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 String emailAddress = emailEdit.getText().toString();
-                if (emailAddress.isEmpty()||!emailAddress.contains("@")) {
-
-                    Toast.makeText(ForgetPasswordActivity.this, "invalid email address", Toast.LENGTH_SHORT).show();
+             if (emailAddress.isEmpty()||!emailAddress.contains("@")) {
+                 showerror("invalid email address");
+//                    Toast.makeText(ForgetPasswordActivity.this, "invalid email address", Toast.LENGTH_SHORT).show();
 
                 } else {
                     showProgressDialog();
@@ -80,6 +87,7 @@ public class ForgetPasswordActivity extends AppCompatActivity {
                 Utils.hideKeyboard(ForgetPasswordActivity.this);
             }
         });
+        hideerror();
         resetBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -94,6 +102,7 @@ public class ForgetPasswordActivity extends AppCompatActivity {
 
             }
         });
+
     }
 
     public void showProgressDialog() {
@@ -149,4 +158,17 @@ public class ForgetPasswordActivity extends AppCompatActivity {
         alertDialog1.getWindow().setAttributes(lp);
     }
 
+    public void showerror(String error) {
+
+        txt_error.setText(error);
+//        final Animation animShake = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.anim_shake);
+//        txt_error.startAnimation(animShake);
+        txt_error.setVisibility(View.VISIBLE);
+
+    }
+
+    public void hideerror(){
+
+        txt_error.setVisibility(View.GONE);
+    }
 }

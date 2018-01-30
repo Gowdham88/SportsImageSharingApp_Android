@@ -86,7 +86,7 @@ public class SignUpActivity extends AppCompatActivity implements EasyPermissions
     CircleImageView profileImg;
     TextView Camera,Gallery,cancel;
     LinearLayout cancelLay;
-    ImageView GalleryIcon, GenderDropimg;
+    ImageView GalleryIcon, GenderDropimg,editicon;
     ImageView CameraIcon;
     Inflater inflater;
     RelativeLayout Signuprellay;
@@ -122,7 +122,8 @@ public class SignUpActivity extends AppCompatActivity implements EasyPermissions
         });
         SignupBtn=(Button)findViewById(R.id.signup_btn);
         profileImg=(CircleImageView)findViewById(R.id.image_view);
-        profileImg.setOnClickListener(new View.OnClickListener() {
+        editicon=(ImageView) findViewById(R.id.imageView_profile_edit);
+        editicon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showBottomSheet();
@@ -419,6 +420,8 @@ public class SignUpActivity extends AppCompatActivity implements EasyPermissions
 
         Camera = (TextView)bottomSheetView.findViewById(R.id.camera_title);
         Gallery = (TextView)bottomSheetView.findViewById(R.id.gallery_title);
+        cancel = (TextView)bottomSheetView.findViewById(R.id.cancel_txt);
+        cancelLay = (LinearLayout) bottomSheetView.findViewById(R.id.cance_lay);
         Camera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -443,6 +446,18 @@ public class SignUpActivity extends AppCompatActivity implements EasyPermissions
                     EasyPermissions.requestPermissions(SignUpActivity.this, "Permissions required", PERMISSIONS_REQUEST_GALLERY, CAMERA);
                 }
 
+                bottomSheetDialog.dismiss();
+            }
+        });
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                bottomSheetDialog.dismiss();
+            }
+        });
+        cancelLay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
                 bottomSheetDialog.dismiss();
             }
         });
