@@ -5,7 +5,7 @@
     android:background="@android:color/black"
     android:orientation="vertical">
 
-    <czsm.github.froger.instamaterial.ui.utils.TouchImageView
+    <SarvodayaHBandroid.ui.utils.TouchImageView
         android:id="@+id/popup_image"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

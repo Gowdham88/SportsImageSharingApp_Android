@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <czsm.github.froger.instamaterial.ui.view.RevealBackgroundView
+    <com.cz.SarvodayaHBandroid.ui.view.RevealBackgroundView
         android:id="@+id/vRevealBackground1"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

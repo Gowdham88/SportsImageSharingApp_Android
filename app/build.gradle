@@ -6,7 +6,7 @@ android {
     buildToolsVersion '27.0.1'
 
     defaultConfig {
-        applicationId "io.github.froger.instamaterial"
+        applicationId "com.cz.SarvodayaHBandroid"
         minSdkVersion 15
         targetSdkVersion 25
         versionCode 2
