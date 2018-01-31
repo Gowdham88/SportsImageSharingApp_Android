@@ -246,12 +246,22 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
             if (this.postItem.getUid().equals(PreferencesHelper.getPreference(context, PreferencesHelper.PREFERENCE_FIREBASE_UUID))) {
 
+<<<<<<< HEAD:app/src/main/java/czsm/github/froger/instamaterial/ui/adapter/FeedAdapter.java
+                    vUsername.setText(PreferencesHelper.getPreference(context,PreferencesHelper.PREFERENCE_EMAIL));
+                    btnMore.setVisibility(View.VISIBLE);
+=======
                 vUsername.setText(PreferencesHelper.getPreference(context, PreferencesHelper.PREFERENCE_EMAIL));
                 btnMore.setVisibility(View.VISIBLE);
+>>>>>>> 677a05ef58e552cb015bf56a9f7e15500bb0f488:app/src/main/java/com/cz/SarvodayaHBandroid/ui/adapter/FeedAdapter.java
 
             } else {
 
                 btnMore.setVisibility(View.GONE);
+<<<<<<< HEAD:app/src/main/java/czsm/github/froger/instamaterial/ui/adapter/FeedAdapter.java
+
+                if(this.postItem.getuserName() != null) {
+=======
+>>>>>>> 677a05ef58e552cb015bf56a9f7e15500bb0f488:app/src/main/java/com/cz/SarvodayaHBandroid/ui/adapter/FeedAdapter.java
 
                 if(this.postItem.getUserName()!= null) {
 
@@ -262,9 +272,15 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             }
 
 
+<<<<<<< HEAD:app/src/main/java/czsm/github/froger/instamaterial/ui/adapter/FeedAdapter.java
+            if(!this.postItem.getPostimage().equals("failed")) {
+
+                Picasso.with(context).load(this.postItem.getPostimage()).fit().centerInside()
+=======
             if(!this.postItem.getPhotoURL().equals("failed")) {
 
                 Picasso.with(context).load(this.postItem.getPhotoURL()).fit().centerInside()
+>>>>>>> 677a05ef58e552cb015bf56a9f7e15500bb0f488:app/src/main/java/com/cz/SarvodayaHBandroid/ui/adapter/FeedAdapter.java
                         .into(ivFeedCenter);
             }
 
@@ -283,8 +299,6 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                             btnLike.setImageResource(R.drawable.ic_heart_outline_grey);
 
                         }
-
-
 
                     } else {
 

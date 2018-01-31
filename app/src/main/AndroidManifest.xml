@@ -111,6 +111,16 @@
         <activity
             android:name=".ui.activity.SignupScreenActivity"
             android:screenOrientation="portrait" />
+<<<<<<< HEAD
+        <activity
+            android:name=".ui.activity.signup"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.SignUpActivity"
+            android:screenOrientation="portrait" />
+
+=======
+>>>>>>> 677a05ef58e552cb015bf56a9f7e15500bb0f488
         <activity android:name=".ui.activity.InfoActivity"
             android:screenOrientation="portrait"/>
     </application>
