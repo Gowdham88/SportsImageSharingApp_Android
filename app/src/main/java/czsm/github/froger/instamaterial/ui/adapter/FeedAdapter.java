@@ -255,8 +255,11 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             if (this.postItem.getUid().equals(PreferencesHelper.getPreference(context,PreferencesHelper.PREFERENCE_FIREBASE_UUID))) {
 
                     vUsername.setText(PreferencesHelper.getPreference(context,PreferencesHelper.PREFERENCE_EMAIL));
+                    btnMore.setVisibility(View.VISIBLE);
 
             } else {
+
+                btnMore.setVisibility(View.GONE);
 
                 if(this.postItem.getuserName() != null) {
 
@@ -265,7 +268,6 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 }
 
             }
-
 
 
             if(!this.postItem.getPostimage().equals("failed")) {
@@ -289,8 +291,6 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                             btnLike.setImageResource(R.drawable.ic_heart_outline_grey);
 
                         }
-
-
 
                     } else {
 
