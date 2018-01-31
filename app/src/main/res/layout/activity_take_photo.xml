@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <czsm.github.froger.instamaterial.ui.view.RevealBackgroundView
+    <SarvodayaHBandroid.github.froger.instamaterial.ui.view.RevealBackgroundView
         android:id="@+id/vRevealBackground"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
@@ -108,7 +108,7 @@
 
         </ViewSwitcher>
 
-        <czsm.github.froger.instamaterial.ui.view.SquaredFrameLayout
+        <SarvodayaHBandroid.github.froger.instamaterial.ui.view.SquaredFrameLayout
             android:id="@+id/vPhotoRoot"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -133,7 +133,7 @@
                 android:layout_height="match_parent"
                 android:background="#ffffff"
                 android:visibility="gone" />
-        </czsm.github.froger.instamaterial.ui.view.SquaredFrameLayout>
+        </SarvodayaHBandroid.github.froger.instamaterial.ui.view.SquaredFrameLayout>
 
         <ViewSwitcher
             android:id="@+id/vLowerPanel"
