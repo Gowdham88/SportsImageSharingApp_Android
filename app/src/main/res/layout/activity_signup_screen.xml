@@ -1,18 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/signuprel_lay"
     android:background="#34495E">
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/image_view"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
-        android:src="@drawable/signupprofile" />
+    <RelativeLayout
+        android:id="@+id/editrel_lay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="12dp"
+        >
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profile_image"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="40dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/signupprofile" />
+
+        <ImageView
+            android:id="@+id/imageView_profile_edit"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginTop="110dp"
+            android:layout_alignEnd="@+id/profile_image"
+            android:layout_alignRight="@+id/profile_image"
+            app:srcCompat="@drawable/pencil_white" />
+    </RelativeLayout>
     <LinearLayout
         android:id="@+id/user_lay"
         android:layout_width="match_parent"
@@ -21,7 +39,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
-        android:layout_below="@+id/image_view">
+        android:layout_below="@+id/editrel_lay">
 
         <EditText
             android:id="@+id/username_edit"

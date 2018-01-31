@@ -49,7 +49,7 @@
 
     </LinearLayout>
 
-        <czsm.github.froger.instamaterial.ui.view.SquaredFrameLayout
+        <com.cz.SarvodayaHBandroid.ui.view.SquaredFrameLayout
             android:id="@+id/vImageRoot"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -75,7 +75,7 @@
                 android:scaleType="center"
                 android:visibility="visible" />
 
-        </czsm.github.froger.instamaterial.ui.view.SquaredFrameLayout>
+        </com.cz.SarvodayaHBandroid.ui.view.SquaredFrameLayout>
 
         <TextView
             android:id="@+id/ivFeedBottom"

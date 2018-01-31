@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="czsm.github.froger.instamaterial">
+    package="com.cz.SarvodayaHBandroid">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
@@ -25,7 +25,7 @@
 
     <application
         android:name=".MyApplication"
-        android:icon="@drawable/logoicon"
+        android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:largeHeap="true"
         android:theme="@style/AppTheme">
@@ -110,15 +110,6 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activity.SignupScreenActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".ui.activity.signup"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".ui.activity.SignUpActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".ui.activity.ProfileActivity"
             android:screenOrientation="portrait" />
         <activity android:name=".ui.activity.InfoActivity"
             android:screenOrientation="portrait"/>

@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="czsm.github.froger.instamaterial.ui.activity.InfoActivity">
+    tools:context="SarvodayaHBandroid.github.froger.instamaterial.SarvodayaHBandroid.github.froger.instamaterial.ui.activity.InfoActivity">
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
@@ -44,7 +44,7 @@
     <TextView
         android:layout_below="@+id/scrl"
         android:id="@+id/power_txt"
-        android:text="powered by CZSmartMobility"
+        android:text="powered by CZSmart Mobility"
         android:gravity="center"
         android:layout_alignParentBottom="true"
         android:textColor="@color/style_color_primary"
