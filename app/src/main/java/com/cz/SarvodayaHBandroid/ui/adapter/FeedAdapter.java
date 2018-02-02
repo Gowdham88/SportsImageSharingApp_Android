@@ -1,5 +1,6 @@
 package com.cz.SarvodayaHBandroid.ui.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.LinearLayoutCompat;
@@ -276,11 +277,11 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
                         if (isLiked) {
 
-                            btnLike.setImageResource(R.drawable.ic_heart_red);
+                            btnLike.setImageResource(R.drawable.likeselected);
 
                         } else  {
 
-                            btnLike.setImageResource(R.drawable.ic_heart_outline_grey);
+                            btnLike.setImageResource(R.drawable.like);
 
                         }
 
@@ -288,7 +289,7 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
                     } else {
 
-                        btnLike.setImageResource(R.drawable.ic_heart_outline_grey);
+                        btnLike.setImageResource(R.drawable.like);
                     }
 
 
@@ -313,6 +314,7 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 Intent intent=new Intent(context, ImageDetailActivity.class);
                 intent.putExtra("imagepath",Profileimg.toString());
                 context.startActivity(intent);
+//                ((Activity) context).overridePendingTransition(R.anim.slide_up, R.anim.stay);
             }
             else{
                 Toast.makeText(context, "server error", Toast.LENGTH_SHORT).show();

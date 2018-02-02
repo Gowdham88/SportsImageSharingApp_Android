@@ -123,7 +123,7 @@ public class MainActivity extends AppCompatActivity implements FeedAdapter.OnFee
     DocumentSnapshot lastVisible = null;
     private int visibleThreshold = 1;
     private boolean isLoading=false;
-
+    ImageView infoimg;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -131,12 +131,21 @@ public class MainActivity extends AppCompatActivity implements FeedAdapter.OnFee
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
         backarrow.setVisibility(View.GONE);
+        infoimg=(ImageView)findViewById(R.id.info_image);
+        infoimg.setVisibility(View.VISIBLE);
+        infoimg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent infointent=new Intent(MainActivity.this,InfoActivity.class);
+                startActivity(infointent);
+            }
+        });
         loadPost(ACTION_SHOW_DEFAULT_ITEM);
-
         if (savedInstanceState == null) {
             pendingIntroAnimation = true;
-        } else {
-            feedAdapter.updateItems(false);
+        }
+        else {
+//            feedAdapter.updateItems(false);
         }
 
         final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext()) {
@@ -469,6 +478,7 @@ public class MainActivity extends AppCompatActivity implements FeedAdapter.OnFee
     public void onActivityResult(int requestCode, int resultCode,
                                  Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
         if (resultCode != Activity.RESULT_CANCELED) {
             if (requestCode == RC_PICK_IMAGE) {
                 if (data != null) {
@@ -856,7 +866,8 @@ public class MainActivity extends AppCompatActivity implements FeedAdapter.OnFee
     }
     @Override
     public void onBackPressed() {
-        MainActivity.this.finish();
+        finish();
+
     }
 
 }

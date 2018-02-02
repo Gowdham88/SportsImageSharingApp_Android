@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/onboard"
+   >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="#80000000">
+                <TextView
+                    android:id="@+id/textView_info"
+                    style="@style/FontAvenirBlack"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:textColor="@android:color/white"
+                    android:textSize="22dp"
+                    android:textStyle="bold"
+                    android:text="@string/onboard_text"
+                    android:layout_above="@+id/button_letme"
+                    app:layout_constraintBottom_toTopOf="@+id/button_letme"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    tools:ignore="MissingPrefix" />
+        <Button
+            android:id="@+id/button_letme"
+            style="@style/okbutton"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/style_color_primary"
+            android:onClick="showAlert"
+            android:textStyle="bold"
+            android:text="Lets get started!"
+            android:layout_alignParentBottom="true"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            />
+
+        </RelativeLayout>
+</android.support.constraint.ConstraintLayout>
+

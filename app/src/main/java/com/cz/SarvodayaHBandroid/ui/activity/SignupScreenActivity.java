@@ -22,11 +22,15 @@ import android.support.v4.content.CursorLoader;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.telecom.Call;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.Animation;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -80,7 +84,7 @@ import static android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE;
 
 public class SignupScreenActivity extends AppCompatActivity  implements EasyPermissions.PermissionCallbacks {
     EditText EmailEdt,UsernameEdt,PassEdt;
-    Button SignupBtn;
+    Button SignupBtn,signupfil;
     TextView AccntTxt;
     LinearLayout cancelLay;
     CircleImageView profileImg;
@@ -121,8 +125,16 @@ public class SignupScreenActivity extends AppCompatActivity  implements EasyPerm
             }
         });
         SignupBtn=(Button)findViewById(R.id.signup_btn);
+        signupfil=(Button)findViewById(R.id.signup_btn1);
+        EmailEdt.addTextChangedListener(mTextWatcher);
+        UsernameEdt.addTextChangedListener(mTextWatcher);
+        PassEdt.addTextChangedListener(mTextWatcher);
+        checkFieldsForEmptyValues();
         profileImg=(CircleImageView)findViewById(R.id.profile_image);
         editicon=(ImageView) findViewById(R.id.imageView_profile_edit);
+        EmailEdt.setInputType(EmailEdt.getInputType()
+                | EditorInfo.TYPE_TEXT_FLAG_NO_SUGGESTIONS
+                | EditorInfo.TYPE_TEXT_VARIATION_FILTER);
         editicon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -156,16 +168,36 @@ public class SignupScreenActivity extends AppCompatActivity  implements EasyPerm
 //                }
             }
         });
+        signupfil.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Utils.hideKeyboard(SignupScreenActivity.this);
+                createAccount(EmailEdt.getText().toString(), UsernameEdt.getText().toString(),PassEdt.getText().toString(),view);
+
+//                if(validateForm()){
+//                    Intent in=new Intent(SignupScreenActivity.this,LoginScreen.class);
+//                    startActivity(in);
+//                }
+            }
+        });
         AccntTxt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                Intent intent = new Intent(getApplicationContext(),LoginScreen.class);
+                Intent intent = new Intent(SignupScreenActivity.this,LoginScreen.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
+                overridePendingTransition(R.anim.enter_from_left, R.anim.exit_to_righ);
+                finish();
 
             }
         });
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        // Forward results to EasyPermissions
+        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
     }
 
     private void showBottomSheet() {
@@ -585,9 +617,22 @@ public class SignupScreenActivity extends AppCompatActivity  implements EasyPerm
                     PreferencesHelper.setPreference(getApplicationContext(), PreferencesHelper.PREFERENCE_PROFILE_PIC, String.valueOf(postimageurl));
                     PreferencesHelper.setPreference(getApplicationContext(), PreferencesHelper.PREFERENCE_FIREBASE_UUID, user.getUid());
 
-                    final Intent intent = new Intent(SignupScreenActivity.this, MainActivity.class);
-                    startActivity(intent);
-                    overridePendingTransition(0, 0);
+                    if (PreferencesHelper.getPreferenceBoolean(SignupScreenActivity.this,PreferencesHelper.PREFERENCE_FIRST_TIME)){
+
+                        Intent mainIntent = new Intent(SignupScreenActivity.this, MainActivity.class);
+                        startActivity(mainIntent);
+                        finish();
+
+                    } else {
+
+                        Intent mainIntent = new Intent(SignupScreenActivity.this,OnBoardingActivity.class);
+                        startActivity(mainIntent);
+                        finish();
+
+                    }
+//                    final Intent intent = new Intent(SignupScreenActivity.this, MainActivity.class);
+//                    startActivity(intent);
+//                    overridePendingTransition(0, 0);
 
                 } else {
 
@@ -607,9 +652,23 @@ public class SignupScreenActivity extends AppCompatActivity  implements EasyPerm
 
                             });
 
-                    final Intent intent = new Intent(SignupScreenActivity.this, MainActivity.class);
-                    startActivity(intent);
-                    overridePendingTransition(0, 0);
+                    if (PreferencesHelper.getPreferenceBoolean(SignupScreenActivity.this,PreferencesHelper.PREFERENCE_FIRST_TIME)){
+
+                        Intent mainIntent = new Intent(SignupScreenActivity.this, MainActivity.class);
+                        startActivity(mainIntent);
+                        finish();
+
+                    } else {
+
+                        Intent mainIntent = new Intent(SignupScreenActivity.this,OnBoardingActivity.class);
+                        startActivity(mainIntent);
+                        finish();
+
+                    }
+
+//                    final Intent intent = new Intent(SignupScreenActivity.this, MainActivity.class);
+//                    startActivity(intent);
+//                    overridePendingTransition(0, 0);
 
                     PreferencesHelper.setPreferenceBoolean(getApplicationContext(), PreferencesHelper.PREFERENCE_LOGGED_IN,true);
                     PreferencesHelper.setPreference(getApplicationContext(), PreferencesHelper.PREFERENCE_EMAIL,UsernameEdt.getText().toString());
@@ -630,5 +689,36 @@ public class SignupScreenActivity extends AppCompatActivity  implements EasyPerm
 
 
     }
+    private void checkFieldsForEmptyValues() {
+        if ((TextUtils.isEmpty(EmailEdt.getText()))
+                || (TextUtils.isEmpty(UsernameEdt.getText())||(TextUtils.isEmpty(PassEdt.getText())))){
+            SignupBtn.setVisibility(View.VISIBLE);
+            SignupBtn.setEnabled(false);
+            signupfil.setVisibility(View.GONE);
+
+        }
+        else{
+            signupfil.setVisibility(View.VISIBLE);
+            SignupBtn.setVisibility(View.GONE);
+        }
+
+    }
+
+    private TextWatcher mTextWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+        }
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+        }
+
+        @Override
+        public void afterTextChanged(Editable editable) {
+            // check Fields For Empty Values
+            checkFieldsForEmptyValues();
+        }
+    };
+
     }
 

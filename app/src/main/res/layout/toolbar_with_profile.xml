@@ -23,29 +23,17 @@
             android:src="@drawable/ic_arrow_back_white_24dp"/>
 
         <TextView
-            style="@style/FontAvenirMedium"
+            style="@style/FontAvenirBook"
             android:id="@+id/toolbar_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:text="User Profile"
-            android:textStyle="bold"
             android:gravity="center"
             android:textColor="#ffffff"
-            android:textSize="16dp"/>
+            android:textSize="17dp"/>
 
 
-        <ImageView
-            android:visibility="gone"
-            android:id="@+id/info_image"
-            android:layout_width="30dp"
-            android:layout_height="25dp"
-            android:layout_alignTop="@+id/logout_image"
-            android:layout_marginEnd="19dp"
-            android:layout_marginRight="19dp"
-            android:layout_toLeftOf="@+id/logout_image"
-            android:layout_toStartOf="@+id/logout_image"
-            android:src="@drawable/info" />
 
         <TextView
             style="@style/FontAvenirMedium"

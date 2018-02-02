@@ -20,7 +20,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.cz.SarvodayaHBandroid.ui.Models.Comment;
 import com.cz.SarvodayaHBandroid.ui.Models.Post;
+import com.cz.SarvodayaHBandroid.ui.adapter.CommentsAdapter;
 import com.cz.SarvodayaHBandroid.ui.adapter.FeedAdapter;
 import com.cz.SarvodayaHBandroid.ui.adapter.FeedItemAnimator;
 import com.cz.SarvodayaHBandroid.ui.utils.CircleTransformation;
@@ -41,6 +43,8 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -101,7 +105,7 @@ public class ProfileActivity extends AppCompatActivity implements RevealBackgrou
     String userId;
     String userName;
     String userProfile;
-    ImageView infoimg;
+
     private FirebaseAuth mAuth;
 //    private UserProfileAdapter userPhotosAdapter;
 
@@ -110,7 +114,7 @@ public class ProfileActivity extends AppCompatActivity implements RevealBackgrou
     private boolean pendingIntroAnimation;
     List<Post> postList = new ArrayList<Post>();
     List<String> postListId = new ArrayList<String>();
-
+    List<Post> postItem = new ArrayList<Post>();
 
     DocumentSnapshot lastVisible = null;
     private int visibleThreshold = 1;
@@ -132,15 +136,7 @@ public class ProfileActivity extends AppCompatActivity implements RevealBackgrou
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
         this.avatarSize = getResources().getDimensionPixelSize(R.dimen.user_profile_avatar_size);
-        infoimg=(ImageView)findViewById(R.id.info_image);
-        infoimg.setVisibility(View.VISIBLE);
-        infoimg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent infointent=new Intent(ProfileActivity.this,InfoActivity.class);
-                startActivity(infointent);
-            }
-        });
+
         mAuth = FirebaseAuth.getInstance();
         userId = getIntent().getStringExtra(USER_ID);
         userName = getIntent().getStringExtra(USER_NAME);
@@ -190,10 +186,16 @@ public class ProfileActivity extends AppCompatActivity implements RevealBackgrou
             }
         };
         rvUserProfile.setLayoutManager(linearLayoutManager);
+        Collections.sort(postList, new Comparator<Post>() {
+            @Override
+            public int compare(Post lhs, Post rhs) {
+                return String.valueOf(rhs.getPostTime()).compareTo(String.valueOf(lhs.getPostTime()));
+            }
 
+        });
         feedAdapter = new FeedAdapter(this,postList);
-        feedAdapter.setOnFeedItemClickListener(ProfileActivity.this);
         rvUserProfile.setAdapter(feedAdapter);
+        feedAdapter.setOnFeedItemClickListener(ProfileActivity.this);
         rvUserProfile.setOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {

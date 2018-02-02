@@ -28,6 +28,7 @@ public class PreferencesHelper {
     public static final String PREFERENCE_USER_DESCRIPTION ="user_desc";
     public static final String PREFERENCE_TAGS ="tags";
     public static final String PREFERENCE_TAG_IDS ="tag_ids";
+    public static final String PREFERENCE_FIRST_TIME ="first_time";
 
 
 

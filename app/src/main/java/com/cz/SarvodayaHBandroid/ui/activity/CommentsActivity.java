@@ -2,6 +2,7 @@ package com.cz.SarvodayaHBandroid.ui.activity;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.app.Notification;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.view.ViewCompat;
@@ -15,8 +16,10 @@ import android.view.ViewTreeObserver;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.EditText;
+import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,15 +37,22 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import com.cz.SarvodayaHBandroid.R;
+
+import org.w3c.dom.Document;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
+import static java.security.AccessController.getContext;
 
 /**
  * Created by froger_mcs on 11.11.14.
@@ -105,13 +115,21 @@ public class CommentsActivity extends AppCompatActivity implements SendCommentBu
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         rvComments.setLayoutManager(linearLayoutManager);
         rvComments.setHasFixedSize(true);
-
+        Collections.sort(commeList, new Comparator<Comment>() {
+            @Override
+            public int compare(Comment lhs, Comment rhs) {
+                return String.valueOf(lhs.getPostTime()).compareTo(String.valueOf(rhs.getPostTime()));
+            }
+        });
         commentsAdapter = new CommentsAdapter(this,commeList);
         rvComments.setAdapter(commentsAdapter);
+//        commentsAdapter = new CommentsAdapter(this,commeList);
+//        rvComments.setAdapter(commentsAdapter);
         commentsAdapter.notifyDataSetChanged();
         rvComments.setOverScrollMode(View.OVER_SCROLL_NEVER);
         commentsAdapter.setAnimationsLocked(false);
         commentsAdapter.setDelayEnterAnimation(false);
+        linearLayoutManager.scrollToPosition(commeList.size() - 1);
 //            rvComments.smoothScrollBy(0, rvComments.getChildAt(0).getHeight() * commentsAdapter.getItemCount());
 
 
@@ -124,7 +142,9 @@ public class CommentsActivity extends AppCompatActivity implements SendCommentBu
             }
         });
     }
-
+//    public void sortDate() {
+//
+//    }
     private void setupSendCommentButton() {
         btnSendComment.setOnSendClickListener(this);
 
@@ -195,7 +215,7 @@ public class CommentsActivity extends AppCompatActivity implements SendCommentBu
 //            commentsAdapter.setAnimationsLocked(false);
 //            commentsAdapter.setDelayEnterAnimation(false);
 ////            rvComments.smoothScrollBy(0, rvComments.getChildAt(0).getHeight() * commentsAdapter.getItemCount());
-
+        Utils.hideKeyboard(CommentsActivity.this);
         etComment.setText(null);
         btnSendComment.setCurrentState(SendCommentButton.STATE_DONE);
 //        }
@@ -279,6 +299,7 @@ public class CommentsActivity extends AppCompatActivity implements SendCommentBu
 //                            Log.e("adbbd",document.getId());
 //                            Log.e("adbbd", String.valueOf(document.getData()));
 
+
                         }
                         setupComments();
 
@@ -287,6 +308,7 @@ public class CommentsActivity extends AppCompatActivity implements SendCommentBu
                 });
 
     }
+
 
 
 }

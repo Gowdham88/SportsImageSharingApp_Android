@@ -2,25 +2,38 @@ package com.cz.SarvodayaHBandroid.ui.adapter;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.app.Notification;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.DecelerateInterpolator;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
+import com.cz.SarvodayaHBandroid.Utils;
 import com.cz.SarvodayaHBandroid.ui.Models.Comment;
+import com.cz.SarvodayaHBandroid.ui.activity.MyObject;
+import com.cz.SarvodayaHBandroid.ui.activity.SignupScreenActivity;
 import com.cz.SarvodayaHBandroid.ui.utils.PreferencesHelper;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import com.cz.SarvodayaHBandroid.R;
+
+import org.w3c.dom.Document;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
+
+import static java.security.AccessController.getContext;
 
 /**
  * Created by froger_mcs on 11.11.14.
@@ -57,6 +70,8 @@ public class CommentsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         TextView tvComment;
         @BindView(R.id.tvName)
         TextView tvname;
+        @BindView(R.id.frame_lay)
+        FrameLayout FrameLay;
 
 
         public CommentViewHolder(View view) {
@@ -69,6 +84,8 @@ public class CommentsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
         runEnterAnimation(viewHolder.itemView, position);
         CommentViewHolder holder = (CommentViewHolder) viewHolder;
+
+
         String str=commeList.get(position).getCommentText();
         holder.tvComment.setText(str);
         if (this.commeList.get(position).getUid().equals(PreferencesHelper.getPreference(context, PreferencesHelper.PREFERENCE_FIREBASE_UUID))) {
@@ -84,8 +101,12 @@ public class CommentsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             }
 
         }
-
-
+//            holder.FrameLay.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//
+//                }
+//            });
 //        switch (position % 3) {
 //            case 0:
 //                holder.tvComment.setText("Lorem ipsum dolor sit amet, consectetur adipisicing elit.");
@@ -103,6 +124,7 @@ public class CommentsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                     .placeholder(R.drawable.logo_ic).fit().centerInside()
                     .into(holder.ivUserAvatar);
         }
+
 //        Picasso.with(context)
 //                .load(R.drawable.logo_ic)
 //                .centerCrop()

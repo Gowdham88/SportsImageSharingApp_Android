@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="SarvodayaHBandroid.github.froger.instamaterial.SarvodayaHBandroid.github.froger.instamaterial.ui.activity.InfoActivity">
+   >
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
@@ -30,9 +30,10 @@
       >
         <TextView
             android:id="@+id/info_txt"
-            style="@style/FontAvenirLight"
+            style="@style/FontAvenirBook"
             android:text="@string/event_description"
             android:textColor="#000000"
+            android:textSize="16dp"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:layout_marginTop="5dp"
@@ -42,13 +43,15 @@
     </ScrollView>
     </LinearLayout>
     <TextView
+        style="@style/FontAvenirBook"
         android:layout_below="@+id/scrl"
         android:id="@+id/power_txt"
-        android:text="powered by CZSmart Mobility"
+        android:text="powered by CZ Smart Mobility"
         android:gravity="center"
+        android:textSize="17dp"
         android:layout_alignParentBottom="true"
         android:textColor="@color/style_color_primary"
         android:layout_width="match_parent"
-        android:layout_height="20dp" />
+        android:layout_height="14dp" />
 
 </RelativeLayout>
