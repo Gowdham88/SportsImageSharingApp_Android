@@ -10,6 +10,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:paddingBottom="8dp"
+        android:id="@+id/comment_lay"
         android:paddingTop="8dp">
 
         <de.hdodenhof.circleimageview.CircleImageView

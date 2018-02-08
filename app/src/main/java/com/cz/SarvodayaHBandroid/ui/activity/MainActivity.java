@@ -8,6 +8,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.drawable.ColorDrawable;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Bundle;
@@ -20,6 +21,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.FileProvider;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -116,10 +118,13 @@ public class MainActivity extends AppCompatActivity implements FeedAdapter.OnFee
     private String mCurrentPhotoPath;
     final private int RC_CAPTURE_IMAGE = 2;
     private FeedAdapter feedAdapter;
+    private android.support.v7.app.AlertDialog dialog;
+    SwipeRefreshLayout swipeRefreshLayout;
 
     private boolean pendingIntroAnimation;
     List<Post> postList = new ArrayList<Post>();
     List<String> postListId = new ArrayList<String>();
+    List<String> commeListId = new ArrayList<String>();
     DocumentSnapshot lastVisible = null;
     private int visibleThreshold = 1;
     private boolean isLoading=false;
@@ -133,6 +138,17 @@ public class MainActivity extends AppCompatActivity implements FeedAdapter.OnFee
         backarrow.setVisibility(View.GONE);
         infoimg=(ImageView)findViewById(R.id.info_image);
         infoimg.setVisibility(View.VISIBLE);
+         swipeRefreshLayout=(SwipeRefreshLayout) findViewById(R.id.swiperefresh);
+        swipeRefreshLayout.setOnRefreshListener(
+                new SwipeRefreshLayout.OnRefreshListener() {
+                    @Override
+                    public void onRefresh() {
+//                        feedAdapter.notifyDataSetChanged();
+
+                        doYourUpdate();
+                    }
+                }
+        );
         infoimg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -192,6 +208,13 @@ public class MainActivity extends AppCompatActivity implements FeedAdapter.OnFee
         });
 
 
+    }
+
+    private void doYourUpdate() {
+        feedAdapter.notifyDataSetChanged();
+        loadPost(ACTION_SHOW_LOADING_ITEM);
+//        loadPost(String.valueOf(this));
+        swipeRefreshLayout.setRefreshing(false);
     }
 
     @Override
@@ -303,6 +326,7 @@ public class MainActivity extends AppCompatActivity implements FeedAdapter.OnFee
         v.getLocationOnScreen(startingLocation);
         intent.putExtra(CommentsActivity.ARG_DRAWING_START_LOCATION, startingLocation[1]);
         intent.putExtra(CommentsActivity.POST_ID, postListId.get(position));
+//        intent.putExtra(CommentsActivity.Comments_ID, commeListId.get(position));
         startActivity(intent);
         overridePendingTransition(0, 0);
     }
@@ -358,7 +382,7 @@ public class MainActivity extends AppCompatActivity implements FeedAdapter.OnFee
 
     @Override
     public void onDeleteClick(final int feedItem) {
-
+    showProgressDialog();
         FeedContextMenuManager.getInstance().hideContextMenu();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("posts").document(postListId.get(feedItem))
@@ -371,12 +395,14 @@ public class MainActivity extends AppCompatActivity implements FeedAdapter.OnFee
                         postListId.remove(feedItem);
                         postList.remove(feedItem);
                         feedAdapter.updateItems(false);
+                        hideProgressDialog();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         Log.w(TAG, "Error deleting document", e);
+                        hideProgressDialog();
                     }
                 });
 
@@ -533,7 +559,7 @@ public class MainActivity extends AppCompatActivity implements FeedAdapter.OnFee
 
         postList.clear();
         postListId.clear();
-
+//        showProgressDialog();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         Query first = db.collection("posts")
@@ -575,6 +601,7 @@ public class MainActivity extends AppCompatActivity implements FeedAdapter.OnFee
 
                             setupFeed();
                             feedAdapter.updateItems(true);
+//                            hideProgressDialog();
                         }
 
 
@@ -585,7 +612,7 @@ public class MainActivity extends AppCompatActivity implements FeedAdapter.OnFee
     }
 
     public void loadMorePost() {
-
+//        showProgressDialog();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         Query first = db.collection("posts")
@@ -620,6 +647,7 @@ public class MainActivity extends AppCompatActivity implements FeedAdapter.OnFee
                                 .get(documentSnapshots.size() -1);
 
                         feedAdapter.updateItems(false);
+//                        hideProgressDialog();
 
                     }
 

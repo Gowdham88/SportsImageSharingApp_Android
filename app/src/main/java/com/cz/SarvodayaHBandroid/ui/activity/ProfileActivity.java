@@ -20,6 +20,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.cz.SarvodayaHBandroid.ui.Models.Comment;
 import com.cz.SarvodayaHBandroid.ui.Models.Post;
 import com.cz.SarvodayaHBandroid.ui.adapter.CommentsAdapter;
@@ -146,11 +147,14 @@ public class ProfileActivity extends AppCompatActivity implements RevealBackgrou
         vUserName.setText(userName);
         vUserNameSub.setText("@"+userName);
         if(!profilePhoto.equals(null)&&!profilePhoto.isEmpty()){
-            Picasso.with(this)
+//            Picasso.with(this)
+//                    .load(profilePhoto).rotate(90)
+//                    .resize(avatarSize, avatarSize)
+//                    .centerCrop()
+//                    .transform(new CircleTransformation())
+//                    .into(ivUserProfilePhoto);
+            Glide.with(this)
                     .load(profilePhoto)
-                    .resize(avatarSize, avatarSize)
-                    .centerCrop()
-                    .transform(new CircleTransformation())
                     .into(ivUserProfilePhoto);
         }
         else{

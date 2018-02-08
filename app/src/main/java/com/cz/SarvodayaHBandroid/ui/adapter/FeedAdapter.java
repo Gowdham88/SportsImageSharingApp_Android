@@ -1,13 +1,18 @@
 package com.cz.SarvodayaHBandroid.ui.adapter;
 
 import android.app.Activity;
+import android.graphics.Matrix;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Matrix;
+import android.net.Uri;
 import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.MimeTypeMap;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -16,6 +21,7 @@ import android.widget.TextSwitcher;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.cz.SarvodayaHBandroid.ui.Models.Post;
 import com.cz.SarvodayaHBandroid.ui.activity.ImageDetailActivity;
 import com.cz.SarvodayaHBandroid.ui.activity.MainActivity;
@@ -235,8 +241,8 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             int adapterPosition = getAdapterPosition();
 
             if(!this.postItem.getProfileImageURL().equals("") && this.postItem.getProfileImageURL() != null) {
-
-                Picasso.with(context).load(this.postItem.getProfileImageURL()).fit().centerInside()
+                Glide.with(context)
+                        .load(this.postItem.getProfileImageURL())
                         .into(ivUserProfile);
             }
 
@@ -264,9 +270,11 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
 
             if(!this.postItem.getPhotoURL().equals("failed")) {
+//
 
-                Picasso.with(context).load(this.postItem.getPhotoURL()).fit().centerInside()
-                        .into(ivFeedCenter);
+//                            Toast.makeText(context, Strtype, Toast.LENGTH_SHORT).show();
+                            Picasso.with(context).load(this.postItem.getPhotoURL()).fit().centerInside()
+                                    .into(ivFeedCenter);
             }
 
             if (this.postItem.getLikes().size() > 0) {
@@ -306,6 +314,9 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 }
             });
         }
+
+
+
 
         private  void initiatePopupWindow() {
 
@@ -349,7 +360,6 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public static class FeedItem {
         public int likesCount;
         public boolean isLiked;
-
         public FeedItem(int likesCount, boolean isLiked) {
             this.likesCount = likesCount;
             this.isLiked = isLiked;
@@ -362,6 +372,14 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         void onMoreClick(View v, int position);
 
         void onProfileClick(View v, int position);
+    }
+    public static String getMimeType(String url) {
+        String type = null;
+        String extension = MimeTypeMap.getFileExtensionFromUrl(url);
+        if (extension != null) {
+            type = MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension);
+        }
+        return type;
     }
 
 }

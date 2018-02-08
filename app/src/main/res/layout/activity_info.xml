@@ -46,7 +46,7 @@
         style="@style/FontAvenirBook"
         android:layout_below="@+id/scrl"
         android:id="@+id/power_txt"
-        android:text="powered by CZ Smart Mobility"
+        android:text="Powered by CZ Smart Mobility"
         android:gravity="center"
         android:textSize="17dp"
         android:layout_alignParentBottom="true"
