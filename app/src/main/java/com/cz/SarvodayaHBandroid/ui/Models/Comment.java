@@ -13,6 +13,7 @@ public class Comment {
     private String commentText;
     private long postTime;
 
+
     public Comment() {
 
     }

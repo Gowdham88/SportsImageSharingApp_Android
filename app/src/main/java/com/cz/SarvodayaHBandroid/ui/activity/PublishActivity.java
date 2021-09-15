@@ -126,7 +126,7 @@ public class PublishActivity extends AppCompatActivity {
             photoUri = savedInstanceState.getParcelable(ARG_TAKEN_PHOTO_URI);
             PATH     = getIntent().getStringExtra("Path");
         }
-        updateStatusBarColor();
+//        updateStatusBarColor();
 
         ivPhoto.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
             @Override
@@ -138,12 +138,12 @@ public class PublishActivity extends AppCompatActivity {
         });
     }
 
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    private void updateStatusBarColor() {
-        if (Utils.isAndroid5()) {
-            getWindow().setStatusBarColor(0xff888888);
-        }
-    }
+//    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+//    private void updateStatusBarColor() {
+//        if (Utils.isAndroid5()) {
+//            getWindow().setStatusBarColor(0xff888888);
+//        }
+//    }
 
     private void loadThumbnailPhoto() {
         ivPhoto.setScaleX(0);
@@ -275,26 +275,27 @@ public class PublishActivity extends AppCompatActivity {
             @Override
             public void onSuccess(DocumentReference documentReference) {
 
-                LoadingFeedItemView view = new LoadingFeedItemView(getApplicationContext());
-                view.setLayoutParams(new LinearLayoutCompat.LayoutParams(
-                        ViewGroup.LayoutParams.MATCH_PARENT,
-                        ViewGroup.LayoutParams.WRAP_CONTENT)
-                );
-                view.setOnLoadingFinishedListener(new LoadingFeedItemView.OnLoadingFinishedListener() {
-                    @Override
-                    public void onLoadingFinished() {
-
-
-
-                    }
-                });
-                view.startLoading();
+//                LoadingFeedItemView view = new LoadingFeedItemView(getApplicationContext());
+//                view.setLayoutParams(new LinearLayoutCompat.LayoutParams(
+//                        ViewGroup.LayoutParams.MATCH_PARENT,
+//                        ViewGroup.LayoutParams.WRAP_CONTENT)
+//                );
+//                view.setOnLoadingFinishedListener(new LoadingFeedItemView.OnLoadingFinishedListener() {
+//                    @Override
+//                    public void onLoadingFinished() {
+//
+//
+//
+//                    }
+//                });
+//                view.startLoading();
 
                 Intent intent = new Intent(PublishActivity.this, MainActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                intent.setAction(MainActivity.ACTION_SHOW_LOADING_ITEM);
+//                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+//                intent.setAction(MainActivity.ACTION_SHOW_LOADING_ITEM);
                 startActivity(intent);
 
+                finish();
 
 
 
@@ -312,7 +313,7 @@ public class PublishActivity extends AppCompatActivity {
 
     }
 
-    public String uploadImage() {
+    public void uploadImage() {
 
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageRef = storage.getReference();
@@ -377,14 +378,10 @@ public class PublishActivity extends AppCompatActivity {
                             progressDialog.setMessage("Uploaded "+(int)progress+"%");
                         }
                     });
-        } else {
-
-            return "empty";
-
+        }else{
+            return;
         }
-
-        return "empty";
-
+        return;
     }
 
     public long getPostTime() {

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/const_lay"
+    android:background="#34495E">
+
+    <LinearLayout
+        android:id="@+id/btncancel"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="12dp">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/closebtnone" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:text="Sarvodaya"
+        android:textStyle="bold"
+        style="@style/FontAvenirheavy"
+        android:textColor="#FFFFFF"
+        android:textSize="35dp"
+        />
+    <TextView
+        android:id="@+id/text_view1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="HandBall"
+        android:textStyle="bold"
+        style="@style/FontAvenirheavy"
+        android:textColor="#FFFFFF"
+        android:textSize="30dp"
+        android:layout_below="@+id/text_view"
+        />
+
+
+        <!--<TextView-->
+            <!--android:id="@+id/textView5"-->
+            <!--style="@style/FontAvenirMedium"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:textSize="14sp"-->
+            <!--android:layout_below="@+id/text_view1"-->
+            <!--android:textColor="#FFFFFF"-->
+            <!--android:text="Email Address"-->
+            <!--android:layout_marginLeft="30dp"-->
+            <!--android:layout_marginTop="50dp"-->
+            <!--/>-->
+
+    <EditText
+        android:id="@+id/email_edit"
+        style="@style/FontAvenirBook"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@+id/text_view1"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:background="@null"
+
+        android:hint="Email"
+        android:layout_marginTop="50dp"
+        android:imeOptions="actionNext"
+        android:inputType="textEmailAddress"
+        android:singleLine="true"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#FFFFFF"
+        android:textCursorDrawable="@drawable/color_cursor"
+        android:textSize="18dp" />
+        <View
+            android:id="@+id/passline"
+            android:layout_below="@+id/email_edit"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:background="#000000"/>
+
+    <LinearLayout
+        android:id="@+id/linlay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/passline"
+        android:layout_marginRight="30dp"
+        android:orientation="vertical"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="20dp">
+        <Button
+
+            android:id="@+id/sinin_edt"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="Reset Password"
+            android:background="@drawable/forgetback"
+            android:textAllCaps="false"
+            android:textSize="18dp"
+            style="@style/FontAvenirBook"
+            android:textColor="#b4d8d8d8" />
+        <Button
+            android:visibility="gone"
+            android:id="@+id/sinin_edt1"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="Reset Password"
+            android:background="@drawable/forgetback"
+            android:textAllCaps="false"
+            android:textSize="18dp"
+            style="@style/FontAvenirBook"
+            android:textColor="#ffffff" />
+    </LinearLayout>
+
+</RelativeLayout>

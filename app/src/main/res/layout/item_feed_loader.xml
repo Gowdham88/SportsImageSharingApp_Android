@@ -100,7 +100,7 @@
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:background="@android:color/transparent"
-                android:src="@drawable/ic_heart_outline_grey" />
+                android:src="@drawable/like" />
 
             <ImageButton
                 android:id="@+id/btnComments"

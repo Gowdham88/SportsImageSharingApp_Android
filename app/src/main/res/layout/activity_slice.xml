@@ -5,7 +5,7 @@
     android:background="@android:color/black"
     android:orientation="vertical">
 
-    <SarvodayaHBandroid.ui.utils.TouchImageView
+    <com.cz.SarvodayaHBandroid.ui.utils.TouchImageView
         android:id="@+id/popup_image"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -23,6 +23,14 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:src="@drawable/closebtnone" />
-    </LinearLayout>
 
+    </LinearLayout>
+    <ImageButton
+        android:visibility="gone"
+        android:id="@+id/btnMore"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/btn_feed_action"
+        android:src="@drawable/ic_more_grey" />
 </RelativeLayout>

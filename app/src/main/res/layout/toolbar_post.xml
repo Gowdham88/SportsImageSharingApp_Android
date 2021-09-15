@@ -22,16 +22,15 @@
             android:src="@drawable/ic_arrow_back_grey600_24dp"/>
 
         <TextView
-            style="@style/FontAvenirMedium"
+            style="@style/FontAvenirBook"
             android:id="@+id/toolbar_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:text="Post"
-            android:textStyle="bold"
             android:gravity="center"
             android:textColor="#000000"
-            android:textSize="18dp"/>
+            android:textSize="17dp"/>
 
         <TextView
             style="@style/FontAvenirBook"

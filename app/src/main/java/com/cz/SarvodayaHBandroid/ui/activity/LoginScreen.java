@@ -7,11 +7,14 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
@@ -34,14 +37,15 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 
-public class LoginScreen extends AppCompatActivity {
+public class LoginScreen extends AppCompatActivity  {
     EditText mEmailEdt,mPassEdt;
-    Button mSininBtn;
+    Button mSininBtn,msigninbtn;
     TextView mAccntTxt,mForgetTxt;
     Animation slideUpAnimation, slideDownAnimation;
     private FirebaseAuth mAuth;
     private android.support.v7.app.AlertDialog dialog;
     RelativeLayout Signinrel;
+    String email,password;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,12 +54,18 @@ public class LoginScreen extends AppCompatActivity {
         mPassEdt=(EditText)findViewById(R.id.loginpass_edt);
         mAccntTxt=(TextView) findViewById(R.id.dont_txt);
         mSininBtn=(Button) findViewById(R.id.sinin_edt);
+        msigninbtn=(Button) findViewById(R.id.sinin_edt1);
         mForgetTxt=(TextView)findViewById(R.id.forget_txt);
+        mEmailEdt.setInputType(mEmailEdt.getInputType()
+                | EditorInfo.TYPE_TEXT_FLAG_NO_SUGGESTIONS
+                | EditorInfo.TYPE_TEXT_VARIATION_FILTER);
         mForgetTxt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(LoginScreen.this,ForgetPasswordActivity.class);
                 startActivity(intent);
+                overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
+//                overridePendingTransition();
             }
         });
         Signinrel=(RelativeLayout) findViewById(R.id.signinrel_lay);
@@ -75,16 +85,24 @@ public class LoginScreen extends AppCompatActivity {
 
 
         }
+
+
+        mEmailEdt.addTextChangedListener(mTextWatcher);
+        mPassEdt.addTextChangedListener(mTextWatcher);
+        checkFieldsForEmptyValues();
         mSininBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Utils.hideKeyboard(LoginScreen.this);
                 signIn(mEmailEdt.getText().toString(), mPassEdt.getText().toString());
-//                if(validateForm()){
-////                    Toast.makeText(LoginScreen.this, "haii", Toast.LENGTH_SHORT).show();
-////                    Intent in=new Intent(LoginScreen.this,MainActivity.class);
-////                    startActivity(in);
-//                }
+            }
+        });
+        msigninbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Utils.hideKeyboard(LoginScreen.this);
+                signIn(mEmailEdt.getText().toString(), mPassEdt.getText().toString());
+
             }
         });
         mAccntTxt.setOnClickListener(new View.OnClickListener() {
@@ -93,7 +111,9 @@ public class LoginScreen extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(),SignupScreenActivity .class);
 //                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
-                overridePendingTransition(R.anim.slide_up, R.anim.stay);
+                overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
+                finish();
+//
 
             }
         });
@@ -145,7 +165,7 @@ public class LoginScreen extends AppCompatActivity {
 
                                         PreferencesHelper.setPreference(getApplicationContext(), PreferencesHelper.PREFERENCE_PROFILE_PIC, user.getProfileImageURL());
                                         PreferencesHelper.setPreference(getApplicationContext(), PreferencesHelper.PREFERENCE_FIREBASE_UUID, users.getUid());
-
+//
                                         Intent in=new Intent(LoginScreen.this,MainActivity.class);
                                         startActivity(in);
                                         finish();
@@ -173,12 +193,6 @@ public class LoginScreen extends AppCompatActivity {
                             hideProgressDialog();
                         }
 
-//                        // [START_EXCLUDE]
-//                        if (!task.isSuccessful()) {
-//
-//                            hideProgressDialog();
-//                            showerror("Authentication failed.");
-//                        }
                     }
                 });
 
@@ -204,10 +218,9 @@ public class LoginScreen extends AppCompatActivity {
     private boolean validateForm() {
         boolean valid = true;
 
-        String email = mEmailEdt.getText().toString();
-        String password = mPassEdt.getText().toString();
+         email = mEmailEdt.getText().toString();
+         password = mPassEdt.getText().toString();
         if (!TextUtils.isEmpty(email) && !TextUtils.isEmpty(password)) {
-
             valid = true;
 
         } else {
@@ -234,6 +247,37 @@ public class LoginScreen extends AppCompatActivity {
 
         return valid;
     }
+
+    private void checkFieldsForEmptyValues() {
+        if ((TextUtils.isEmpty(mEmailEdt.getText()))
+                || (TextUtils.isEmpty(mPassEdt.getText()))){
+            mSininBtn.setVisibility(View.VISIBLE);
+            mSininBtn.setEnabled(false);
+            msigninbtn.setVisibility(View.GONE);
+
+        }
+        else{
+            msigninbtn.setVisibility(View.VISIBLE);
+            mSininBtn.setVisibility(View.GONE);
+        }
+
+    }
+
+    private TextWatcher mTextWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+        }
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+        }
+
+        @Override
+        public void afterTextChanged(Editable editable) {
+            // check Fields For Empty Values
+            checkFieldsForEmptyValues();
+        }
+    };
 
 
 }

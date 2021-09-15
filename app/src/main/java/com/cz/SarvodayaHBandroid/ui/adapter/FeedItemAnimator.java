@@ -140,11 +140,11 @@ public class FeedItemAnimator extends DefaultItemAnimator {
 
                         if (isLiked) {
 
-                            holder.btnLike.setImageResource(R.drawable.ic_heart_red);
+                            holder.btnLike.setImageResource(R.drawable.likeselected);
 
                         } else  {
 
-                            holder.btnLike.setImageResource(R.drawable.ic_heart_outline_grey);
+                            holder.btnLike.setImageResource(R.drawable.like);
 
                         }
 
@@ -152,7 +152,7 @@ public class FeedItemAnimator extends DefaultItemAnimator {
 
                     } else {
 
-                        holder.btnLike.setImageResource(R.drawable.ic_heart_outline_grey);
+                        holder.btnLike.setImageResource(R.drawable.like);
                     }
 
 

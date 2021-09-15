@@ -23,16 +23,15 @@
             android:src="@drawable/ic_arrow_back_white_24dp"/>
 
         <TextView
-            style="@style/FontAvenirMedium"
+            style="@style/FontAvenirBook"
             android:id="@+id/toolbar_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:text="Info"
-            android:textStyle="bold"
             android:gravity="center"
             android:textColor="#ffffff"
-            android:textSize="16dp"/>
+            android:textSize="17dp"/>
 
 
         <ImageView

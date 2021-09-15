@@ -32,10 +32,10 @@
     </string-array>
     <string name="user_profile_photo">http://igcdn-photos-f-a.akamaihd.net/hphotos-ak-xpa1/t51.2885-19/929118_455075441302693_1605108410_a.jpg</string>
     <string name="resetpass">A reset link has been sent your email</string>
-    <string name="event_description">This much-talked-about festival brings all your favorite Food Network personalities and celebrity chefs to Miami for five days of events, from intimate dinners cooked by Sean Brock to a late-night Tacos After Dark session with Aarón Sanchez. If you\'ve always dreamed of drinking tiki cocktails with Guy Fieri or having a rosé brunch with Martha Stewart, the South Beach Wine &amp; Food Festival can make your wishes come true.
-         If you\'ve always dreamed of drinking tiki cocktails with Guy Fieri or having a rosé brunch with Martha Stewart, the South Beach Wine &amp; Food Festival can make your wishes come true.
-         If you\'ve always dreamed of drinking tiki cocktails with Guy Fieri or having a rosé brunch with Martha Stewart, the South Beach Wine &amp; Food Festival can make your wishes come true.
-         If you\'ve always dreamed of drinking tiki cocktails with Guy Fieri or having a rosé brunch with Martha Stewart, the South Beach Wine &amp; Food Festival can make your wishes come true.
-
+    <string name="onboard">Share your practice,Training and other HandBall pictures</string>
+    <string name="event_description">       &#160; &#160;This is an app of Sarvodaya Handball club. The\nclub was formed by the alumni members of PSG \nTech. The membership is open for all the Hand\nball lovers.\n\n
+        &#160; &#160; In this app you can post pictures for free. We \nadvise to post handball pictures from your prac\ntice, matches, etc. You can like, comment on the \npictures. More features will be rolled out in the \nsubsequent updates.\n\n
+        &#160; &#160; For feedback please contact ________________
     </string>
+    <string name="onboard_text">Share your handball training, trophy &amp; match pictures here !!</string>
 </resources>

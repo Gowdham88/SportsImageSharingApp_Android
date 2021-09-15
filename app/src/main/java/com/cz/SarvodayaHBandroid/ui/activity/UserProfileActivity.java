@@ -1,16 +1,28 @@
 package com.cz.SarvodayaHBandroid.ui.activity;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.media.MediaScannerConnection;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
+import android.support.design.widget.BottomSheetDialog;
 import android.support.design.widget.TabLayout;
+import android.support.v4.content.CursorLoader;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -26,9 +38,12 @@ import android.view.animation.Interpolator;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.cz.SarvodayaHBandroid.BuildConfig;
+import com.cz.SarvodayaHBandroid.Constants;
 import com.cz.SarvodayaHBandroid.ui.Models.Post;
 import com.cz.SarvodayaHBandroid.ui.adapter.FeedAdapter;
 import com.cz.SarvodayaHBandroid.ui.adapter.UserAdapter;
@@ -41,28 +56,46 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.UUID;
 
 import com.cz.SarvodayaHBandroid.R;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
+import pub.devrel.easypermissions.AppSettingsDialog;
+import pub.devrel.easypermissions.EasyPermissions;
 
 import static android.content.ContentValues.TAG;
+import static android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE;
 
 /**
  * Created by Miroslaw Stanek on 14.01.15.
  */
-public class UserProfileActivity extends AppCompatActivity implements RevealBackgroundView.OnStateChangeListener,FeedAdapter.OnFeedItemClickListener {
+public class UserProfileActivity extends AppCompatActivity implements RevealBackgroundView.OnStateChangeListener,FeedAdapter.OnFeedItemClickListener, EasyPermissions.PermissionCallbacks {
     public static final String ARG_REVEAL_START_LOCATION = "reveal_start_location";
     public static final String USER_ID = "user_id";
     public static final String USER_IMAGE = "user_image";
@@ -103,12 +136,12 @@ public class UserProfileActivity extends AppCompatActivity implements RevealBack
     ImageView backarrow;
     @BindView(R.id.edit_btn)
     Button EditProfileBtn;
+    Boolean isboolean=false;
+//    @BindView(R.id.count_txt)
+//    TextView vpostCount;
 
-    @BindView(R.id.count_txt)
-    TextView vpostCount;
-
-    @BindView(R.id.flwcount_txt)
-    TextView vfolowerCount;
+//    @BindView(R.id.flwcount_txt)
+//    TextView vfolowerCount;
 
     private int avatarSize;
     private String profilePhoto;
@@ -118,6 +151,22 @@ public class UserProfileActivity extends AppCompatActivity implements RevealBack
     private FirebaseAuth mAuth;
     UserAdapter adapter;
     Context context;
+    ImageView editicon;
+    TextView Camera,Gallery,cancel;
+    private static final int PERMISSIONS_REQUEST_CAMERA = 1888;
+    private static final int PERMISSIONS_REQUEST_GALLERY = 1889;
+    private static final String[] CAMERA = {Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE};
+    private String selectedImagePath = "";
+    final private int RC_PICK_IMAGE = 1;
+    final private int RC_CAPTURE_IMAGE = 2;
+    private Uri fileUri;
+    Uri imageUri;
+    String postimageurl = "";
+    Uri contentURI;
+    boolean isPhotoValid = false;
+    private String mCurrentPhotoPath;
+    LinearLayout cancelLay;
+    private android.support.v7.app.AlertDialog dialog;
 //    private UserProfileAdapter userPhotosAdapter;
 
     private FeedAdapter feedAdapter;
@@ -130,7 +179,7 @@ public class UserProfileActivity extends AppCompatActivity implements RevealBack
 
     DocumentSnapshot lastVisible = null;
     private int visibleThreshold = 1;
-    private boolean isLoading=false;
+    private boolean isLoading=true;
 
     public static void startUserProfileFromLocation(int[] startingLocation, Activity startingActivity,String Userid,String name,String image) {
         Intent intent = new Intent(startingActivity, UserProfileActivity.class);
@@ -153,7 +202,13 @@ public class UserProfileActivity extends AppCompatActivity implements RevealBack
         userId = getIntent().getStringExtra(USER_ID);
         userName = getIntent().getStringExtra(USER_NAME);
         userProfile = getIntent().getStringExtra(USER_IMAGE);
-
+        editicon=(ImageView) findViewById(R.id.imageView_profile_edit);
+        editicon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showBottomSheet();
+            }
+        });
         this.profilePhoto = userProfile;
         vUserName.setText(userName);
 //        vUserNameSub.setText("@"+userName);
@@ -175,14 +230,13 @@ public class UserProfileActivity extends AppCompatActivity implements RevealBack
 //                    .into(ivUserProfilePhoto);
         }
 
-
         setupTabs();
         setupUserProfileGrid();
         setupRevealBackground(savedInstanceState);
         loadPost();
 
-        PostCount();
-        UserCount();
+//        PostCount();
+//        UserCount();
 
 
         EditProfileBtn.setOnClickListener(new View.OnClickListener() {
@@ -191,6 +245,283 @@ public class UserProfileActivity extends AppCompatActivity implements RevealBack
                 PopUp();
             }
         });
+    }
+
+    private void showBottomSheet() {
+
+        final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(UserProfileActivity.this);
+        LayoutInflater factory = LayoutInflater.from(this);
+        View bottomSheetView = factory.inflate(R.layout.dialo_camera_bottomsheet, null);
+        bottomSheetDialog.setContentView(bottomSheetView);
+        bottomSheetDialog.show();
+
+        Camera = (TextView) bottomSheetView.findViewById(R.id.camera_title);
+        Gallery = (TextView) bottomSheetView.findViewById(R.id.gallery_title);
+        cancel = (TextView)bottomSheetView.findViewById(R.id.cancel_txt);
+        cancelLay = (LinearLayout) bottomSheetView.findViewById(R.id.cance_lay);
+        Camera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                bottomSheetDialog.dismiss();
+
+                if (hasPermissions()) {
+                    captureImage();
+                } else {
+                    EasyPermissions.requestPermissions(UserProfileActivity.this, "Permissions required", PERMISSIONS_REQUEST_CAMERA, CAMERA);
+                }
+            }
+        });
+
+        Gallery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (hasPermissions()) {
+                    Intent i = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                    startActivityForResult(i, RC_PICK_IMAGE);
+                } else {
+                    EasyPermissions.requestPermissions(UserProfileActivity.this, "Permissions required", PERMISSIONS_REQUEST_GALLERY, CAMERA);
+                }
+                bottomSheetDialog.dismiss();
+            }
+        });
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                bottomSheetDialog.dismiss();
+            }
+        });
+        cancelLay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                bottomSheetDialog.dismiss();
+            }
+        });
+
+    }
+
+    @Override
+    public void onPermissionsGranted(int requestCode, List<String> perms) {
+
+        switch (requestCode){
+
+            case PERMISSIONS_REQUEST_GALLERY:
+                if(perms.contains(Manifest.permission.WRITE_EXTERNAL_STORAGE)&&perms.contains(Manifest.permission.READ_EXTERNAL_STORAGE)) {
+                    Intent i = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                    startActivityForResult(i, RC_PICK_IMAGE);
+                }
+                break;
+
+            case PERMISSIONS_REQUEST_CAMERA:
+                if(perms.contains(Manifest.permission.CAMERA)) {
+                    captureImage();
+                }
+                break;
+
+        }
+
+
+    }
+
+    @Override
+    public void onPermissionsDenied(int requestCode, List<String> perms) {
+        Log.d(TAG, "onPermissionsDenied:" + requestCode + ":" + perms.size());
+
+        // (Optional) Check whether the user denied any permissions and checked "NEVER ASK AGAIN."
+        // This will display a dialog directing them to enable the permission in app settings.
+        if (EasyPermissions.somePermissionPermanentlyDenied(this, perms)) {
+            new AppSettingsDialog.Builder(this).build().show();
+        }
+
+    }
+
+
+
+    private boolean hasPermissions() {
+        return EasyPermissions.hasPermissions(UserProfileActivity.this, CAMERA);
+    }
+
+    private void captureImage() {
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        fileUri = getOutputMediaFileUri(1);
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
+        startActivityForResult(intent, RC_CAPTURE_IMAGE);
+    }
+
+    public Uri getOutputMediaFileUri(int type) {
+        return FileProvider.getUriForFile(getApplicationContext(),
+                BuildConfig.APPLICATION_ID + ".provider",
+                getOutputMediaFile(type));
+    }
+
+    private File getOutputMediaFile(int type) {
+
+        File mediaStorageDir = new File(
+                Environment
+                        .getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),
+                Constants.IMAGE_DIRECTORY_NAME);
+
+        if (!mediaStorageDir.exists()) {
+            if (!mediaStorageDir.mkdirs()) {
+                Log.d(TAG, "Oops! Failed create "
+                        + Constants.IMAGE_DIRECTORY_NAME + " directory");
+                return null;
+            }
+        }
+
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss",
+                Locale.getDefault()).format(new Date());
+        File mediaFile;
+        if (type == MEDIA_TYPE_IMAGE) {
+            mediaFile = new File(mediaStorageDir.getPath() + File.separator
+                    + "IMG_" + timeStamp + ".jpg");
+        } else {
+            return null;
+        }
+        // Save a file: path for use with ACTION_VIEW intents
+        mCurrentPhotoPath = "file:" + mediaFile.getAbsolutePath();
+
+        return mediaFile;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode,
+                                 Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+//        showProgressDialog();
+        if(requestCode==5555){
+            loadPost();
+        }
+        if (resultCode != Activity.RESULT_CANCELED) {
+            if (requestCode == RC_PICK_IMAGE) {
+                if (data != null) {
+                    Uri contentURI = data.getData();
+                    isPhotoValid = true;
+                    this.contentURI = contentURI;
+                    try {
+                        Bitmap bitmap = MediaStore.Images.Media.getBitmap(getApplicationContext().getContentResolver(), contentURI);
+                        ivUserProfilePhoto.setImageBitmap(bitmap);
+                        selectedImagePath=getRealPathFromURI(contentURI);
+                        uploadImage(getRealPathFromURI(contentURI));
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        Toast.makeText(getApplicationContext(), "Failed!", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            } else if (requestCode == RC_CAPTURE_IMAGE) {
+                // Show the thumbnail on ImageView
+//                showProgressDialog();
+                Uri imageUri = Uri.parse(mCurrentPhotoPath);
+                this.contentURI = imageUri;
+                isPhotoValid = true;
+                File file = new File(imageUri.getPath());
+                try {
+                    InputStream ims = new FileInputStream(file);
+                    ivUserProfilePhoto.setImageBitmap(BitmapFactory.decodeStream(ims));
+                } catch (FileNotFoundException e) {
+                    return;
+                }
+
+                // ScanFile so it will be appeared on Gallery
+                MediaScannerConnection.scanFile(getApplicationContext(),
+                        new String[]{imageUri.getPath()}, null,
+                        new MediaScannerConnection.OnScanCompletedListener() {
+                            public void onScanCompleted(String path, Uri uri) {
+                            }
+                        });
+                selectedImagePath = imageUri.getPath();
+                uploadImage(imageUri.getPath());
+
+            }
+
+        } else {
+            super.onActivityResult(requestCode, resultCode,
+                    data);
+        }
+    }
+
+
+
+    private String getRealPathFromURI(Uri contentUri) {
+        String[] proj = {MediaStore.Images.Media.DATA};
+        CursorLoader loader = new CursorLoader(getApplicationContext(), contentUri, proj, null, null, null);
+        Cursor cursor = loader.loadInBackground();
+        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        cursor.moveToFirst();
+        String result = cursor.getString(column_index);
+        cursor.close();
+        return result;
+    }
+    public void uploadImage(String realPathFromURI) {
+
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        StorageReference storageRef = storage.getReference();
+        if(contentURI != null)
+        {
+            final ProgressDialog progressDialog = new ProgressDialog(this);
+            progressDialog.setTitle("Uploading...");
+            progressDialog.show();
+
+//            ivPhoto.setDrawingCacheEnabled(true);
+//            ivPhoto.buildDrawingCache();
+
+
+            Uri file = Uri.fromFile(new File(selectedImagePath));
+            StorageReference riversRef = storageRef.child("images/"+file.getLastPathSegment());
+//            uploadTask = riversRef.putFile(file);
+            Bitmap bitmap = BitmapFactory.decodeFile(file.getPath());
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+            byte[] data = baos.toByteArray();
+
+            StorageReference ref = storageRef.child("images/"+ UUID.randomUUID().toString()+".jpg");
+            UploadTask uploadTask = ref.putBytes(data);
+            uploadTask
+                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            progressDialog.dismiss();
+                            Toast.makeText(UserProfileActivity.this, "Uploaded", Toast.LENGTH_SHORT).show();
+                            postimageurl = taskSnapshot.getDownloadUrl().toString();
+
+                            if (postimageurl.equals("failed")) {
+
+
+                                return;
+                            }
+                            final FirebaseUser user = mAuth.getCurrentUser();
+//                            AddDatabase(user,view);
+                            saveUserImage(postimageurl);
+
+
+
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            progressDialog.dismiss();
+                            Toast.makeText(UserProfileActivity.this, "Failed "+e.getMessage(), Toast.LENGTH_SHORT).show();
+                            postimageurl = "failed";
+                        }
+                    })
+                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                            double progress = (100.0*taskSnapshot.getBytesTransferred()/taskSnapshot
+                                    .getTotalByteCount());
+                            progressDialog.setMessage("Uploaded "+(int)progress+"%");
+                        }
+                    });
+        } else {
+
+            return ;
+
+        }
+
+
+
     }
 
     private void PopUp() {
@@ -203,7 +534,7 @@ public class UserProfileActivity extends AppCompatActivity implements RevealBack
         Button ok = (Button)deleteDialogView.findViewById(R.id.ok_button);
         Button cancel = (Button)deleteDialogView.findViewById(R.id.cancel_button);
         final EditText EdtPfl = (EditText)deleteDialogView.findViewById(R.id.profile_edt);
-
+        EdtPfl.setText(userName);
         final AlertDialog alertDialog1 = alertDialog.create();
         ok.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -264,6 +595,7 @@ public class UserProfileActivity extends AppCompatActivity implements RevealBack
         int numberOfColumns = 3;
         rvUserProfile.setLayoutManager(new GridLayoutManager(this, numberOfColumns));
         adapter = new UserAdapter(UserProfileActivity.this,postList);
+        adapter.notifyDataSetChanged();
 //        adapter.setOnFeedItemClickListener(UserProfileActivity.this);
         rvUserProfile.setAdapter(adapter);
 //        feedAdapter = new FeedAdapter(this,postList);
@@ -311,7 +643,15 @@ public class UserProfileActivity extends AppCompatActivity implements RevealBack
 //            }
 //        });
     }
+    public void intialpopup(int position) {
+            Intent intent=new Intent(UserProfileActivity.this, ImageDetailActivity.class);
+            intent.putExtra("imagepath",postList.get(position).getPhotoURL());
+            intent.putExtra("name",isLoading);
+            intent.putExtra("postid",postListId.get(position));
+            startActivityForResult(intent,5555);
+//            ((Activity) context).overridePendingTransition(R.anim.slide_up, R.anim.stay);
 
+    }
     private void setupUserProfileGrid() {
 //        final StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL);
 //        rvUserProfile.setLayoutManager(layoutManager);
@@ -466,7 +806,8 @@ public class UserProfileActivity extends AppCompatActivity implements RevealBack
                                 .get(documentSnapshots.size() -1);
 
                             setupFeed();
-//                            UserAdapter.updateItems(true);
+//                            adapter.notifyDataSetChanged();
+//                            UserAdapter.updateItems(true);F
 
 
                     }
@@ -693,7 +1034,54 @@ public class UserProfileActivity extends AppCompatActivity implements RevealBack
 
     }
 
-public void PostCount() {
+    public void saveUserImage(final String postimageurl) {
+        showProgressDialog();
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        DocumentReference ref = db.collection("users").document(userId);
+
+
+        ref.update("profileImageURL", postimageurl)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, "DocumentSnapshot successfully updated!");
+                        if(!postimageurl.equals(null)&&!postimageurl.isEmpty()){
+                            Picasso.with(UserProfileActivity.this)
+                                    .load(postimageurl)
+                                    .resize(avatarSize, avatarSize)
+                                    .centerCrop()
+                                    .transform(new CircleTransformation())
+                                    .into(ivUserProfilePhoto);
+                        }
+                        else{
+//            Picasso.with(this)
+//                    .load(profilePhoto)
+//                    .placeholder(R.drawable.background)
+//                    .resize(avatarSize, avatarSize)
+//                    .centerCrop()
+//                    .transform(new CircleTransformation())
+//                    .into(ivUserProfilePhoto);
+                        }
+                        Toast.makeText(UserProfileActivity.this, "Update Successfully", Toast.LENGTH_SHORT).show();
+                        PreferencesHelper.setPreference(getApplicationContext(), PreferencesHelper.PREFERENCE_PROFILE_PIC, postimageurl);
+            hideProgressDialog();
+                    }
+
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.w(TAG, "Error updating document", e);
+                Toast.makeText(UserProfileActivity.this,"Update failed",Toast.LENGTH_SHORT).show();
+                hideProgressDialog();
+//                dialog.dismiss();
+            }
+
+        });
+
+    }
+
+    public void PostCount() {
 
     postCount.clear();
 
@@ -718,7 +1106,7 @@ public void PostCount() {
 
                     }
 
-                    vpostCount.setText("" + postCount.size());
+//                    vpostCount.setText("" + postCount.size());
 
 
                 }
@@ -754,12 +1142,28 @@ public void PostCount() {
 
                         }
 
-                        vfolowerCount.setText(""+userCount.size());
+//                        vfolowerCount.setText(""+userCount.size());
 
                     }
 
                 });
 
+    }
+    public void showProgressDialog() {
+
+
+        android.support.v7.app.AlertDialog.Builder alertDialog = new android.support.v7.app.AlertDialog.Builder(UserProfileActivity.this);
+        //View view = getLayoutInflater().inflate(R.layout.progress);
+        alertDialog.setView(R.layout.progress);
+        dialog = alertDialog.create();
+        dialog.show();
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+
+    }
+
+    public void hideProgressDialog(){
+        if(dialog!=null)
+            dialog.dismiss();
     }
 
 
