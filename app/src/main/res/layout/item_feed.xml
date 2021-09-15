@@ -36,12 +36,12 @@
         </LinearLayout>
 
         <TextView
+            style="@style/FontAvenirheavy"
             android:id="@+id/ivUserName"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="sas"
             android:gravity="center_vertical"
-            android:textStyle="bold"
             android:textSize="16dp"
             android:lines="1"
             android:maxLines="1"
@@ -49,7 +49,7 @@
 
     </LinearLayout>
 
-        <io.github.froger.instamaterial.ui.view.SquaredFrameLayout
+        <com.cz.SarvodayaHBandroid.ui.view.SquaredFrameLayout
             android:id="@+id/vImageRoot"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -75,10 +75,11 @@
                 android:scaleType="center"
                 android:visibility="visible" />
 
-        </io.github.froger.instamaterial.ui.view.SquaredFrameLayout>
+        </com.cz.SarvodayaHBandroid.ui.view.SquaredFrameLayout>
 
         <TextView
             android:id="@+id/ivFeedBottom"
+            style="@style/FontAvenirLight"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text=""
@@ -97,14 +98,14 @@
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:background="@android:color/transparent"
-                android:src="@drawable/ic_heart_outline_grey" />
+                android:src="@drawable/like" />
 
             <ImageButton
                 android:id="@+id/btnComments"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:background="@drawable/btn_feed_action"
-                android:src="@drawable/ic_comment_outline_grey" />
+                android:src="@drawable/comment" />
 
             <ImageButton
                 android:id="@+id/btnMore"
@@ -137,6 +138,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:text="123 likes"
+                        style="@style/FontAvenirMedium"
+                        android:textSize="13dp"
                         android:textColor="@color/text_like_counter" />
 
                     <TextView

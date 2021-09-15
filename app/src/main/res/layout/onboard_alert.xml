@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:background="@drawable/dialog_background"
+        android:layout_height="wrap_content">
+
+    <!--<ImageView-->
+            <!--android:layout_gravity="center_horizontal"-->
+            <!--android:layout_width="120dp"-->
+            <!--android:layout_height="80dp"-->
+            <!--android:src="@drawable/notification"-->
+            <!--android:contentDescription="@string/app_name" />-->
+    <TextView
+            style="@style/FontAvenirMedium"
+            android:textSize="14dp"
+             android:textColor="@color/style_color_primary"
+            android:text="@string/onboard"
+            android:layout_width="212dp"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:layout_height="70dp" />
+
+    <Button
+            android:text="OK"
+            android:id="@+id/ok_button"
+            style="@style/ok_button"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:layout_width="86dp"
+            android:textSize="15dp"
+            android:layout_height="35dp"
+            android:layout_marginBottom="4dp"
+    />
+
+</LinearLayout>

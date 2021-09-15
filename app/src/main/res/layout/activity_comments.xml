@@ -4,7 +4,7 @@
 
     <include
         android:id="@+id/toolbar"
-        layout="@layout/view_feed_toolbar" />
+        layout="@layout/toolbar_comment" />
 
     <LinearLayout
         android:id="@+id/contentRoot"
@@ -24,7 +24,9 @@
                 android:id="@+id/rvComments"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:scrollbars="none" />
+                android:scrollbars="vertical"
+
+                />
 
             <View
                 android:layout_width="match_parent"
@@ -50,10 +52,11 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:hint="what do you think?"
                 android:textColor="#555555"
                 android:textSize="14sp" />
 
-            <io.github.froger.instamaterial.ui.view.SendCommentButton
+            <com.cz.SarvodayaHBandroid.ui.view.SendCommentButton
                 android:id="@+id/btnSendComment"
                 android:layout_width="72dp"
                 android:layout_height="match_parent"

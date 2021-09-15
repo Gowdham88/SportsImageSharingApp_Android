@@ -1,35 +1,35 @@
 {
   "project_info": {
-    "project_number": "364263394041",
-    "firebase_url": "https://myapp-eb284.firebaseio.com",
-    "project_id": "myapp-eb284",
-    "storage_bucket": "myapp-eb284.appspot.com"
+    "project_number": "129976830572",
+    "firebase_url": "https://sarvodayahandball.firebaseio.com",
+    "project_id": "firebase-sarvodayahandball",
+    "storage_bucket": "firebase-sarvodayahandball.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:364263394041:android:22b373fb1674ac6f",
+        "mobilesdk_app_id": "1:129976830572:android:da134ef416488790",
         "android_client_info": {
-          "package_name": "com.qinapp"
+          "package_name": "com.cz.SarvodayaHBandroid"
         }
       },
       "oauth_client": [
         {
-          "client_id": "364263394041-hsavsorjshgn5iv5rtaeungl6mtep1lq.apps.googleusercontent.com",
+          "client_id": "129976830572-643s7gg9t6m5udtl59gmpcqvt7bge82i.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.qinapp",
-            "certificate_hash": "7e53707d6eec976a7611f484211267c44a250ab0"
+            "package_name": "com.cz.SarvodayaHBandroid",
+            "certificate_hash": "c8120cd6ff053c52864a2c24373906363a0b2f8a"
           }
         },
         {
-          "client_id": "364263394041-9upaonvd1j626buau9p1hcovc9dvooo8.apps.googleusercontent.com",
+          "client_id": "129976830572-rg9guu6jg9lc5dbkmdhd0bosqs82rqfn.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBJ0TdLJM7Y8Z-BhqrTEqxlfWR3HvcFLL4"
+          "current_key": "AIzaSyAG_eLr93aToEh-XME5pTOIPejyrBx2zNo"
         }
       ],
       "services": {
@@ -40,99 +40,17 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "364263394041-hudfo089g7grdmijflp08e7t6tnp99qq.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.Hello.Woofy-Automated-Social-Media-Scheduler-prod"
-              }
+              "client_id": "129976830572-rg9guu6jg9lc5dbkmdhd0bosqs82rqfn.apps.googleusercontent.com",
+              "client_type": 3
             },
             {
-              "client_id": "364263394041-9upaonvd1j626buau9p1hcovc9dvooo8.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        },
-        "ads_service": {
-          "status": 2
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:364263394041:android:79aa058c3cafeb02",
-        "android_client_info": {
-          "package_name": "nld.com.nld"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "364263394041-rdvu3ieqik0kaegj3mvuilrdggff6dph.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "nld.com.nld",
-            "certificate_hash": "7e53707d6eec976a7611f484211267c44a250ab0"
-          }
-        },
-        {
-          "client_id": "364263394041-9upaonvd1j626buau9p1hcovc9dvooo8.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyBJ0TdLJM7Y8Z-BhqrTEqxlfWR3HvcFLL4"
-        }
-      ],
-      "services": {
-        "analytics_service": {
-          "status": 1
-        },
-        "appinvite_service": {
-          "status": 2,
-          "other_platform_oauth_client": [
-            {
-              "client_id": "364263394041-hudfo089g7grdmijflp08e7t6tnp99qq.apps.googleusercontent.com",
+              "client_id": "129976830572-kcsps4vmvgd8sec43kfra804gsvctr6h.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.Hello.Woofy-Automated-Social-Media-Scheduler-prod"
+                "bundle_id": "com.cz.SarvodayaHB"
               }
-            },
-            {
-              "client_id": "364263394041-9upaonvd1j626buau9p1hcovc9dvooo8.apps.googleusercontent.com",
-              "client_type": 3
             }
           ]
-        },
-        "ads_service": {
-          "status": 2
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:364263394041:android:0c10006aa847cc09",
-        "android_client_info": {
-          "package_name": "io.github.froger.instamaterial"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "364263394041-9upaonvd1j626buau9p1hcovc9dvooo8.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyBJ0TdLJM7Y8Z-BhqrTEqxlfWR3HvcFLL4"
-        }
-      ],
-      "services": {
-        "analytics_service": {
-          "status": 1
-        },
-        "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
         },
         "ads_service": {
           "status": 2

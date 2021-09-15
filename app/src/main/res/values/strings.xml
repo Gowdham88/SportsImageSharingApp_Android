@@ -31,4 +31,11 @@
         <item>http://scontent-b-fra.cdninstagram.com/hphotos-xaf1/t51.2885-15/s306x306/e15/10899087_405295322969722_20422376_n.jpg</item>
     </string-array>
     <string name="user_profile_photo">http://igcdn-photos-f-a.akamaihd.net/hphotos-ak-xpa1/t51.2885-19/929118_455075441302693_1605108410_a.jpg</string>
+    <string name="resetpass">A reset link has been sent your email</string>
+    <string name="onboard">Share your practice,Training and other HandBall pictures</string>
+    <string name="event_description">       &#160; &#160;This is an app of Sarvodaya Handball club. The\nclub was formed by the alumni members of PSG \nTech. The membership is open for all the Hand\nball lovers.\n\n
+        &#160; &#160; In this app you can post pictures for free. We \nadvise to post handball pictures from your prac\ntice, matches, etc. You can like, comment on the \npictures. More features will be rolled out in the \nsubsequent updates.\n\n
+        &#160; &#160; For feedback please contact ________________
+    </string>
+    <string name="onboard_text">Share your handball training, trophy &amp; match pictures here !!</string>
 </resources>

@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/signuprel_lay"
+    android:background="#34495E">
+
+    <RelativeLayout
+        android:id="@+id/editrel_lay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="12dp"
+        >
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profile_image"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="40dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/signupprofile" />
+
+        <ImageView
+            android:id="@+id/imageView_profile_edit"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginTop="110dp"
+            android:layout_alignEnd="@+id/profile_image"
+            android:layout_alignRight="@+id/profile_image"
+            app:srcCompat="@drawable/edit_profile" />
+    </RelativeLayout>
+    <LinearLayout
+        android:id="@+id/user_lay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_below="@+id/editrel_lay">
+
+        <EditText
+            android:id="@+id/username_edit"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:hint="Username"
+            android:textCursorDrawable="@drawable/color_cursor"
+            android:background="@null"
+            android:textColorHint="#FFFFFF"
+            android:layout_marginTop="5dp"
+            android:textSize="18dp"
+            android:singleLine="true"
+            android:inputType="text"
+            android:imeOptions="actionNext"
+            style="@style/FontAvenirBook"
+            android:textColor="#FFFFFF"
+            android:gravity="center"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#000000"/>
+        <EditText
+            android:id="@+id/email_edit"
+            style="@style/FontAvenirBook"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@null"
+            android:gravity="center"
+            android:hint="Email"
+            android:imeOptions="actionNext"
+            android:inputType="textEmailAddress"
+            android:singleLine="true"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#FFFFFF"
+            android:textCursorDrawable="@drawable/color_cursor"
+            android:textSize="18dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#000000"/>
+        <EditText
+            android:id="@+id/pass_edit"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:hint="Password"
+            android:textColorHint="#FFFFFF"
+            android:layout_marginTop="5dp"
+            android:textSize="18dp"
+            android:textCursorDrawable="@drawable/color_cursor"
+            style="@style/FontAvenirBook"
+            android:singleLine="true"
+            android:inputType="textPassword"
+            android:imeOptions="actionDone"
+            android:background="@null"
+            android:textColor="#FFFFFF"
+            android:gravity="center"/>
+        <View
+            android:id="@+id/username_view"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#000000"/>
+    </LinearLayout>
+    <!--<Button-->
+        <!--android:id="@+id/signup_btn"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="60dp"-->
+        <!--android:layout_below="@+id/user_lay"-->
+        <!--android:layout_marginLeft="30dp"-->
+        <!--android:text="Sign Up"-->
+        <!--android:background="@drawable/genderpopup"-->
+        <!--android:textAllCaps="false"-->
+        <!--android:textSize="18dp"-->
+        <!--style="@style/FontAvenirBook"-->
+        <!--android:textColor="#34495E"-->
+        <!--android:layout_marginRight="30dp"-->
+        <!--android:layout_marginTop="20dp"/>-->
+    <LinearLayout
+        android:id="@+id/linlay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/user_lay"
+        android:layout_marginRight="30dp"
+        android:orientation="vertical"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="20dp">
+
+        <Button
+
+            android:id="@+id/signup_btn"
+            style="@style/FontAvenirheavy"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_alignLeft="@+id/linlay"
+            android:layout_alignStart="@+id/linlay"
+            android:layout_alignTop="@+id/linlay"
+            android:background="@drawable/genbck"
+            android:text="Sign Up"
+            android:textAllCaps="false"
+            android:textColor="#44000000"
+            android:textSize="22dp" />
+        <Button
+            android:visibility="gone"
+            android:id="@+id/signup_btn1"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_below="@+id/user_lay"
+            android:text="Sign Up"
+            android:background="@drawable/genderpopup"
+            android:textAllCaps="false"
+            android:textSize="22dp"
+            style="@style/FontAvenirBook"
+            android:textColor="#34495E" />
+    </LinearLayout>
+    <TextView
+        android:id="@+id/accnt_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:text="Already have an account?"
+        android:textColor="#FFFFFF"
+        android:textSize="20dp"
+        style="@style/FontAvenirBook"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
+        android:layout_alignParentBottom="true"/>
+</RelativeLayout>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:orientation="vertical"
+  >
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:src="@drawable/hanfballsplash" />
+
+    <TextView
+        style="@style/FontAvenirheavy"
+        android:id="@+id/splash_txt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="Sarvodaya Hand Ball"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        android:layout_marginTop="15dp"
+        android:textColor="@color/style_color_primary"
+    />
+</LinearLayout>

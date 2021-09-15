@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/signinrel_lay"
     android:background="#34495E">
 
     <TextView
@@ -38,21 +39,25 @@
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
         android:layout_below="@+id/text_view1">
+
         <EditText
             android:id="@+id/login_edt"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:hint="Email"
-            android:textCursorDrawable="@drawable/color_cursor"
-            android:singleLine="true"
-            android:inputType="textEmailAddress"
-            android:imeOptions="actionNext"
             style="@style/FontAvenirBook"
-            android:textColorHint="#FFFFFF"
-            android:textColor="#FFFFFF"
-            android:textSize="18dp"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_alignLeft="@+id/user_lay"
+            android:layout_alignStart="@+id/user_lay"
+            android:layout_alignTop="@+id/user_lay"
             android:background="@null"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:hint="Email"
+            android:imeOptions="actionNext"
+            android:inputType="textEmailAddress"
+            android:singleLine="true"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#FFFFFF"
+            android:textCursorDrawable="@drawable/color_cursor"
+            android:textSize="18dp" />
         <View
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
@@ -60,7 +65,7 @@
         <EditText
             android:id="@+id/loginpass_edt"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="40dp"
             android:hint="Password"
             android:textCursorDrawable="@drawable/color_cursor"
             android:background="@null"
@@ -74,25 +79,60 @@
             android:textColor="#FFFFFF"
             android:gravity="center"/>
         <View
+            android:id="@+id/passline"
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
             android:background="#000000"/>
 
     </LinearLayout>
+
+<LinearLayout
+    android:id="@+id/linlay"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/user_lay"
+    android:layout_marginRight="30dp"
+    android:orientation="vertical"
+    android:layout_marginLeft="30dp"
+    android:layout_marginTop="20dp">
     <Button
+
         android:id="@+id/sinin_edt"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:layout_below="@+id/user_lay"
-        android:layout_marginLeft="30dp"
+        android:layout_height="44dp"
         android:text="Sign In"
+        android:background="@drawable/genbck"
         android:textAllCaps="false"
-        android:textSize="18dp"
+        android:textSize="22dp"
+        style="@style/FontAvenirheavy"
+        android:textColor="#44000000"
+     />
+    <Button
+        android:visibility="gone"
+        android:id="@+id/sinin_edt1"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:layout_below="@+id/user_lay"
+        android:text="Sign In"
+        android:background="@drawable/genderpopup"
+        android:textAllCaps="false"
+        android:textSize="22dp"
         style="@style/FontAvenirBook"
-        android:textColor="#ECF0F1"
-        android:layout_marginRight="30dp"
-        android:layout_marginTop="10dp"/>
-
+        android:textColor="#34495E" />
+</LinearLayout>
+    <TextView
+        style="@style/FontAvenirBook"
+        android:id="@+id/forget_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linlay"
+        android:gravity="end"
+        android:textSize="17dp"
+        android:textColor="#ffffff"
+        android:layout_marginLeft="193dp"
+        android:layout_marginTop="10dp"
+        android:text="Forgot password?"
+        />
     <TextView
         android:id="@+id/dont_txt"
         style="@style/FontAvenirBook"

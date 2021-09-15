@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/forgot_lay"
+    >
+    <ImageView
+        android:id="@+id/btn_back"
+        android:src="@drawable/back_arrow"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_centerVertical="true"
+        android:layout_width="25dp"
+        android:layout_height="25dp" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Forgot Password"
+        android:textColor="@color/style_color_primary"
+        android:textSize="19dp"
+        android:gravity="center"
+        android:layout_marginTop="50dp"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Email"
+        android:layout_marginLeft="30dp"
+        android:textColor="@color/style_color_primary"
+        android:textSize="17dp"
+        android:layout_marginTop="50dp"/>
+    <EditText
+        android:id="@+id/edit_txt"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:imeOptions="actionNext"
+        android:background="@null"
+        android:inputType="textEmailAddress"
+        android:singleLine="true"
+        android:textColor="@color/style_color_primary"
+        android:textColorHint="@color/style_color_primary"
+        android:textCursorDrawable="@drawable/forcurserclr"
+        android:layout_marginTop="5dp"
+        android:textSize="18dp" />
+    <View
+        android:id="@+id/passline"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:background="#000000"/>
+    <Button
+        android:text="Reset"
+        android:id="@+id/reset_btn"
+        android:textAllCaps="false"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="30dp"/>
+</LinearLayout>
